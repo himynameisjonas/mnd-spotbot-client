@@ -16,13 +16,13 @@ module.exports = function(grunt) {
     },
     watch: {
       app: {
-        files: ['src/**/.js', 'src/**/*.scss'],
-        tasks: ['browserify.dev']
+        files: ['src/**/*.js'],
+        tasks: ['browserify:dev']
       },
       options: {
         livereload: true,
         files: [
-          'src/app.js'
+          './src/app.js'
         ]
       }
     },
