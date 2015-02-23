@@ -1,4 +1,4 @@
-var sassify = require('sassify');
+var babelify = require('babelify');
 
 module.exports = function(grunt) {
 
@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     browserify: {
       options: {
-        transform: [require('grunt-react').browserify],
+        transform: [babelify],
         debug: true
       },
       dev: {
