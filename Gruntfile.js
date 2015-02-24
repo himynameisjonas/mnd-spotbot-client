@@ -11,7 +11,10 @@ module.exports = function(grunt) {
       },
       dev: {
         src: './src/app.js',
-        dest: './tmp/app.js'
+        dest: './tmp/app.js',
+        options: {
+          require: ['./config/environment.js/:config']
+        }
       }
     },
     watch: {
