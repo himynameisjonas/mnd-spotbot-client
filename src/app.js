@@ -3,53 +3,26 @@ import config from 'config';
 import ReactFireMixin from 'reactfire';
 import Firebase from 'firebase';
 import _ from 'lodash';
-import request from 'superagent';
-
-/*
- * TODO:
- * How to fetch spotify info. Maybe via store? Don't wanna make to make calls to spotify api.
- * How to search and enque.
- * Everything goes via firebase!!
- */
-
-/*
-var trackId = currentTrack.split(':')[2];
-request.get('https://api.spotify.com/v1/tracks/' + trackId, function(res) {
-});
-*/
-/*
-var Search = React.createClass({
-  render() {
-    return (
-      <form>
-        <div className="form-group">
-          <input type="search" className="form-control" placeholder="Search" />
-        </div>
-      </form>
-    );
-  }
-});
-*/
-
-var CurrentTrack = React.createClass({
-  componentDidUpdate() {
-    console.log("did update");
-    console.log(this.props.track);
-  },
-  render() {
-    return (
-      <div>
-      </div>
-    );
-  }
-});
+import CurrentTrack from './current_track';
+import CurrentPlaylist from './current_playlist';
+import Queue from './queue';
+import PlayerControls from './player_controls';
+import Search from './search';
+import Actions from './actions';
+import SearchStore from './search_store';
+import Reflux from 'reflux';
 
 var App = React.createClass({
-  mixins: [ReactFireMixin],
+  mixins: [ReactFireMixin, Reflux.listenTo(SearchStore, 'onSearchChange')],
+
   getInitialState() {
     return {
       data: {}
     };
+  },
+
+  onSearchChange(data) {
+    debugger;
   },
 
   componentWillMount() {
@@ -57,14 +30,48 @@ var App = React.createClass({
     this.bindAsArray(ref, "data");
   },
 
+  playPause() {
+    var data = this.state.data;
+    this.firebaseRefs.data.child('player/playing').set(!data[0].playing);
+  },
+
+  play() {
+    var data = this.state.data;
+    this.firebaseRefs.data.child('player/playing').set(true);
+  },
+  pause() {
+    var data = this.state.data;
+    this.firebaseRefs.data.child('player/playing').set(false);
+  },
+  next() {
+    this.firebaseRefs.data.child('player/next').set(true);
+  },
+
   render() {
     return (
       <div className="container">
         <header>
-          <Search />
+          <div className="row">
+            <div className="col-xs-4">
+              <CurrentTrack track={this.state.data[0]} />
+            </div>
+            <div className="col-xs-4">
+              <PlayerControls play={this.play} pause={this.pause} next={this.next} />
+            </div>
+            <div className="col-xs-4">
+              <Search />
+            </div>
+          </div>
         </header>
         <main>
-          <CurrentTrack track={this.state.data[0]} />
+          <div className="row">
+            <div className="col-xs-6">
+              <Queue playlist={this.state.data[2]} />
+            </div>
+            <div className="col-xs-6">
+              <CurrentPlaylist playlist={this.state.data[1]} />
+            </div>
+          </div>
         </main>
       </div>
     );
