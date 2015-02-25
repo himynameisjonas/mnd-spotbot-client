@@ -48,7 +48,6 @@ var App = React.createClass({
   },
 
   render() {
-    debugger;
     return (
       <div className="container">
         <header>

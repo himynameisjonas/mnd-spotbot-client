@@ -32771,7 +32771,6 @@ var App = React.createClass({
   },
 
   render: function render() {
-    debugger;
     return React.createElement(
       "div",
       { className: "container" },
