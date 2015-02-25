@@ -27,7 +27,7 @@ var App = React.createClass({
 
   componentWillMount() {
     var ref = new Firebase(config.FIREBASE_URL);
-    this.bindAsArray(ref, "data");
+    this.bindAsObject(ref, "data");
   },
 
   playPause() {
@@ -48,12 +48,13 @@ var App = React.createClass({
   },
 
   render() {
+    debugger;
     return (
       <div className="container">
         <header>
           <div className="row">
             <div className="col-xs-4">
-              <CurrentTrack track={this.state.data[0]} />
+              <CurrentTrack track={this.state.data.player} />
             </div>
             <div className="col-xs-4">
               <PlayerControls play={this.play} pause={this.pause} next={this.next} />
@@ -66,10 +67,10 @@ var App = React.createClass({
         <main>
           <div className="row">
             <div className="col-xs-6">
-              <Queue playlist={this.state.data[2]} />
+              <Queue playlist={this.state.data.queue} />
             </div>
             <div className="col-xs-6">
-              <CurrentPlaylist playlist={this.state.data[1]} />
+              <CurrentPlaylist playlist={this.state.data.playlist} />
             </div>
           </div>
         </main>

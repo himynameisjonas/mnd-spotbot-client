@@ -32750,7 +32750,7 @@ var App = React.createClass({
 
   componentWillMount: function componentWillMount() {
     var ref = new Firebase(config.FIREBASE_URL);
-    this.bindAsArray(ref, "data");
+    this.bindAsObject(ref, "data");
   },
 
   playPause: function playPause() {
@@ -32771,6 +32771,7 @@ var App = React.createClass({
   },
 
   render: function render() {
+    debugger;
     return React.createElement(
       "div",
       { className: "container" },
@@ -32783,7 +32784,7 @@ var App = React.createClass({
           React.createElement(
             "div",
             { className: "col-xs-4" },
-            React.createElement(CurrentTrack, { track: this.state.data[0] })
+            React.createElement(CurrentTrack, { track: this.state.data.player })
           ),
           React.createElement(
             "div",
@@ -32806,12 +32807,12 @@ var App = React.createClass({
           React.createElement(
             "div",
             { className: "col-xs-6" },
-            React.createElement(Queue, { playlist: this.state.data[2] })
+            React.createElement(Queue, { playlist: this.state.data.queue })
           ),
           React.createElement(
             "div",
             { className: "col-xs-6" },
-            React.createElement(CurrentPlaylist, { playlist: this.state.data[1] })
+            React.createElement(CurrentPlaylist, { playlist: this.state.data.playlist })
           )
         )
       )
