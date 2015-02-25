@@ -32946,32 +32946,23 @@ var React = _interopRequire(require("react"));
 var PlayerControls = React.createClass({
   displayName: "PlayerControls",
 
-  handleClickPlay: function handleClickPlay() {
-    this.props.play();
-  },
-  handleClickPause: function handleClickPause() {
-    this.props.pause();
-  },
-  handleClickNext: function handleClickNext() {
-    this.props.next();
-  },
   render: function render() {
     return React.createElement(
       "div",
       null,
       React.createElement(
         "button",
-        { type: "button", className: "btn btn-default", onClick: this.handleClickPlay },
+        { type: "button", className: "btn btn-default", onClick: this.props.play },
         React.createElement("i", { className: "fa fa-play" })
       ),
       React.createElement(
         "button",
-        { type: "button", className: "btn btn-default", onClick: this.handleClickPause },
+        { type: "button", className: "btn btn-default", onClick: this.props.pause },
         React.createElement("i", { className: "fa fa-pause" })
       ),
       React.createElement(
         "button",
-        { type: "button", className: "btn btn-default", onClick: this.handleClickNext },
+        { type: "button", className: "btn btn-default", onClick: this.props.next },
         React.createElement("i", { className: "fa fa-step-forward" })
       )
     );
