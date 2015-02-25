@@ -1,4 +1,5 @@
 import React from 'react';
+import Reflux from 'reflux';
 import config from 'config';
 import ReactFireMixin from 'reactfire';
 import Firebase from 'firebase';
@@ -9,20 +10,21 @@ import Queue from './queue';
 import PlayerControls from './player_controls';
 import Search from './search';
 import Actions from './actions';
-import SearchStore from './search_store';
-import Reflux from 'reflux';
+import Store from './store';
+import SearchResult from './search_result';
 
 var App = React.createClass({
-  mixins: [ReactFireMixin, Reflux.listenTo(SearchStore, 'onSearchChange')],
+  mixins: [ReactFireMixin, Reflux.listenTo(Store, 'onSearchChange')],
 
   getInitialState() {
     return {
-      data: {}
+      data: {},
+      searchResult: {}
     };
   },
 
-  onSearchChange(data) {
-    debugger;
+  onSearchChange(result) {
+    this.setState({ searchResult: result });
   },
 
   componentWillMount() {
@@ -45,7 +47,7 @@ var App = React.createClass({
   },
   next() {
     this.firebaseRefs.data.child('player/next').set(true);
-  },
+  }
 
   render() {
     return (
@@ -64,6 +66,11 @@ var App = React.createClass({
           </div>
         </header>
         <main>
+          <div className="row">
+            <div className="col-xs-12">
+              <SearchResult result={this.state.searchResult} />
+            </div>
+          </div>
           <div className="row">
             <div className="col-xs-6">
               <Queue playlist={this.state.data.queue} />

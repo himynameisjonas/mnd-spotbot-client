@@ -13,7 +13,7 @@ var CurrentPlaylist = React.createClass({
   },
 
   componentWillReceiveProps(newProps) {
-    if(typeof(newProps.playlist) === 'undefined') {
+    if(typeof(newProps.playlist) === 'undefined' || typeof(newProps.playlist.tracks) === 'undefined' ) {
       return;
     }
     var trackIds = newProps.playlist.tracks.map(uri => {

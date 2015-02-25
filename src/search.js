@@ -1,8 +1,6 @@
 import React from 'react';
 import Actions from './actions';
-import SearchStore from './search_store';
 
-//Ember.$.get("https://api.spotify.com/v1/search",{q: model.query, limit: 20, type: 'album', market: 'se'}).then(function(data){
 var Search = React.createClass({
   getInitialState() {
     return {

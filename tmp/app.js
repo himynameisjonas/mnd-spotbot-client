@@ -32698,7 +32698,7 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["defau
 
 var Reflux = _interopRequire(require("reflux"));
 
-var Actions = Reflux.createActions(["search"]);
+var Actions = Reflux.createActions(["search", "setPlaylist"]);
 
 module.exports = Actions;
 
@@ -32708,6 +32708,8 @@ module.exports = Actions;
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
 var React = _interopRequire(require("react"));
+
+var Reflux = _interopRequire(require("reflux"));
 
 var config = _interopRequire(require("config"));
 
@@ -32731,7 +32733,7 @@ var Actions = _interopRequire(require("./actions"));
 
 var SearchStore = _interopRequire(require("./search_store"));
 
-var Reflux = _interopRequire(require("reflux"));
+var SearchResult = _interopRequire(require("./search_result"));
 
 var App = React.createClass({
   displayName: "App",
@@ -32740,12 +32742,13 @@ var App = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      data: {}
+      data: {},
+      searchResult: {}
     };
   },
 
-  onSearchChange: function onSearchChange(data) {
-    debugger;
+  onSearchChange: function onSearchChange(result) {
+    this.setState({ searchResult: result });
   },
 
   componentWillMount: function componentWillMount() {
@@ -32768,6 +32771,9 @@ var App = React.createClass({
   },
   next: function next() {
     this.firebaseRefs.data.child("player/next").set(true);
+  },
+  setPlaylist: function setPlaylist(spotifyUri) {
+    this.firebaseRefs.data.child("playlist/uri").set(spotifyUri);
   },
 
   render: function render() {
@@ -32805,6 +32811,15 @@ var App = React.createClass({
           { className: "row" },
           React.createElement(
             "div",
+            { className: "col-xs-12" },
+            React.createElement(SearchResult, { result: this.state.searchResult, setPlaylist: this.setPlaylist })
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "row" },
+          React.createElement(
+            "div",
             { className: "col-xs-6" },
             React.createElement(Queue, { playlist: this.state.data.queue })
           ),
@@ -32821,7 +32836,7 @@ var App = React.createClass({
 
 React.render(React.createElement(App, null), document.body);
 
-},{"./actions":174,"./current_playlist":176,"./current_track":177,"./player_controls":178,"./queue":179,"./search":180,"./search_store":181,"config":"config","firebase":1,"lodash":3,"react":149,"reactfire":150,"reflux":151}],176:[function(require,module,exports){
+},{"./actions":174,"./current_playlist":176,"./current_track":177,"./player_controls":178,"./queue":179,"./search":180,"./search_result":181,"./search_store":182,"config":"config","firebase":1,"lodash":3,"react":149,"reactfire":150,"reflux":151}],176:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -32848,7 +32863,7 @@ var CurrentPlaylist = React.createClass({
   componentWillReceiveProps: function componentWillReceiveProps(newProps) {
     var _this = this;
 
-    if (typeof newProps.playlist === "undefined") {
+    if (typeof newProps.playlist === "undefined" || typeof newProps.playlist.tracks === "undefined") {
       return;
     }
     var trackIds = newProps.playlist.tracks.map(function (uri) {
@@ -32892,7 +32907,7 @@ var CurrentPlaylist = React.createClass({
 
 module.exports = CurrentPlaylist;
 
-},{"./track":182,"./utils":183,"lodash":3,"react":149,"superagent":171}],177:[function(require,module,exports){
+},{"./track":183,"./utils":184,"lodash":3,"react":149,"superagent":171}],177:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -32936,7 +32951,7 @@ var CurrentTrack = React.createClass({
 
 module.exports = CurrentTrack;
 
-},{"./track":182,"./utils":183,"react":149,"superagent":171}],178:[function(require,module,exports){
+},{"./track":183,"./utils":184,"react":149,"superagent":171}],178:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -33043,7 +33058,7 @@ var Queue = React.createClass({
 
 module.exports = Queue;
 
-},{"./track":182,"./utils":183,"lodash":3,"react":149,"superagent":171}],180:[function(require,module,exports){
+},{"./track":183,"./utils":184,"lodash":3,"react":149,"superagent":171}],180:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -33054,7 +33069,6 @@ var Actions = _interopRequire(require("./actions"));
 
 var SearchStore = _interopRequire(require("./search_store"));
 
-//Ember.$.get("https://api.spotify.com/v1/search",{q: model.query, limit: 20, type: 'album', market: 'se'}).then(function(data){
 var Search = React.createClass({
   displayName: "Search",
 
@@ -33091,7 +33105,93 @@ var Search = React.createClass({
 
 module.exports = Search;
 
-},{"./actions":174,"./search_store":181,"react":149}],181:[function(require,module,exports){
+},{"./actions":174,"./search_store":182,"react":149}],181:[function(require,module,exports){
+"use strict";
+
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var React = _interopRequire(require("react"));
+
+var _ = _interopRequire(require("lodash"));
+
+var Album = React.createClass({
+  displayName: "Album",
+
+  handleClick: function handleClick() {
+    this.props.setPlaylist(this.props.item.uri);
+  },
+  render: function render() {
+    var album = this.props.item;
+    return React.createElement(
+      "li",
+      { onClick: this.handleClick },
+      React.createElement(
+        "div",
+        { className: "media" },
+        React.createElement(
+          "div",
+          { className: "media-left" },
+          React.createElement("img", { src: album.images[2].url })
+        ),
+        React.createElement(
+          "div",
+          { className: "media-body" },
+          React.createElement(
+            "h4",
+            { className: "media-heading" },
+            album.name
+          )
+        )
+      )
+    );
+  }
+});
+
+var List = React.createClass({
+  displayName: "List",
+
+  render: function render() {
+    var _this = this;
+
+    var _list = this.props.result.map(function (item) {
+      return React.createElement(Album, { item: item, setPlaylist: _this.props.setPlaylist });
+    });
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "h2",
+        null,
+        "Search result: albums"
+      ),
+      React.createElement(
+        "ul",
+        null,
+        _list
+      )
+    );
+  }
+});
+
+var SearchResult = React.createClass({
+  displayName: "SearchResult",
+
+  render: function render() {
+    var _list = "";
+    if (!_.isEmpty(this.props.result)) {
+      _list = React.createElement(List, { result: this.props.result, setPlaylist: this.props.setPlaylist });
+    }
+    return React.createElement(
+      "div",
+      null,
+      _list
+    );
+  }
+});
+
+module.exports = SearchResult;
+
+},{"lodash":3,"react":149}],182:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -33102,11 +33202,16 @@ var Actions = _interopRequire(require("./actions"));
 
 var request = _interopRequire(require("superagent"));
 
+var Firebase = _interopRequire(require("firebase"));
+
+var config = _interopRequire(require("config"));
+
 var Store = Reflux.createStore({
   listenables: Actions,
 
   init: function init() {
     this.albums = [];
+    this.firebase = new Firebase(config.FIREBASE_URL);
   },
 
   onSearch: function onSearch(query) {
@@ -33114,16 +33219,17 @@ var Store = Reflux.createStore({
 
     request.get("https://api.spotify.com/v1/search").query({ q: query, limit: 20, type: "album", market: "se" }).end(function (res) {
       _this.albums = res.body.albums.items;
-      console.log(_this.albums);
       _this.trigger(_this.albums);
     });
-  }
+  },
 
-});
+  onSetPlaylist: function onSetPlaylist(spotifyUri) {
+    this.firebase.data.child("playlist/uri").set(spotifyUri);
+  } });
 
 module.exports = Store;
 
-},{"./actions":174,"reflux":151,"superagent":171}],182:[function(require,module,exports){
+},{"./actions":174,"config":"config","firebase":1,"reflux":151,"superagent":171}],183:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -33169,7 +33275,7 @@ var Track = React.createClass({
 
 module.exports = Track;
 
-},{"./utils":183,"react":149}],183:[function(require,module,exports){
+},{"./utils":184,"react":149}],184:[function(require,module,exports){
 "use strict";
 
 module.exports = {
