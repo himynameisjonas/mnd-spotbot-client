@@ -12,6 +12,9 @@ import Search from './search';
 import SearchResult from './search_result';
 
 import SearchStore from './stores/search_store';
+import PlayerActions from './actions/player_actions';
+import PlayerStore from './stores/player_store';
+
 var App = React.createClass({
   mixins: [ReactFireMixin, Reflux.listenTo(SearchStore, 'onSearchChange')],
 
@@ -31,22 +34,13 @@ var App = React.createClass({
     this.bindAsObject(ref, "data");
   },
 
-  playPause() {
-    var data = this.state.data;
-    this.firebaseRefs.data.child('player/playing').set(!data[0].playing);
+  componentDidMount() {
+    PlayerActions.setFirebaseRef(this.firebaseRefs);
   },
 
-  play() {
-    var data = this.state.data;
-    this.firebaseRefs.data.child('player/playing').set(true);
+  componentWillUnmount() {
+    this.firebaseRefs.off();
   },
-  pause() {
-    var data = this.state.data;
-    this.firebaseRefs.data.child('player/playing').set(false);
-  },
-  next() {
-    this.firebaseRefs.data.child('player/next').set(true);
-  }
 
   render() {
     return (
@@ -57,7 +51,7 @@ var App = React.createClass({
               <CurrentTrack track={this.state.data.player} />
             </div>
             <div className="col-xs-4">
-              <PlayerControls play={this.play} pause={this.pause} next={this.next} />
+              <PlayerControls />
             </div>
             <div className="col-xs-4">
               <Search />
