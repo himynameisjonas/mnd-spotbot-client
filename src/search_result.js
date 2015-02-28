@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
-import Actions from './actions';
+import PlayerActions from './actions/player_actions';
 
 var Album = React.createClass({
   handleClick() {
-    Actions.setPlaylist(this.props.item.uri);
+    PlayerActions.setPlaylist(this.props.item.uri);
   },
   render() {
     var album = this.props.item;

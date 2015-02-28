@@ -1,5 +1,5 @@
 import React from 'react';
-import Actions from './actions';
+import SearchActions from './actions/search_actions';
 
 var Search = React.createClass({
   getInitialState() {
@@ -11,7 +11,7 @@ var Search = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     var query = this.refs.$input.getDOMNode().value;
-    Actions.search(query);
+    SearchActions.search(query);
     this.setState({ query: query });
   },
 

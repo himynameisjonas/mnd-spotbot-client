@@ -9,12 +9,11 @@ import CurrentPlaylist from './current_playlist';
 import Queue from './queue';
 import PlayerControls from './player_controls';
 import Search from './search';
-import Actions from './actions';
-import Store from './store';
 import SearchResult from './search_result';
 
+import SearchStore from './stores/search_store';
 var App = React.createClass({
-  mixins: [ReactFireMixin, Reflux.listenTo(Store, 'onSearchChange')],
+  mixins: [ReactFireMixin, Reflux.listenTo(SearchStore, 'onSearchChange')],
 
   getInitialState() {
     return {

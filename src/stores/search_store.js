@@ -1,15 +1,13 @@
 import Reflux from 'reflux';
-import Actions from './actions';
+import SearchActions from '../actions/search_actions';
 import request from 'superagent';
-import Firebase from 'firebase';
-import config from 'config';
 
 var Store = Reflux.createStore({
-  listenables: Actions,
+  listenables: SearchActions,
 
   init() {
     this.albums = [];
-    this.firebase = new Firebase(config.FIREBASE_URL);
+    this.playlist = [];
   },
 
   onSearch(query) {
@@ -17,11 +15,7 @@ var Store = Reflux.createStore({
       this.albums = res.body.albums.items;
       this.trigger(this.albums);
     });
-  },
-
-  onSetPlaylist(spotifyUri) {
-    this.firebase.data.child('playlist/uri').set(spotifyUri);
-  },
+  }
 
 });
 
