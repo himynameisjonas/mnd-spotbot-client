@@ -11,22 +11,16 @@ import PlayerControls from './player_controls';
 import Search from './search';
 import SearchResult from './search_result';
 
-import SearchStore from './stores/search_store';
 import PlayerActions from './actions/player_actions';
 import PlayerStore from './stores/player_store';
 
 var App = React.createClass({
-  mixins: [ReactFireMixin, Reflux.listenTo(SearchStore, 'onSearchChange')],
+  mixins: [ReactFireMixin],
 
   getInitialState() {
     return {
-      data: {},
-      searchResult: {}
+      data: {}
     };
-  },
-
-  onSearchChange(result) {
-    this.setState({ searchResult: result });
   },
 
   componentWillMount() {
@@ -61,7 +55,7 @@ var App = React.createClass({
         <main>
           <div className="row">
             <div className="col-xs-12">
-              <SearchResult result={this.state.searchResult} />
+              <SearchResult />
             </div>
           </div>
           <div className="row">

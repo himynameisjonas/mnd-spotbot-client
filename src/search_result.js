@@ -1,6 +1,8 @@
 import React from 'react';
+import Reflux from 'reflux';
 import _ from 'lodash';
 import PlayerActions from './actions/player_actions';
+import SearchStore from './stores/search_store';
 
 var Album = React.createClass({
   handleClick() {
@@ -42,10 +44,19 @@ var List = React.createClass({
 });
 
 var SearchResult = React.createClass({
+  mixins: [Reflux.listenTo(SearchStore, 'onSearchChange')],
+  getInitialState() {
+    return {
+      result: null
+    };
+  },
+  onSearchChange(result) {
+    this.setState({ result: result });
+  },
   render() {
     var _list = '';
-    if(!_.isEmpty(this.props.result)) {
-      _list = <List result={this.props.result} />;
+    if(this.state.result !== null) {
+      _list = <List result={this.state.result} />;
     }
     return (
       <div>
