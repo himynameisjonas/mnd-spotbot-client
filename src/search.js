@@ -8,8 +8,8 @@ var Search = React.createClass({
     };
   },
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     SearchActions.search(this.state.query);
     this.setState({ query: '' });
   },
@@ -20,9 +20,10 @@ var Search = React.createClass({
 
   render() {
     return (
-      <form className="form-inline" onSubmit={this.handleSubmit}>
-        <div className="form-group">
+      <form className="search" onSubmit={this.handleSubmit}>
+        <div className="has-feedback">
           <input onChange={this.handleChange} value={this.state.query} type="search" className="form-control" placeholder="Search..." />
+          <i className="fa fa-search form-control-feedback"></i>
         </div>
       </form>
     );

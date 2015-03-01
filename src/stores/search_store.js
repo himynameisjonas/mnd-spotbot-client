@@ -21,22 +21,34 @@ var Store = Reflux.createStore({
     this.trigger(this.albums, this.tracks);
   },
 
+  clearSearch() {
+    this.albums = [];
+    this.tracks = [];
+    this.trigger(this.albums, this.tracks);
+  },
+
   onSearch(query) {
-    // Search Albums
-    request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'album', market: 'se' }).end((res) => {
-      var ids = _.pluck(res.body.albums.items, 'id');
-      // Get more album meta-data
-      request.get('https://api.spotify.com/v1/albums').query({ ids: ids }).end((res) => {
-        this.albums = res.body.albums;
 
-        // Search tracks
-        request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'track', market: 'se' }).end((res) => {
-          this.tracks = res.body.tracks.items;
+    this.albums = [];
+    this.tracks = [];
+    // Search tracks
+    request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'track', market: 'se' }).end((res) => {
+      this.tracks = res.body.tracks.items;
+      request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'album', market: 'se' }).end((res) => {
+        var ids = _.pluck(res.body.albums.items, 'id');
+
+        // Get more album meta-data
+        if(ids.length) {
+          request.get('https://api.spotify.com/v1/albums').query({ ids: ids }).end((res) => {
+            this.albums = res.body.albums;
+            this.trigger(this.albums, this.tracks);
+          }.bind(this));
+        }
+        else {
           this.trigger(this.albums, this.tracks);
-        }.bind(this));
-
-      }.bind(this));
-    });
+        }
+      });
+    }.bind(this));
   }
 
 });
