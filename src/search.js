@@ -22,9 +22,8 @@ var Search = React.createClass({
     return (
       <form className="form-inline" onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <input onChange={this.handleChange} value={this.state.query} type="search" className="form-control" placeholder="Search" />
+          <input onChange={this.handleChange} value={this.state.query} type="search" className="form-control" placeholder="Search..." />
         </div>
-        <button type="submit" className="btn btn-primary">Go</button>
       </form>
     );
   }

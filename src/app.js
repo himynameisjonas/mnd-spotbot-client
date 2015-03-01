@@ -30,6 +30,15 @@ var App = React.createClass({
     Reflux.listenTo(SearchStore, 'onSearchChange')
   ],
 
+  getInitialState() {
+    return {
+      tracks: {},
+      currentTrack: {},
+      searchResultAlbums: {},
+      searchResultTracks: {}
+    };
+  },
+
   onTrackChange(track) {
     this.setState({ currentTrack: track });
   },
@@ -38,16 +47,11 @@ var App = React.createClass({
     this.setState({ tracks: tracks, searchResult: {} });
   },
 
-  onSearchChange(result) {
-    this.setState({ searchResult: result });
-  },
-
-  getInitialState() {
-    return {
-      tracks: {},
-      currentTrack: {},
-      searchResult: {}
-    };
+  onSearchChange(albums, tracks) {
+    this.setState({
+      searchResultAlbums: albums,
+      searchResultTracks: tracks
+    });
   },
 
   componentDidMount() {
@@ -61,24 +65,26 @@ var App = React.createClass({
 
   render() {
     return (
-      <div className="container">
-        <header>
-          <div className="row">
-            <div className="col-xs-4">
-              <CurrentTrack track={this.state.currentTrack} />
-            </div>
-            <div className="col-xs-4">
-              <PlayerControls />
-            </div>
-            <div className="col-xs-4">
-              <Search />
-            </div>
+      <div>
+        <header id="banner">
+          <div className="container">
+              <div className="row">
+                <div className="col-xs-4">
+                  <PlayerControls />
+                </div>
+                <div className="col-xs-4">
+                  <CurrentTrack track={this.state.currentTrack} />
+                </div>
+                <div className="col-xs-4">
+                  <Search />
+                </div>
+              </div>
           </div>
         </header>
         <main>
           <div className="row">
             <div className="col-xs-12">
-              <SearchResult searchResult={this.state.searchResult} />
+              <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
             </div>
           </div>
           <div className="row">
@@ -89,7 +95,7 @@ var App = React.createClass({
             </div>
           </div>
         </main>
-      </div>
+        </div>
     );
   }
 });
