@@ -4,6 +4,9 @@ import FirebaseRef from 'firebaseRef';
 
 var Store = Reflux.createStore({
   listenables: Actions,
+  onShuffle() {
+    FirebaseRef.child('playlist/shuffle').set(true);
+  },
   onPlay() {
     FirebaseRef.child('player/playing').set(true);
   },
