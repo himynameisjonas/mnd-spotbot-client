@@ -4,3 +4,4 @@ tmp/main.css
 tmp/main.css.map
 .sass-cache/
 .env
+config/environment.js
