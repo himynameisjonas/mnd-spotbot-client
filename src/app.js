@@ -1,9 +1,9 @@
 import React from 'react';
 import Reflux from 'reflux';
-import config from 'config';
-import ReactFireMixin from 'reactfire';
-import Firebase from 'firebase';
+import FirebaseRef from 'firebaseRef';
 import _ from 'lodash';
+
+// Components
 import CurrentTrack from './current_track';
 import CurrentPlaylist from './current_playlist';
 import Queue from './queue';
@@ -11,29 +11,52 @@ import PlayerControls from './player_controls';
 import Search from './search';
 import SearchResult from './search_result';
 
-import PlayerActions from './actions/player_actions';
+// Stores
 import PlayerStore from './stores/player_store';
+import PlaylistStore from './stores/playlist_store';
+import CurrentTrackStore from './stores/current_track_store';
+import SearchStore from './stores/search_store';
+
+// Actions
+import PlayerActions from './actions/player_actions';
+import PlaylistActions from './actions/playlist_actions';
+import CurrentTrackActions from './actions/current_track_actions';
+
 
 var App = React.createClass({
-  mixins: [ReactFireMixin],
+  mixins: [
+    Reflux.listenTo(PlaylistStore, 'onTracksChange'),
+    Reflux.listenTo(CurrentTrackStore, 'onTrackChange'),
+    Reflux.listenTo(SearchStore, 'onSearchChange')
+  ],
+
+  onTrackChange(track) {
+    this.setState({ currentTrack: track });
+  },
+
+  onTracksChange(tracks) {
+    this.setState({ tracks: tracks, searchResult: {} });
+  },
+
+  onSearchChange(result) {
+    this.setState({ searchResult: result });
+  },
 
   getInitialState() {
     return {
-      data: {}
+      tracks: {},
+      currentTrack: {},
+      searchResult: {}
     };
   },
 
-  componentWillMount() {
-    var ref = new Firebase(config.FIREBASE_URL);
-    this.bindAsObject(ref, "data");
-  },
-
   componentDidMount() {
-    PlayerActions.setFirebaseRef(this.firebaseRefs);
-  },
-
-  componentWillUnmount() {
-    this.firebaseRefs.off();
+   FirebaseRef.child('playlist/tracks').on('value', (trackUris) => {
+     PlaylistActions.setTracks(trackUris.val());
+   });
+   FirebaseRef.child('player/current_track').on('value', (trackUri) => {
+     CurrentTrackActions.setTrack(trackUri.val());
+   });
   },
 
   render() {
@@ -42,7 +65,7 @@ var App = React.createClass({
         <header>
           <div className="row">
             <div className="col-xs-4">
-              <CurrentTrack track={this.state.data.player} />
+              <CurrentTrack track={this.state.currentTrack} />
             </div>
             <div className="col-xs-4">
               <PlayerControls />
@@ -55,15 +78,14 @@ var App = React.createClass({
         <main>
           <div className="row">
             <div className="col-xs-12">
-              <SearchResult />
+              <SearchResult searchResult={this.state.searchResult} />
             </div>
           </div>
           <div className="row">
             <div className="col-xs-6">
-              <Queue playlist={this.state.data.queue} />
             </div>
             <div className="col-xs-6">
-              <CurrentPlaylist playlist={this.state.data.playlist} />
+              <CurrentPlaylist tracks={this.state.tracks} />
             </div>
           </div>
         </main>

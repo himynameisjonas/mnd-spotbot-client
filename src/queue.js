@@ -12,6 +12,7 @@ var Queue = React.createClass({
     };
   },
 
+  /*
   componentWillReceiveProps(newProps) {
     if(typeof(newProps.playlist) === 'undefined') {
       return;
@@ -25,6 +26,7 @@ var Queue = React.createClass({
       this.setState({ playlist: res.body });
     }.bind(this));
   },
+ */
 
   renderPlayList() {
     var _tracks = [];

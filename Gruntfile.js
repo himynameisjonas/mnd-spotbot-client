@@ -13,7 +13,7 @@ module.exports = function(grunt) {
         src: './src/app.js',
         dest: './tmp/app.js',
         options: {
-          require: ['./config/environment.js/:config']
+          require: ['./config/environment.js/:config', './config/firebase_ref.js:firebaseRef']
         }
       }
     },

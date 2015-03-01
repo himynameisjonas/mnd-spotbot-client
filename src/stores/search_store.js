@@ -1,9 +1,9 @@
 import Reflux from 'reflux';
-import SearchActions from '../actions/search_actions';
+import Actions from '../actions/search_actions';
 import request from 'superagent';
 
 var Store = Reflux.createStore({
-  listenables: SearchActions,
+  listenables: Actions,
 
   init() {
     this.albums = [];
