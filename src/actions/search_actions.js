@@ -1,7 +1,9 @@
 import Reflux from 'reflux';
 
 var Actions = Reflux.createActions([
-  'search'
+  'search',
+  'removeTrack',
+  'removeAlbum'
 ]);
 
 export default Actions;

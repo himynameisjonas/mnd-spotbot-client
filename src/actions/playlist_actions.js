@@ -2,7 +2,8 @@ import Reflux from 'reflux';
 
 var Actions = Reflux.createActions([
   'setTracks',
-  'setPlaylistUri'
+  'setPlaylistUri',
+  'enqueue'
 ]);
 
 export default Actions;
