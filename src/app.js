@@ -16,18 +16,21 @@ import PlayerStore from './stores/player_store';
 import PlaylistStore from './stores/playlist_store';
 import CurrentTrackStore from './stores/current_track_store';
 import SearchStore from './stores/search_store';
+import QueueStore from './stores/queue_store';
 
 // Actions
 import PlayerActions from './actions/player_actions';
 import PlaylistActions from './actions/playlist_actions';
 import CurrentTrackActions from './actions/current_track_actions';
+import QueueActions from './actions/queue_actions';
 
 
 var App = React.createClass({
   mixins: [
     Reflux.listenTo(PlaylistStore, 'onTracksChange'),
     Reflux.listenTo(CurrentTrackStore, 'onTrackChange'),
-    Reflux.listenTo(SearchStore, 'onSearchChange')
+    Reflux.listenTo(SearchStore, 'onSearchChange'),
+    Reflux.listenTo(QueueStore, 'onQueueChange')
   ],
 
   getInitialState() {
@@ -35,8 +38,13 @@ var App = React.createClass({
       tracks: {},
       currentTrack: {},
       searchResultAlbums: {},
-      searchResultTracks: {}
+      searchResultTracks: {},
+      queue: {}
     };
+  },
+
+  onQueueChange(tracks) {
+    this.setState({ queue: tracks });
   },
 
   onTrackChange(track) {
@@ -60,6 +68,9 @@ var App = React.createClass({
    });
    FirebaseRef.child('player/current_track').on('value', (trackUri) => {
      CurrentTrackActions.setTrack(trackUri.val());
+   });
+   FirebaseRef.child('queue').on('value', (trackUris) => {
+     QueueActions.setQueue(_.toArray(trackUris.val()));
    });
   },
 
@@ -89,6 +100,7 @@ var App = React.createClass({
           </div>
           <div className="row">
             <div className="col-xs-6">
+              <Queue tracks={this.state.queue} />
             </div>
             <div className="col-xs-6">
               <CurrentPlaylist tracks={this.state.tracks} />

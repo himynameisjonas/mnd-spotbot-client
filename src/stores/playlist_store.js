@@ -12,10 +12,6 @@ var Store = Reflux.createStore({
     this.tracks = [];
   },
 
-  onEnqueue(spotifyUri) {
-    FirebaseRef.child('queue').push({uri: spotifyUri});
-  },
-
   onSetTracks(trackUris) {
     // Tracks will be null the first time we set a new playlist
     if(trackUris === null) {

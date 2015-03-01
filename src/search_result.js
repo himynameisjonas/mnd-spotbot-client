@@ -4,6 +4,7 @@ import _ from 'lodash';
 import utils from './utils';
 import PlaylistActions from './actions/playlist_actions';
 import SearchActions from './actions/search_actions';
+import QueueActions from './actions/queue_actions';
 
 var Album = React.createClass({
   handleClick() {
@@ -32,8 +33,8 @@ var Album = React.createClass({
 
 var Track = React.createClass({
   handleClick() {
-    PlaylistActions.enqueue(this.props.item.uri);
-    SearchActions.removeTrack(this.props.item);
+    QueueActions.enqueue(this.props.item.uri);
+    //SearchActions.removeTrack(this.props.item);
   },
   render() {
     var track = this.props.item;
