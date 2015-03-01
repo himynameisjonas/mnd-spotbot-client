@@ -7,23 +7,23 @@ var Queue = React.createClass({
   renderPlayList() {
     var _tracks = [];
     this.props.tracks.map(track => {
-      _tracks.push(<Track metaData={track} />);
+      _tracks.push(<li><Track metaData={track} /></li>);
     });
     return (
-      <ul>
+      <ul className="list-unstyled">
       {_tracks}
       </ul>
     );
   },
 
   render() {
-    var playList = '';
+    var playList = <div>Queue is empty</div>;;
     if(!_.isEmpty(this.props.tracks)) {
       playList = this.renderPlayList();
     }
     return (
       <div>
-        <h2>Queue</h2>
+        <h3>Queue</h3>
         {playList}
       </div>
     );

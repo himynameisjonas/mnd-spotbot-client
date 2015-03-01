@@ -2,7 +2,8 @@ import Reflux from 'reflux';
 
 var Actions = Reflux.createActions([
   'setQueue',
-  'enqueue'
+  'enqueue',
+  'clearQueue'
 ]);
 
 export default Actions;

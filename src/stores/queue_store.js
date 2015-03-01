@@ -16,8 +16,14 @@ var Store = Reflux.createStore({
     FirebaseRef.child('queue').push({uri: spotifyUri});
   },
 
+  clearQueue() {
+    this.queue = [];
+    this.trigger(this.queue);
+  },
+
   onSetQueue(spotifyUris) {
     if(_.isEmpty(spotifyUris)) {
+      this.clearQueue();
       return;
     }
     var spotifyUris = _.pluck(spotifyUris, 'uri');
