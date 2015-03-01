@@ -10,6 +10,11 @@ var Store = Reflux.createStore({
 
   init() {
     this.tracks = [];
+    this.name = '';
+  },
+
+  setName(name) {
+    this.name = name;
   },
 
   onSetTracks(trackUris) {
@@ -22,9 +27,10 @@ var Store = Reflux.createStore({
     });
     request.get('https://api.spotify.com/v1/tracks/').query({ ids: _.take(trackIds, 20).join(',')}).end((res) => {
       this.tracks = res.body.tracks;
-      this.trigger(this.tracks);
+      this.trigger(this.tracks, this.name);
     }.bind(this));
   },
+
   onSetPlaylistUri(spotifyUri) {
     FirebaseRef.child('playlist/uri').set(spotifyUri);
   }

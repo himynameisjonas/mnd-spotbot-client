@@ -40,6 +40,7 @@ var App = React.createClass({
       searchResultAlbums: {},
       searchResultTracks: {},
       queue: {}
+      playlistName: ''
     };
   },
 
@@ -51,8 +52,8 @@ var App = React.createClass({
     this.setState({ currentTrack: track });
   },
 
-  onTracksChange(tracks) {
-    this.setState({ tracks: tracks, searchResult: {} });
+  onTracksChange(tracks, name) {
+    this.setState({ tracks: tracks, playlistName: name, searchResult: {} });
   },
 
   onSearchChange(albums, tracks) {
@@ -65,6 +66,9 @@ var App = React.createClass({
   componentDidMount() {
    FirebaseRef.child('playlist/tracks').on('value', (trackUris) => {
      PlaylistActions.setTracks(trackUris.val());
+   });
+   FirebaseRef.child('playlist/name').on('value', (name) => {
+     PlaylistActions.setName(name.val());
    });
    FirebaseRef.child('player/current_track').on('value', (trackUri) => {
      CurrentTrackActions.setTrack(trackUri.val());
@@ -93,17 +97,19 @@ var App = React.createClass({
           </div>
         </header>
         <main>
-          <div className="row">
-            <div className="col-xs-12">
-              <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-12">
+                <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-6">
-              <Queue tracks={this.state.queue} />
-            </div>
-            <div className="col-xs-6">
-              <CurrentPlaylist tracks={this.state.tracks} />
+            <div className="row">
+              <div className="col-xs-6">
+                <Queue tracks={this.state.queue} />
+              </div>
+              <div className="col-xs-6">
+                <CurrentPlaylist tracks={this.state.tracks} name={this.state.playlistName} />
+              </div>
             </div>
           </div>
         </main>
