@@ -17,10 +17,18 @@ module.exports = function(grunt) {
         }
       }
     },
+    sass: {
+      dist: {
+        files: [{
+          src: './src/**/*.scss',
+          dest: './tmp/main.css'
+        }]
+      }
+    },
     watch: {
       app: {
-        files: ['src/**/*.js'],
-        tasks: ['browserify:dev']
+        files: ['src/**/*.js', 'src/**/*.scss'],
+        tasks: ['browserify:dev', 'sass:dist']
       },
       options: {
         livereload: true,
@@ -55,6 +63,7 @@ module.exports = function(grunt) {
     grunt.task.run([
       'connect:livereload',
       'browserify:dev',
+      'sass:dist',
       'open',
       'watch:app'
     ]);
@@ -66,5 +75,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-notify');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
 };

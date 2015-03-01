@@ -1,2 +1,6 @@
 node_modules
 tmp/app.js
+tmp/main.css
+tmp/main.css.map
+.sass-cache/
+.env
