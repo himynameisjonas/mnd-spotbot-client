@@ -13,7 +13,7 @@ var Store = Reflux.createStore({
     this.name = '';
   },
 
-  setName(name) {
+  onSetName(name) {
     this.name = name;
   },
 

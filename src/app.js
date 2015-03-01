@@ -10,6 +10,7 @@ import Queue from './queue';
 import PlayerControls from './player_controls';
 import Search from './search';
 import SearchResult from './search_result';
+import Duration from './duration.js';
 
 // Stores
 import PlayerStore from './stores/player_store';
@@ -40,7 +41,8 @@ var App = React.createClass({
       searchResultAlbums: {},
       searchResultTracks: {},
       queue: {},
-      playlistName: ''
+      playlistName: '',
+      songStartedAt: Date.now()
     };
   },
 
@@ -48,12 +50,19 @@ var App = React.createClass({
     this.setState({ queue: tracks });
   },
 
-  onTrackChange(track) {
-    this.setState({ currentTrack: track });
+  onTrackChange(track, startedAt) {
+    this.setState({
+      currentTrack: track,
+      songStartedAt: startedAt
+    });
   },
 
   onTracksChange(tracks, name) {
-    this.setState({ tracks: tracks, playlistName: name, searchResult: {} });
+    this.setState({
+      tracks: tracks,
+      playlistName: name,
+      searchResult: {}
+    });
   },
 
   onSearchChange(albums, tracks) {
@@ -70,8 +79,8 @@ var App = React.createClass({
    FirebaseRef.child('playlist/name').on('value', (name) => {
      PlaylistActions.setName(name.val());
    });
-   FirebaseRef.child('player/current_track').on('value', (trackUri) => {
-     CurrentTrackActions.setTrack(trackUri.val());
+   FirebaseRef.child('player/current_track').on('value', (track) => {
+     CurrentTrackActions.setTrack(track.val());
    });
    FirebaseRef.child('queue').on('value', (trackUris) => {
      QueueActions.setQueue(_.toArray(trackUris.val()));
@@ -96,6 +105,7 @@ var App = React.createClass({
               </div>
           </div>
         </header>
+        <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} />
         <main>
           <div className="container">
             <div className="row">

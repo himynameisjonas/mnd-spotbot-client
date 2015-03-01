@@ -52,6 +52,16 @@ header#banner {
   @extend .album;
 }
 
+.duration {
+  height: 5px;
+  background: rgba(0,0,0,.3);
+  .elapsed {
+    height: 5px;
+    background: rgba(0,0,0,.5);
+    transition: width 0.5s ease;
+  }
+}
+
 .search {
   .form-control-feedback {
     right: 5px !important;
