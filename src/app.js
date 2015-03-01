@@ -95,8 +95,6 @@ var App = React.createClass({
                 </div>
               </div>
           </div>
-          <div className="timer">
-          </div>
         </header>
         <main>
           <div className="container">
