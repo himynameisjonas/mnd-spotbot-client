@@ -90,6 +90,7 @@ var App = React.createClass({
   render() {
     return (
       <div>
+        <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} />
         <header id="banner">
           <div className="container">
               <div className="row">
@@ -105,7 +106,6 @@ var App = React.createClass({
               </div>
           </div>
         </header>
-        <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} />
         <main>
           <div className="container">
             <div className="row">
