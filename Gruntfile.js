@@ -1,9 +1,26 @@
 var babelify = require('babelify');
+var dotenv = require('dotenv');
+dotenv.load();
 
 module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    replace: {
+      vars: {
+        options: {
+          patterns: [
+            {
+              match: 'firebaseUrl',
+              replacement: process.env.FIREBASE_URL
+            }
+          ]
+        },
+        files: [
+          { src: ['./config/environment_template.js'], dest: './config/environment.js' }
+        ]
+      }
+    },
     browserify: {
       options: {
         transform: [babelify],
@@ -13,14 +30,14 @@ module.exports = function(grunt) {
         src: './src/app.js',
         dest: './tmp/app.js',
         options: {
-          require: ['./config/environment.js/:config', './config/firebase_ref.js:firebaseRef']
+          require: ['./config/environment.js/:env', './config/firebase_ref.js:firebaseRef']
         }
       },
       dist: {
         src: './src/app.js',
         dest: './public/app.js',
         options: {
-          require: ['./config/environment.js/:config', './config/firebase_ref.js:firebaseRef']
+          require: ['./config/environment.js/:env', './config/firebase_ref.js:firebaseRef']
         }
       }
     },
@@ -74,6 +91,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('serve', function(target) {
     grunt.task.run([
+      'replace:vars',
       'connect:livereload',
       'browserify:dev',
       'sass:dev',
@@ -82,13 +100,16 @@ module.exports = function(grunt) {
     ]);
   });
 
-  grunt.registerTask('build', function(target) {
+
+  grunt.registerTask('dist', function(target) {
     grunt.task.run([
-      'browserify:dev',
-      'sass:dist'
+      'replace:vars',
+      'browserify:dist'
     ]);
   });
   grunt.registerTask('default', ['serve']);
+  grunt.registerTask('heroku:production', ['dist']);
+  grunt.registerTask('build', ['dist']);
 
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -96,4 +117,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-replace');
 };

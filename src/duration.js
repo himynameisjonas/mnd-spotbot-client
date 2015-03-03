@@ -18,7 +18,7 @@ var Duration = React.createClass({
   },
 
   render() {
-
+    // Calculate width outside render and update state instead
     var width = (this.state.elapsed / this.props.trackDuration) * 100;
     var style = {
       width: width.toFixed(5) + '%'

@@ -1,6 +1,6 @@
-import config from 'config';
+import env from 'env';
 import Firebase from 'firebase';
 
-var FirebaseRef = new Firebase(config.FIREBASE_URL);
+var FirebaseRef = new Firebase(env.FIREBASE_URL);
 
 export default FirebaseRef;

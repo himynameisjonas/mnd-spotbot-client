@@ -8,7 +8,7 @@ var Store = Reflux.createStore({
   listenables: Actions,
   init() {
     this.currentTrack = null;
-    this.startedAt = 0; // How many seconds ago the song started
+    this.startedAt = 0;
   },
   onSetTrack(track) {
     this.startedAt = track.started_at;

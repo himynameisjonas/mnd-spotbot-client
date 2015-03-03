@@ -3,5 +3,6 @@ tmp/app.js
 tmp/main.css
 tmp/main.css.map
 .sass-cache/
-.env
 config/environment.js
+.env
+public/app.js

@@ -1,0 +1,51 @@
+header#banner {
+  background: #f8f8f8;
+  padding: 20px 0; }
+  header#banner .track .media-left img {
+    width: 35px;
+    height: 34px; }
+
+.album .media-heading, .track .media-heading {
+  font-size: 14px; }
+  .album .media-heading .time, .track .media-heading .time, .album .media-heading .release-date, .track .media-heading .release-date {
+    font-size: 12px;
+    color: #777; }
+.album .media-body, .track .media-body {
+  font-size: 12px; }
+.album .media-left, .track .media-left {
+  position: relative; }
+  .album .media-left:hover .enqueue, .track .media-left:hover .enqueue {
+    display: block; }
+  .album .media-left .enqueue, .track .media-left .enqueue {
+    cursor: pointer;
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 64px;
+    padding-top: 24px;
+    text-align: center; }
+.album h4, .track h4 {
+  font-size: 12px; }
+
+.duration {
+  height: 5px;
+  background: rgba(0, 0, 0, 0.3); }
+  .duration .elapsed {
+    height: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    transition: width 0.5s ease; }
+
+.search .form-control-feedback {
+  right: 5px !important;
+  top: 10px !important;
+  color: #666; }
+
+.playlist .playlist-name {
+  color: #777;
+  font-size: 14px; }
+
+/*# sourceMappingURL=main.css.map */
