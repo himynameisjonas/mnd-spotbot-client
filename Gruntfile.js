@@ -15,15 +15,28 @@ module.exports = function(grunt) {
         options: {
           require: ['./config/environment.js/:config', './config/firebase_ref.js:firebaseRef']
         }
+      },
+      dist: {
+        src: './src/app.js',
+        dest: './public/app.js',
+        options: {
+          require: ['./config/environment.js/:config', './config/firebase_ref.js:firebaseRef']
+        }
       }
     },
     sass: {
-      dist: {
+      dev: {
         files: [{
           src: './src/**/*.scss',
           dest: './tmp/main.css'
         }]
-      }
+      },
+      dist: {
+        files: [{
+          src: './src/**/*.scss',
+          dest: './public/main.css'
+        }]
+      },
     },
     watch: {
       app: {
@@ -63,9 +76,16 @@ module.exports = function(grunt) {
     grunt.task.run([
       'connect:livereload',
       'browserify:dev',
-      'sass:dist',
+      'sass:dev',
       'open',
       'watch:app'
+    ]);
+  });
+
+  grunt.registerTask('build', function(target) {
+    grunt.task.run([
+      'browserify:dev',
+      'sass:dist'
     ]);
   });
   grunt.registerTask('default', ['serve']);
@@ -76,5 +96,4 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-contrib-sass');
-
 };
