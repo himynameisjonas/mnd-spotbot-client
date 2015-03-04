@@ -12,7 +12,12 @@ header#banner {
   }
 }
 
+li {
+  margin-bottom: 10px;
+}
+
 .album {
+
   .media-heading {
     font-size: 14px;
     .time, .release-date {
@@ -20,9 +25,11 @@ header#banner {
       color: #777;
     }
   }
+
   .media-body {
     font-size: 12px;
   }
+
   .media-left {
     position: relative;
     &:hover {
@@ -30,6 +37,7 @@ header#banner {
         display: block;
       }
     }
+
     .enqueue {
       cursor: pointer;
       display: none;
@@ -44,10 +52,12 @@ header#banner {
       text-align: center;
     }
   }
+
   h4 {
     font-size: 12px;
   }
 }
+
 .track {
   @extend .album;
 }
@@ -55,6 +65,7 @@ header#banner {
 .duration {
   height: 5px;
   background: rgba(0,0,0,.3);
+
   .elapsed {
     height: 5px;
     background: rgba(0,0,0,.5);

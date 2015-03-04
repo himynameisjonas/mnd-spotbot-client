@@ -58,7 +58,7 @@ module.exports = function(grunt) {
     watch: {
       app: {
         files: ['src/**/*.js', 'src/**/*.scss'],
-        tasks: ['browserify:dev', 'sass:dist']
+        tasks: ['browserify:dev', 'sass:dev']
       },
       options: {
         livereload: true,

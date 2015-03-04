@@ -5,6 +5,10 @@ header#banner {
     width: 35px;
     height: 34px; }
 
+li {
+  margin-bottom: 10px;
+  color: #000; }
+
 .album .media-heading, .track .media-heading {
   font-size: 14px; }
   .album .media-heading .time, .track .media-heading .time, .album .media-heading .release-date, .track .media-heading .release-date {
