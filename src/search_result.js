@@ -68,8 +68,8 @@ var Track = React.createClass({
 
 var AlbumList = React.createClass({
   render() {
-    var _albums = this.props.albums.map(item => {
-      return <Album item={item} />;
+    var _albums = this.props.albums.map((item, index) => {
+      return <Album item={item} key={index} />;
     });
     return (
       <div>
@@ -83,8 +83,8 @@ var AlbumList = React.createClass({
 
 var TrackList = React.createClass({
   render() {
-    var _tracks = this.props.tracks.map(item => {
-      return <Track item={item} />;
+    var _tracks = this.props.tracks.map((item, index) => {
+      return <Track item={item} key={index} />;
     });
     return (
       <div>
