@@ -73,18 +73,18 @@ var App = React.createClass({
   },
 
   componentDidMount() {
-   FirebaseRef.child('playlist/tracks').on('value', (trackUris) => {
-     PlaylistActions.setTracks(trackUris.val());
-   });
-   FirebaseRef.child('playlist/name').on('value', (name) => {
-     PlaylistActions.setName(name.val());
-   });
-   FirebaseRef.child('player/current_track').on('value', (track) => {
-     CurrentTrackActions.setTrack(track.val());
-   });
-   FirebaseRef.child('queue').on('value', (trackUris) => {
-     QueueActions.setQueue(_.toArray(trackUris.val()));
-   });
+    FirebaseRef.child('playlist/tracks').on('value', (trackUris) => {
+      PlaylistActions.setTracks(trackUris.val());
+    });
+    FirebaseRef.child('playlist/name').on('value', (name) => {
+      PlaylistActions.setName(name.val());
+    });
+    FirebaseRef.child('player/current_track').on('value', (track) => {
+      CurrentTrackActions.setTrack(track.val());
+    });
+    FirebaseRef.child('queue').on('value', (trackUris) => {
+      QueueActions.setQueue(_.toArray(trackUris.val()));
+    });
   },
 
   render() {
@@ -123,7 +123,7 @@ var App = React.createClass({
             </div>
           </div>
         </main>
-        </div>
+      </div>
     );
   }
 });
