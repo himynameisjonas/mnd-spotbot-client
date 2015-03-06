@@ -4,6 +4,9 @@ import FirebaseRef from 'firebaseRef';
 
 var Store = Reflux.createStore({
   listenables: Actions,
+  init() {
+    this.isPlaying = false;
+  },
   onShuffle() {
     FirebaseRef.child('playlist/shuffle').set(true);
   },
@@ -15,6 +18,10 @@ var Store = Reflux.createStore({
   },
   onNext() {
     FirebaseRef.child('player/next').set(true);
+  },
+  onSetPlayingStatus(isPlaying) {
+    this.isPlaying = isPlaying;
+    this.trigger(this.isPlaying);
   }
 });
 

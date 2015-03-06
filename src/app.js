@@ -28,6 +28,7 @@ import QueueActions from './actions/queue_actions';
 
 var App = React.createClass({
   mixins: [
+    Reflux.listenTo(PlayerStore, 'onPlayerChange'),
     Reflux.listenTo(PlaylistStore, 'onTracksChange'),
     Reflux.listenTo(CurrentTrackStore, 'onTrackChange'),
     Reflux.listenTo(SearchStore, 'onSearchChange'),
@@ -42,8 +43,13 @@ var App = React.createClass({
       searchResultTracks: {},
       queue: {},
       playlistName: '',
-      songStartedAt: Date.now()
+      songStartedAt: Date.now(),
+      isPlaying: false
     };
+  },
+
+  onPlayerChange(status) {
+    this.setState({ isPlaying: status });
   },
 
   onQueueChange(tracks) {
@@ -85,12 +91,15 @@ var App = React.createClass({
     FirebaseRef.child('queue').on('value', (trackUris) => {
       QueueActions.setQueue(_.toArray(trackUris.val()));
     });
+    FirebaseRef.child('player/playing').on('value', (snapshot) => {
+      PlayerActions.setPlayingStatus(snapshot.val());
+    });
   },
 
   render() {
     return (
       <div>
-        <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} />
+        <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} isPlaying={this.state.isPlaying} />
         <header id="banner">
           <div className="container">
               <div className="row">
