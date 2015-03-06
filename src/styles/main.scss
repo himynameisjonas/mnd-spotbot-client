@@ -32,7 +32,7 @@ li {
 
   .media-left {
     position: relative;
-    &:hover {
+    &:hover, &:focus {
       .enqueue {
         display: block;
       }

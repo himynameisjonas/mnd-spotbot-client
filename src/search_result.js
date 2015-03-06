@@ -8,9 +8,14 @@ import QueueActions from './actions/queue_actions';
 import { Button } from 'react-bootstrap';
 
 var Image = React.createClass({
+  handleKeyUp(event) {
+    if(event.which === 13) {
+      this.props.handleClick();
+    }
+  },
   render() {
     return (
-      <div className="media-left" onClick={this.props.handleClick}>
+      <div className="media-left" onKeyUp={this.handleKeyUp} onClick={this.props.handleClick} tabIndex="0">
         <img src={this.props.imageUrl} />
         <div className="enqueue">
           <i className="fa fa-plus"></i>
