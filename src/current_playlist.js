@@ -34,7 +34,7 @@ var CurrentPlaylist = React.createClass({
   renderPlayList() {
     var _tracks = [];
     this.props.tracks.map((track, index) => {
-      _tracks.push(<li><Track metaData={track} key={index} /></li>);
+      _tracks.push(<li key={index}><Track metaData={track} /></li>);
     });
     return (
       <ul className="list-unstyled">
