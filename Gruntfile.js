@@ -6,6 +6,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    // Replace
     replace: {
       vars: {
         options: {
@@ -21,6 +22,7 @@ module.exports = function(grunt) {
         ]
       }
     },
+    // Browserify
     browserify: {
       options: {
         transform: [babelify],
@@ -41,6 +43,7 @@ module.exports = function(grunt) {
         }
       }
     },
+    // Sass
     sass: {
       dev: {
         files: [{
@@ -55,6 +58,7 @@ module.exports = function(grunt) {
         }]
       },
     },
+    // Watch
     watch: {
       app: {
         files: ['src/**/*.js', 'src/**/*.scss'],
@@ -67,6 +71,7 @@ module.exports = function(grunt) {
         ]
       }
     },
+    // Connect
     connect: {
       options: {
         port: 8000,
@@ -82,6 +87,7 @@ module.exports = function(grunt) {
         }
       }
     },
+    // Open
     open: {
       server: {
         url: 'http://<%= connect.options.hostname %>:<%= connect.options.port %>'
@@ -100,13 +106,13 @@ module.exports = function(grunt) {
     ]);
   });
 
-
   grunt.registerTask('dist', function(target) {
     grunt.task.run([
       'replace:vars',
       'browserify:dist'
     ]);
   });
+
   grunt.registerTask('default', ['serve']);
   grunt.registerTask('heroku:production', ['dist']);
   grunt.registerTask('build', ['dist']);
