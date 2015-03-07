@@ -5,4 +5,4 @@ tmp/main.css.map
 .sass-cache/
 config/environment.js
 .env
-public/*
+public/app.js
