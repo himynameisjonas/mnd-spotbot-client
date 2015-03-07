@@ -27,6 +27,7 @@ import CurrentTrackActions from './actions/current_track_actions';
 import QueueActions from './actions/queue_actions';
 
 
+
 var App = React.createClass({
   mixins: [
     Reflux.listenTo(PlayerStore, 'onPlayerChange'),
@@ -87,7 +88,7 @@ var App = React.createClass({
       PlaylistActions.setName(name.val());
     });
     FirebaseRef.child('player/current_track').on('value', (track) => {
-      CurrentTrackActions.setTrack(track.val());
+      CurrentTrackActions.getTrack(track.val());
     });
     FirebaseRef.child('queue').on('value', (trackUris) => {
       QueueActions.setQueue(_.toArray(trackUris.val()));
@@ -124,10 +125,10 @@ var App = React.createClass({
               </div>
             </div>
             <div className="row">
-              <div className="col-xs-6">
+              <div className="col-xs-12">
                 <Queue tracks={this.state.queue} />
               </div>
-              <div className="col-xs-6">
+              <div className="col-xs-12">
                 <CurrentPlaylist tracks={this.state.tracks} name={this.state.playlistName} />
               </div>
             </div>

@@ -3,14 +3,21 @@ import Actions from '../actions/current_track_actions';
 import request from 'superagent';
 import utils from '../utils';
 import _ from 'lodash';
+import FirebaseRef from 'firebaseRef'
 
 var Store = Reflux.createStore({
   listenables: Actions,
+
   init() {
     this.currentTrack = null;
     this.startedAt = 0;
   },
+
   onSetTrack(track) {
+    FirebaseRef.child('player/current_track/uri').set(track.uri);
+  },
+
+  onGetTrack(track) {
     this.startedAt = track.started_at;
     var trackId = utils.parseSpotifyId(track.uri);
     request.get('https://api.spotify.com/v1/tracks/' + trackId, function(res) {
