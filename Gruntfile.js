@@ -23,6 +23,12 @@ module.exports = function(grunt) {
         ]
       }
     },
+    copy: {
+      main: {
+        src: 'tmp/index.html',
+        dest: 'public/index.html'
+      }
+    },
     // Browserify
     browserify: {
       options: {
@@ -94,6 +100,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist', function(target) {
     grunt.task.run([
       'replace:vars',
+      'copy:main',
       'browserify:dist'
     ]);
   });
@@ -108,4 +115,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 };
