@@ -2,6 +2,7 @@ import React from 'react';
 import Reflux from 'reflux';
 import FirebaseRef from 'firebaseRef';
 import _ from 'lodash';
+import from './styles/main.scss';
 
 // Components
 import CurrentTrack from './current_track';

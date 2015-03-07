@@ -37,6 +37,7 @@
     "react-bootstrap": "^0.16.0",
     "reactfire": "^0.4.0",
     "reflux": "^0.2.5",
+    "sassify": "^0.5.2",
     "superagent": "^0.21.0"
   },
   "dependencies": {

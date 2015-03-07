@@ -1,4 +1,5 @@
 var babelify = require('babelify');
+var sassify = require('sassify');
 var dotenv = require('dotenv');
 dotenv.load();
 
@@ -25,7 +26,7 @@ module.exports = function(grunt) {
     // Browserify
     browserify: {
       options: {
-        transform: [babelify],
+        transform: [babelify, sassify],
         debug: true
       },
       dev: {
@@ -43,26 +44,11 @@ module.exports = function(grunt) {
         }
       }
     },
-    // Sass
-    sass: {
-      dev: {
-        files: [{
-          src: './src/**/*.scss',
-          dest: './tmp/main.css'
-        }]
-      },
-      dist: {
-        files: [{
-          src: './src/**/*.scss',
-          dest: './public/main.css'
-        }]
-      },
-    },
     // Watch
     watch: {
       app: {
         files: ['src/**/*.js', 'src/**/*.scss'],
-        tasks: ['browserify:dev', 'sass:dev']
+        tasks: ['browserify:dev']
       },
       options: {
         livereload: true,
@@ -100,7 +86,6 @@ module.exports = function(grunt) {
       'replace:vars',
       'connect:livereload',
       'browserify:dev',
-      'sass:dev',
       'open',
       'watch:app'
     ]);
@@ -122,6 +107,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-notify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-replace');
 };
