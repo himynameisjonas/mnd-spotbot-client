@@ -29,6 +29,13 @@ module.exports = function(grunt) {
         dest: 'public/index.html'
       }
     },
+    uglify: {
+      my_target: {
+        files: {
+          'public/app.min.js': ['public/app.js']
+        }
+      }
+    },
     // Browserify
     browserify: {
       options: {
@@ -101,7 +108,8 @@ module.exports = function(grunt) {
     grunt.task.run([
       'replace:vars',
       'copy:main',
-      'browserify:dist'
+      'browserify:dist',
+      'uglify'
     ]);
   });
 
@@ -116,4 +124,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 };
