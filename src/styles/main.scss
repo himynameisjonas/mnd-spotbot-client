@@ -102,9 +102,11 @@ li {
       height: 35px;
     }
   }
-  ul {
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
+  @media(min-width:768px){
+    ul {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+    }
   }
 }
