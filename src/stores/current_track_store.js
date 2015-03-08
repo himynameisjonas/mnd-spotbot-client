@@ -9,8 +9,10 @@ var Store = Reflux.createStore({
   listenables: Actions,
 
   init() {
-    this.currentTrack = null;
-    this.startedAt = 0;
+    this.obj = {
+      currentTrack: null,
+      startedAt: 0
+    };
   },
 
   onSetTrack(track) {
@@ -18,11 +20,11 @@ var Store = Reflux.createStore({
   },
 
   onGetTrack(track) {
-    this.startedAt = track.started_at;
+    this.obj.startedAt = track.started_at;
     var trackId = utils.parseSpotifyId(track.uri);
     request.get('https://api.spotify.com/v1/tracks/' + trackId, function(res) {
-      this.currentTrack = res.body;
-      this.trigger(this.currentTrack, this.startedAt);
+      this.obj.currentTrack = res.body;
+      this.trigger(this.obj);
     }.bind(this));
   }
 

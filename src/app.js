@@ -58,25 +58,25 @@ var App = React.createClass({
     this.setState({ queue: tracks });
   },
 
-  onTrackChange(track, startedAt) {
+  onTrackChange(obj) {
     this.setState({
-      currentTrack: track,
-      songStartedAt: startedAt
+      currentTrack: obj.currentTrack,
+      songStartedAt: obj.startedAt
     });
   },
 
-  onTracksChange(tracks, name) {
+  onTracksChange(obj) {
     this.setState({
-      tracks: tracks,
-      playlistName: name,
-      searchResult: {}
+      tracks: obj.tracks,
+      playlistName: obj.name,
+      searchResult: {} // Clear result instead via action
     });
   },
 
-  onSearchChange(albums, tracks) {
+  onSearchChange(obj) {
     this.setState({
-      searchResultAlbums: albums,
-      searchResultTracks: tracks
+      searchResultAlbums: obj.albums,
+      searchResultTracks: obj.tracks
     });
   },
 
@@ -105,13 +105,13 @@ var App = React.createClass({
         <header id="banner">
           <div className="container">
               <div className="row">
-                <div className="col-xs-3">
+                <div className="col-xs-12 col-sm-3">
                   <PlayerControls />
                 </div>
-                <div className="col-xs-6">
+                <div className="col-xs-12 col-sm-6">
                   <CurrentTrack track={this.state.currentTrack} isPlaying={this.state.isPlaying} />
                 </div>
-                <div className="col-xs-3">
+                <div className="col-xs-12 col-sm-3">
                   <Search />
                 </div>
               </div>
