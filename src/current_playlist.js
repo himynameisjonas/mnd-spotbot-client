@@ -1,39 +1,12 @@
 import React from 'react';
-import Track from './track';
 import _ from 'lodash';
-import PlaylistActions from './actions/playlist_actions';
 import utils from './utils';
 import QueueActions from './actions/queue_actions';
 import PlayerActions from './actions/player_actions';
 import CurrentTrackActions from './actions/current_track_actions';
+import AddPlaylist from './current_playlist/add_playlist';
 
-var AddPlaylist = React.createClass({
-  getInitialState() {
-    return { query: '' }
-  },
-
-  handleSubmit(event) {
-    event.preventDefault();
-    PlaylistActions.setPlaylistUri(this.state.query);
-    this.setState({ query: '' });
-  },
-
-  handleChange(event) {
-    this.setState({ query: event.target.value });
-  },
-
-  render() {
-    return(
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <input value={this.state.query} onChange={this.handleChange} ref="$input" type="text" className="form-control" placeholder="Paste spotify uri" />
-        </div>
-      </form>
-    );
-  }
-});
-
-var Temp = React.createClass({
+var Track = React.createClass({
   handleClick() {
     CurrentTrackActions.setTrack(this.props.metaData);
   },
@@ -41,15 +14,32 @@ var Temp = React.createClass({
     var track = this.props.metaData;
     return (
       <div className="media track">
-          <div className="media-left" onClick={this.handleClick}>
-            <img src={track.album.images[2].url} />
-          </div>
-          <div className="media-body">
-            <h3 className="media-heading">
-              {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
-            </h3>
+        <div className="media-left" onClick={this.handleClick}>
+          <img src={track.album.images[2].url} />
+        </div>
+        <div className="media-body">
+          <h3 className="media-heading">
+            {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
+          </h3>
+          <div>
             {track.artists[0].name} / {track.album.name}
           </div>
+        </div>
+      </div>
+    );
+  }
+});
+
+var AlbumTrack = React.createClass({
+  render() {
+    var track = this.props.metaData;
+    return (
+      <div>
+        <div className="media track">
+          <h3 className="media-heading">
+            {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
+          </h3>
+        </div>
       </div>
     );
   }
@@ -57,16 +47,29 @@ var Temp = React.createClass({
 
 var CurrentPlaylist = React.createClass({
 
-  renderPlayList() {
+  getInitialState() {
+    return {
+      isAlbum: false
+    }
+  },
 
-    var albums = this.props.tracks.map(track => {
+  componentWillReceiveProps(newProps) {
+    var albums = newProps.tracks.map(track => {
       return track.album.uri;
     });
-    console.log(_.uniq(albums).length);
+    var isAlbum = _.uniq(albums).length === 1;
+    this.setState({ isAlbum: isAlbum });
+  },
 
+  renderPlayList() {
     var _tracks = [];
     this.props.tracks.map((track, index) => {
-      _tracks.push(<li key={index}><Temp metaData={track} /></li>);
+      if(this.state.isAlbum) {
+        _tracks.push(<li key={index}><AlbumTrack metaData={track} /></li>);
+      }
+      else {
+        _tracks.push(<li key={index}><Track metaData={track} /></li>);
+      }
     });
     return (
       <ul className="list-unstyled">
@@ -80,9 +83,15 @@ var CurrentPlaylist = React.createClass({
     if(!_.isEmpty(this.props.tracks)) {
       playList = this.renderPlayList();
     }
+    var albumCover = '';
+    if(this.state.isAlbum) {
+      albumCover = <img src={this.props.tracks[0].album.images[2].url} />
+    }
+    console.log("Playlist");
+
     return (
       <div className="playlist">
-        <h3>Playlist/Album <span className="playlist-name">{this.props.name}</span></h3>
+        <h3>Playlist/Album {albumCover} <span className="playlist-name">{this.props.name}</span></h3>
         <AddPlaylist />
         {playList}
       </div>
