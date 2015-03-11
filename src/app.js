@@ -105,13 +105,13 @@ var App = React.createClass({
         <header id="banner">
           <div className="container">
               <div className="row">
-                <div className="col-xs-12 col-sm-3">
-                  <PlayerControls />
-                </div>
-                <div className="col-xs-12 col-sm-6">
+                <div className="col-xs-12 col-sm-5">
                   <CurrentTrack track={this.state.currentTrack} isPlaying={this.state.isPlaying} />
                 </div>
                 <div className="col-xs-12 col-sm-3">
+                  <PlayerControls />
+                </div>
+                <div className="col-xs-12 col-sm-4">
                   <Search />
                 </div>
               </div>
