@@ -34,7 +34,7 @@
     "grunt-open": "^0.2.3",
     "grunt-replace": "^0.8.0",
     "lodash": "^3.3.0",
-    "react": "^0.12.2",
+    "react": "^0.13.0",
     "react-bootstrap": "^0.16.0",
     "reflux": "^0.2.5",
     "sassify": "^0.5.2",
