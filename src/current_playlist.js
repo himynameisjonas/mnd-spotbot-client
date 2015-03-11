@@ -31,12 +31,15 @@ var Track = React.createClass({
 });
 
 var AlbumTrack = React.createClass({
+  handleClick() {
+    CurrentTrackActions.setTrack(this.props.metaData);
+  },
   render() {
     var track = this.props.metaData;
     return (
       <div>
         <div className="media track">
-          <h3 className="media-heading">
+          <h3 className="media-heading" onClick={this.handleClick}>
             {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
           </h3>
         </div>
@@ -87,7 +90,6 @@ var CurrentPlaylist = React.createClass({
     if(this.state.isAlbum) {
       albumCover = <img src={this.props.tracks[0].album.images[2].url} />
     }
-    console.log("Playlist");
 
     return (
       <div className="playlist">
