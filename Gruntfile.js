@@ -1,10 +1,8 @@
 var babelify = require('babelify');
-var sassify = require('sassify');
 var dotenv = require('dotenv');
 dotenv.load();
 
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     // Replace
@@ -30,10 +28,23 @@ module.exports = function(grunt) {
         }
       }
     },
+    // Sass
+    sass: {
+      dev: {
+        files: {
+          'tmp/main.css': 'src/styles/main.scss'
+        }
+      },
+      dist: {
+        files: {
+          'public/main.css': 'src/styles/main.scss'
+        }
+      }
+    },
     // Browserify
     browserify: {
       options: {
-        transform: [babelify, sassify],
+        transform: [babelify],
         debug: true
       },
       dev: {
@@ -55,7 +66,7 @@ module.exports = function(grunt) {
     watch: {
       app: {
         files: ['src/**/*.js', 'src/**/*.scss'],
-        tasks: ['browserify:dev']
+        tasks: ['browserify:dev', 'sass:dev']
       },
       options: {
         livereload: true,
@@ -92,6 +103,7 @@ module.exports = function(grunt) {
     grunt.task.run([
       'replace:vars',
       'connect:livereload',
+      'sass:dev',
       'browserify:dev',
       'open',
       'watch:app'
@@ -101,6 +113,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist', function(target) {
     grunt.task.run([
       'replace:vars',
+      'sass:dist',
       'browserify:dist',
       'uglify'
     ]);
@@ -117,4 +130,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 };
