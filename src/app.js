@@ -11,6 +11,7 @@ import PlayerControls from './player_controls';
 import Search from './search';
 import SearchResult from './search_result';
 import Duration from './duration.js';
+import Fullscreen from './fullscreen.js'
 
 // Stores
 import PlayerStore from './stores/player_store';
