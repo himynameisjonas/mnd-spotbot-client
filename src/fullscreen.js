@@ -1,24 +1,39 @@
 import React from 'react';
-import Reflux from 'reflux';
+import utils from './utils';
+import _ from 'lodash';
 
-// Components
-import CurrentTrack from './current_track';
-
-// Stores
-import CurrentTrackStore from './stores/current_track_store';
 
 var Fullscreen = React.createClass({
 
-  render() {
+  renderTrack() {
+    var trackMeta = this.props.track;
     return (
-      <div id="fullscreen" className="fullscreen">
-        <img className="cover" src={this.state.currentTrack.album.images[2].url} />
+      <div id="fullscreen" className="fullscreen open">
+        <img className="cover" src={trackMeta.album.images[2].url} />
         <div className="cover-fade">
           <button className="fullscreen-close"><i className="fa fa-times-circle"></i></button>
           <div className="fullscreen-inner">
-            <CurrentTrack track={this.state.currentTrack} isPlaying={this.state.isPlaying} />
+            <div className="current-track">
+              <h3 className="media-heading">
+                {trackMeta.name} <span className="time">{utils.formatDuration(trackMeta.duration_ms)}</span>
+              </h3>
+              <span className="media-artist-album">{trackMeta.artists[0].name} / {trackMeta.album.name}</span>
+            </div>
           </div>
         </div>
+      </div>
+    );
+  },
+
+  render() {
+    var track = '';
+    if(!_.isEmpty(this.props.track)) {
+      track = this.renderTrack();
+    }
+
+    return (
+      <div>
+        {track}
       </div>
     );
   }

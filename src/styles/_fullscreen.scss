@@ -55,7 +55,6 @@
   }
 
   .current-track {
-    z-index: 111;
     width: auto;
     max-width: 100%;
 
@@ -64,6 +63,10 @@
       font-size: 30px;
       font-weight: 100;
       color: #84bd00;
+
+      .time {
+        color: #fff;
+      }
 
       @media(min-width:768px){
         font-size: 60px;
@@ -95,6 +98,7 @@
   margin: 15px;
   @media(min-width:768px){
     margin: 120px;    
+    max-width: 80%;
   }
 }
 

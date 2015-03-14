@@ -110,6 +110,7 @@ var App = React.createClass({
   render() {
     return (
       <div>
+        <Fullscreen track={this.state.currentTrack} />
         <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
         <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} isPlaying={this.state.isPlaying} />
         <header id="banner" role="banner">
