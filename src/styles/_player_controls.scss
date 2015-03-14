@@ -1,0 +1,11 @@
+@import "vars";
+
+.player-controls {
+  margin: 10px 0;
+  text-align: center;
+
+  @media(min-width:768px) {
+    margin: 0;
+    text-align: left;
+  }
+}

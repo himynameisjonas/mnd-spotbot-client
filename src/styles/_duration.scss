@@ -1,14 +1,14 @@
 @import "vars";
 
 .duration {
-  height: 5px;
   background: rgba($textColor, .5);;
+  height: 5px;
   max-width: 100%;
   overflow: hidden;
 
   .elapsed {
-    height: 5px;
     background: rgba($textColor, 1);
+    height: 5px;
     transition: width 0.5s ease;
   }
 }

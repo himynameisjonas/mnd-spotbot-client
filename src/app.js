@@ -101,7 +101,7 @@ var App = React.createClass({
     return (
       <div>
         <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} isPlaying={this.state.isPlaying} />
-        <header id="banner">
+        <header id="banner" role="banner">
           <div className="container">
               <div className="row">
                 <div className="col-xs-12 col-sm-5">

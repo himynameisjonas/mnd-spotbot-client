@@ -1,16 +1,19 @@
 @import "vars";
 
 .playlist {
+
   .playlist-name {
     color: rgba($textColor, .5);
     font-size: 14px;
   }
+
   .media-left {
     img {
       height: 35px;
     }
   }
-  @media(min-width:768px){
+
+  @media screen and (min-width: $screen-sm-min) {
     ul {
       columns: 2;
       -webkit-columns: 2;

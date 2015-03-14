@@ -2,35 +2,33 @@
 
 body {
   background: #111 url(bg.jpg) no-repeat;
+  background-size: cover;
   color: rgba($textColor, 1);
   font-family: "Courier New";
-  background-size: cover;
 }
 
 .btn-default {
   background-color: rgba($textColor, .1);
-  color: rgba($textColor, 1);
   border-color: rgba($textColor, .5);
+  color: rgba($textColor, 1);
+
   &:hover, &:focus {
     background-color: rgba($textColor, .2);
-    color: rgba($textColor, 1);
     border-color: rgba($textColor, 1);
+    color: rgba($textColor, 1);
   }
 }
+
 textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus, .btn:focus {
-    border-color: rgba($textColor, 0.8);
-    box-shadow: 0 1px 1px rgba($textColor, 0.075) inset, 0 0 8px rgba($textColor, 0.6);
-    outline: 0 none;
+  border-color: rgba($textColor, 0.8);
+  box-shadow: 0 1px 1px rgba($textColor, 0.075) inset, 0 0 8px rgba($textColor, 0.6);
+  outline: 0 none;
 }
 
 .form-control {
   background-color: rgba($textColor, .1);
-  color: $textColor;;
   border: solid rgba($textColor, .5) 1px;
-}
-
-.queue {
-  border-bottom: solid $textColor 1px;
+  color: $textColor;;
 }
 
 header#banner {
@@ -38,10 +36,11 @@ header#banner {
 
   .track {
     margin: 0;
+
     .media-left {
       img {
-        width: 35px;
         height: 34px;
+        width: 35px;
       }
     }
   }
@@ -51,61 +50,10 @@ li {
   margin-bottom: 10px;
 }
 
-.current-track {
-  position: relative;
-
-  .playing-status {
-    position: absolute;
-    top: 7px;
-    left: 12px;
-    z-index: 100;
-    color: rgba($textColor, 0.5);
-  }
-}
-
-.track, .album {
-  .media-heading {
-    font-size: 14px;
-  }
-
-  .time, .release-date {
-    font-size: 12px;
-    color: rgba($textColor, .5);
-  }
-
-  .media-body {
-    font-size: 12px;
-  }
-
-  h4 {
-    font-size: 12px;
-  }
-
-  .media-left {
-    position: relative;
-
-    &:hover, &:focus {
-      .enqueue {
-        display: block;
-      }
-    }
-
-    .enqueue {
-      cursor: pointer;
-      display: none;
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 64px;
-      height: 64px;
-      padding-top: 24px;
-      text-align: center;
-    }
-  }
-}
-
-@import "duration";
 @import "current_playlist";
+@import "current_track";
+@import "duration";
+@import "player_controls";
+@import "queue";
 @import "search";
+@import "track";
