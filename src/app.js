@@ -128,7 +128,7 @@ var App = React.createClass({
                 <Queue tracks={this.state.queue} />
               </div>
               <div className="col-xs-12">
-                <CurrentPlaylist tracks={this.state.tracks} name={this.state.playlistName} />
+                <CurrentPlaylist tracks={this.state.tracks} name={this.state.playlistName} currentTrack={this.state.currentTrack} />
               </div>
             </div>
           </div>

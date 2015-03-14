@@ -36,8 +36,9 @@ var AlbumTrack = React.createClass({
   },
   render() {
     var track = this.props.metaData;
+    var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
-      <div>
+      <div className={isCurrentTrack}>
         <div className="media track">
           <h3 className="media-heading" onClick={this.handleClick}>
             <span className="track-name">{this.props.index}. {track.name}</span> <span className="time">{utils.formatDuration(track.duration_ms)}</span>
@@ -67,11 +68,12 @@ var CurrentPlaylist = React.createClass({
   renderPlayList() {
     var _tracks = [];
     this.props.tracks.map((track, index) => {
+      var isCurrentTrack = this.props.currentTrack.id === track.id;
       if(this.state.isAlbum) {
-        _tracks.push(<li key={index}><AlbumTrack index={index+1} key={index} metaData={track} /></li>);
+        _tracks.push(<li key={index}><AlbumTrack isCurrentTrack={isCurrentTrack} index={index+1} key={index} metaData={track} /></li>);
       }
       else {
-        _tracks.push(<li key={index}><Track index={index+1} key={index} metaData={track} /></li>);
+        _tracks.push(<li key={index}><Track isCurrentTrack={isCurrentTrack} index={index+1} key={index} metaData={track} /></li>);
       }
     });
     return (

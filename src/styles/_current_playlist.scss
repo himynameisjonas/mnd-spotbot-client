@@ -17,13 +17,21 @@
     }
   }
 
+  &-current-track {
+    .media-heading {
+      font-weight: bold;
+    }
+  }
+
   .media-heading {
     display: table;
     border-bottom: dotted rgba($textColor, .2) 1px;
+
     .track-name {
       display: table-cell;
       width: 80%;
     }
+
     .time {
       display: table-cell;
       width: 20%;
