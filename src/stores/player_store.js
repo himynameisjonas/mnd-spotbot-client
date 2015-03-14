@@ -19,6 +19,9 @@ var Store = Reflux.createStore({
   onNext() {
     FirebaseRef.child('player/next').set(true);
   },
+  onTogglePlay() {
+    FirebaseRef.child('player/playing').set(!this.isPlaying);
+  },
   onSetPlayingStatus(isPlaying) {
     this.isPlaying = isPlaying;
     this.trigger(this.isPlaying);

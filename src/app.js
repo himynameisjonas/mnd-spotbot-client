@@ -108,7 +108,7 @@ var App = React.createClass({
                   <CurrentTrack track={this.state.currentTrack} isPlaying={this.state.isPlaying} />
                 </div>
                 <div className="col-xs-12 col-sm-3">
-                  <PlayerControls />
+                  <PlayerControls isPlaying={this.state.isPlaying} />
                 </div>
                 <div className="col-xs-12 col-sm-4">
                   <Search />

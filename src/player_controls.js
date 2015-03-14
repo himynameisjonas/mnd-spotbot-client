@@ -4,11 +4,17 @@ import { Button } from 'react-bootstrap';
 
 var PlayerControls = React.createClass({
   render() {
+    var playButton = '';
+    if(this.props.isPlaying) {
+      playButton = <Button bsStyle="default" onClick={PlayerActions.togglePlay}><i className="fa fa-pause"></i></Button>
+    }
+    else {
+      playButton = <Button bsStyle="default" onClick={PlayerActions.togglePlay}><i className="fa fa-play"></i></Button>
+    }
     return (
       <div className="player-controls">
         <div className="btn-group" role="group" aria-label="Player controls">
-          <Button bsStyle="default" onClick={PlayerActions.play}><i className="fa fa-play"></i></Button>
-          <Button bsStyle="default" onClick={PlayerActions.pause}><i className="fa fa-pause"></i></Button>
+          {playButton}
           <Button bsStyle="default" onClick={PlayerActions.next}><i className="fa fa-forward"></i></Button>
           <Button bsStyle="default" onClick={PlayerActions.shuffle}><i className="fa fa-random"></i></Button>
         </div>
