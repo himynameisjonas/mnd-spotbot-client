@@ -1,5 +1,39 @@
+$apa: rgba(0,255,0, 1);
+$textColor: #00ff00;
+
+.btn-default {
+  background-color: rgba($textColor, .1);
+  color: rgba($textColor, 1);
+  border-color: rgba($textColor, .5);
+  &:hover, &:focus {
+    background-color: rgba($textColor, .2);
+    color: rgba($textColor, 1);
+    border-color: rgba($textColor, 1);
+  }
+}
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus, .btn:focus {
+    border-color: rgba($textColor, 0.8);
+    box-shadow: 0 1px 1px rgba($textColor, 0.075) inset, 0 0 8px rgba($textColor, 0.6);
+    outline: 0 none;
+}
+body {
+  background: #111 url(bg.jpg) no-repeat;
+  color: rgba($textColor, 1);
+  font-family: "Courier New";
+  background-size: cover;
+}
+
+.form-control {
+  background-color: rgba($textColor, .1);
+  color: $textColor;;
+  border: solid rgba($textColor, .5) 1px;
+}
+
+.queue {
+  border-bottom: solid $textColor 1px;
+}
+
 header#banner {
-  background: #f8f8f8;
   padding: 20px 0;
 
   .track {
@@ -36,7 +70,7 @@ li {
 
   .time, .release-date {
     font-size: 12px;
-    color: #777;
+    color: rgba($textColor, .5);
   }
 
   .media-body {
@@ -74,13 +108,13 @@ li {
 
 .duration {
   height: 5px;
-  background: rgba(0,0,0,.3);
+  background: rgba($textColor, .5);;
   max-width: 100%;
   overflow: hidden;
 
   .elapsed {
     height: 5px;
-    background: rgba(0,0,0,.5);
+    background: rgba($textColor, 1);
     transition: width 0.5s ease;
   }
 }
@@ -89,12 +123,13 @@ li {
   .form-control-feedback {
     right: 5px !important;
     top: 10px !important;
-    color: #666;
+    color: rgba($textColor, .5);
   }
 }
+
 .playlist {
   .playlist-name {
-    color: #777;
+    color: rgba($textColor, .5);
     font-size: 14px;
   }
   .media-left {

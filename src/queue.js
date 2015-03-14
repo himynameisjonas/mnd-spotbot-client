@@ -22,7 +22,7 @@ var Queue = React.createClass({
       playList = this.renderPlayList();
     }
     return (
-      <div>
+      <div className="queue">
         <h3>Queue</h3>
         {playList}
       </div>
