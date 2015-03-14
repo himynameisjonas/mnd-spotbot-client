@@ -4,14 +4,6 @@
   margin: 10px 0;
   position: relative;
 
-  .playing-status {
-    color: rgba($textColor, 0.5);
-    left: 12px;
-    position: absolute;
-    top: 7px;
-    z-index: 100;
-  }
-
   @media screen and (min-width: $screen-sm-min) {
     margin: 0;
   }
