@@ -40,7 +40,7 @@ var AlbumTrack = React.createClass({
       <div>
         <div className="media track">
           <h3 className="media-heading" onClick={this.handleClick}>
-            {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
+            <span className="track-name">{this.props.index}. {track.name}</span> <span className="time">{utils.formatDuration(track.duration_ms)}</span>
           </h3>
         </div>
       </div>
@@ -68,16 +68,16 @@ var CurrentPlaylist = React.createClass({
     var _tracks = [];
     this.props.tracks.map((track, index) => {
       if(this.state.isAlbum) {
-        _tracks.push(<li key={index}><AlbumTrack metaData={track} /></li>);
+        _tracks.push(<li key={index}><AlbumTrack index={index+1} key={index} metaData={track} /></li>);
       }
       else {
-        _tracks.push(<li key={index}><Track metaData={track} /></li>);
+        _tracks.push(<li key={index}><Track index={index+1} key={index} metaData={track} /></li>);
       }
     });
     return (
-      <ul className="list-unstyled">
+      <ol className="list-unstyled">
       {_tracks}
-      </ul>
+      </ol>
     );
   },
 

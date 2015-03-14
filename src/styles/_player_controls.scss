@@ -4,7 +4,7 @@
   margin: 10px 0;
   text-align: center;
 
-  @media(min-width:768px) {
+  @media screen and (min-width: $screen-sm-min) {
     margin: 0;
     text-align: left;
   }

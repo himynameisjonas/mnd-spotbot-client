@@ -2,6 +2,10 @@
 
 .playlist {
 
+  li {
+    min-height: 25px;
+  }
+
   .playlist-name {
     color: rgba($textColor, .5);
     font-size: 14px;
@@ -13,8 +17,26 @@
     }
   }
 
+  .media-heading {
+    display: table;
+    border-bottom: dotted rgba($textColor, .2) 1px;
+    .track-name {
+      display: table-cell;
+      width: 80%;
+    }
+    .time {
+      display: table-cell;
+      width: 20%;
+      text-align: right;
+    }
+  }
+
+  ul, ol {
+    color: $textColor;
+  }
+
   @media screen and (min-width: $screen-sm-min) {
-    ul {
+    ul, ol {
       columns: 2;
       -webkit-columns: 2;
       -moz-columns: 2;

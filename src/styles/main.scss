@@ -1,7 +1,8 @@
 @import "vars";
 
 body {
-  background: #111 url(bg.jpg) no-repeat;
+  //background: #111 url(bg.jpg) no-repeat;
+  background: $bgColor;
   background-size: cover;
   color: rgba($textColor, 1);
   font-family: "Courier New";
@@ -15,7 +16,7 @@ body {
   &:hover, &:focus {
     background-color: rgba($textColor, .2);
     border-color: rgba($textColor, 1);
-    color: rgba($textColor, 1);
+    color: $textColor;
   }
 }
 
