@@ -45,12 +45,16 @@ var App = React.createClass({
       queue: {},
       playlistName: '',
       songStartedAt: Date.now(),
-      isPlaying: false
+      isPlaying: false,
+      isShuffle: false
     };
   },
 
-  onPlayerChange(status) {
-    this.setState({ isPlaying: status });
+  onPlayerChange(obj) {
+    this.setState({
+      isPlaying: obj.isPlaying,
+      isShuffle: obj.isShuffle
+    });
   },
 
   onQueueChange(tracks) {
@@ -95,6 +99,9 @@ var App = React.createClass({
     FirebaseRef.child('player/playing').on('value', (snapshot) => {
       PlayerActions.setPlayingStatus(snapshot.val());
     });
+    FirebaseRef.child('playlist/shuffle').on('value', (snapshot) => {
+      PlayerActions.setShuffleStatus(snapshot.val());
+    });
   },
 
   render() {
@@ -109,7 +116,7 @@ var App = React.createClass({
                   <CurrentTrack track={this.state.currentTrack} />
                 </div>
                 <div className="col-xs-12 col-sm-3">
-                  <PlayerControls isPlaying={this.state.isPlaying} />
+                  <PlayerControls isPlaying={this.state.isPlaying} isShuffle={this.state.isShuffle} />
                 </div>
                 <div className="col-xs-12 col-sm-4">
                   <Search />

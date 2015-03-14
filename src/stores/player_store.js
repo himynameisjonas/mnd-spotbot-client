@@ -5,10 +5,13 @@ import FirebaseRef from 'firebaseRef';
 var Store = Reflux.createStore({
   listenables: Actions,
   init() {
-    this.isPlaying = false;
+    this.obj = {
+      isPlaying: false,
+      isShuffle: false
+    };
   },
   onShuffle() {
-    FirebaseRef.child('playlist/shuffle').set(true);
+    FirebaseRef.child('playlist/shuffle').set(!this.obj.isShuffle);
   },
   onPlay() {
     FirebaseRef.child('player/playing').set(true);
@@ -20,11 +23,15 @@ var Store = Reflux.createStore({
     FirebaseRef.child('player/next').set(true);
   },
   onTogglePlay() {
-    FirebaseRef.child('player/playing').set(!this.isPlaying);
+    FirebaseRef.child('player/playing').set(!this.obj.isPlaying);
   },
   onSetPlayingStatus(isPlaying) {
-    this.isPlaying = isPlaying;
-    this.trigger(this.isPlaying);
+    this.obj.isPlaying = isPlaying;
+    this.trigger(this.obj);
+  },
+  onSetShuffleStatus(isShuffle) {
+    this.obj.isShuffle = isShuffle;
+    this.trigger(this.obj);
   }
 });
 
