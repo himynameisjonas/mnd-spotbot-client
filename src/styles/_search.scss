@@ -1,0 +1,9 @@
+@import "vars";
+
+.search {
+  .form-control-feedback {
+    right: 5px !important;
+    top: 10px !important;
+    color: rgba($textColor, .5);
+  }
+}
