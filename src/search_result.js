@@ -119,16 +119,18 @@ var SearchResult = React.createClass({
       display: ((hasResult) ? 'block' : 'none')
     };
     return (
-      <div className="container" style={style}>
-        <h2>Search result <Button bsStyle="link" onClick={SearchActions.clearSearch}>Clear</Button></h2>
-        <div className="row">
-          <div className="col-xs-6">
-            <h3>Tracks:</h3>
-            {_trackList}
-          </div>
-          <div className="col-xs-6">
-            <h3>Albums:</h3>
-            {_albumList}
+      <div className="search-result" style={style}>
+        <div className="container">
+          <h2>Search result <Button bsStyle="link" onClick={SearchActions.clearSearch}>&times;</Button></h2>
+          <div className="row">
+            <div className="col-xs-6">
+              <h3>Tracks:</h3>
+              {_trackList}
+            </div>
+            <div className="col-xs-6">
+              <h3>Albums:</h3>
+              {_albumList}
+            </div>
           </div>
         </div>
       </div>

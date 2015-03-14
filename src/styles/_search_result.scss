@@ -1,0 +1,17 @@
+@import "vars";
+
+.search-result {
+  position: absolute;
+  top: 5%;
+  background: rgba($bgColor, .9);
+  z-index: 100;
+  border: solid rgba($textColor, .8) 1px;
+  right: 5%;
+  left: 5%;
+  bottom: 5%;
+
+  .row {
+    height: 70vh;
+    overflow: auto;
+  }
+}

@@ -1,11 +1,20 @@
 @import "vars";
 
+html, body {
+  height: 100%;
+}
 body {
   //background: #111 url(bg.jpg) no-repeat;
-  background: $bgColor;
+  background: #111 url(green.jpg) no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   color: rgba($textColor, 1);
   font-family: "Courier New";
+}
+
+.body-wrapper {
+  background: rgba($bgColor, .8);
+  height: 100vh;
 }
 
 .btn-default {
@@ -33,6 +42,8 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus, .btn:fo
 }
 
 header#banner {
+  border-bottom: solid rgba($textColor, .5) 1px;
+  background: rgba($bgColor, .5);
   padding: 20px 0;
 
   .track {
@@ -57,4 +68,5 @@ li {
 @import "player_controls";
 @import "queue";
 @import "search";
+@import "search_result";
 @import "track";

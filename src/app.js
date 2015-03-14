@@ -99,13 +99,14 @@ var App = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className="body-wrapper">
+        <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
         <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} isPlaying={this.state.isPlaying} />
         <header id="banner" role="banner">
           <div className="container">
               <div className="row">
                 <div className="col-xs-12 col-sm-5">
-                  <CurrentTrack track={this.state.currentTrack} isPlaying={this.state.isPlaying} />
+                  <CurrentTrack track={this.state.currentTrack} />
                 </div>
                 <div className="col-xs-12 col-sm-3">
                   <PlayerControls isPlaying={this.state.isPlaying} />
@@ -118,11 +119,6 @@ var App = React.createClass({
         </header>
         <main>
           <div className="container">
-            <div className="row">
-              <div className="col-xs-12">
-                <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
-              </div>
-            </div>
             <div className="row">
               <div className="col-xs-12">
                 <Queue tracks={this.state.queue} />
