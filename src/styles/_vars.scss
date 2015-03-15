@@ -1,6 +1,10 @@
 $themeColor: #84BD00;
 $bgColor: #111;
 
+@function themeColor($opacity) {
+  @return rgba($themeColor, $opacity);;
+}
+
 // Extra small screen / phone
 //** Deprecated `$screen-xs` as of v3.0.1
 $screen-xs:                  480px !default;

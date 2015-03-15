@@ -7,7 +7,7 @@
   }
 
   .time, .release-date {
-    color: rgba($themeColor, .5);
+    color: themeColor(.5);
     font-size: 12px;
   }
 
@@ -29,7 +29,7 @@
     }
 
     .enqueue {
-      background: rgba($themeColor, .3);
+      background: themeColor(.3);
       cursor: pointer;
       color: #fff;
       display: none;

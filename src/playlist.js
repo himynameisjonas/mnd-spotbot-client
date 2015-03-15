@@ -124,7 +124,7 @@ var Playlist = React.createClass({
 
     return (
       <div className="playlist">
-        <h3>{this.props.name} ({this.props.totalTracks} songs)</h3>
+        <h3>{this.props.name} <span className="track-count">({this.props.totalTracks} songs)</span></h3>
         <AddPlaylist />
         {playList}
       </div>

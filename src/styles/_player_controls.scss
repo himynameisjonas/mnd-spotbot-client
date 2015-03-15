@@ -5,8 +5,8 @@
   text-align: center;
 
   .shuffle-active {
-    border: solid $themeColor 1px;
-    background: rgba($themeColor, 0.2);
+    border: solid themeColor(1) 1px;
+    background: themeColor(.2);
   }
 
   @media screen and (min-width: $screen-sm-min) {

@@ -1,13 +1,13 @@
 @import "vars";
 
 .duration {
-  background: rgba($themeColor, .5);;
+  background: themeColor(.5);
   height: 5px;
   max-width: 100%;
   overflow: hidden;
 
   .elapsed {
-    background: rgba($themeColor, 1);
+    background: themeColor(1);
     height: 5px;
     transition: width 0.5s ease;
   }
