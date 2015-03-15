@@ -29,17 +29,17 @@
     }
 
     .enqueue {
-      background: rgba($themeColor, .5);
+      background: rgba($themeColor, .3);
       cursor: pointer;
       color: #fff;
       display: none;
       left: 0;
-      height: 64px;
-      padding-top: 24px;
+      height: 35px;
+      padding-top: 10px;
       position: absolute;
       text-align: center;
       top: 0;
-      width: 64px;
+      width: 35px;
     }
   }
 }

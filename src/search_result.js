@@ -32,10 +32,11 @@ var Album = React.createClass({
   },
   render() {
     var album = this.props.item;
+    var imageUrl = _.isUndefined(album.images[2]) ? album.images[1].url : album.images[2].url;
     return (
       <li>
         <div className="media album">
-            <Image handleClick={this.handleClick} imageUrl={album.images[2].url} />
+            <Image handleClick={this.handleClick} imageUrl={imageUrl} />
             <div className="media-body">
               <h3 className="media-heading">
                 {album.name} <span className="release-date">{album.release_date}</span>
@@ -108,10 +109,7 @@ var SearchResult = React.createClass({
   },
   // THIS WILL BE CHANGED TOO
   componentDidUpdate(newProps) {
-    var hasResult = !_.isEmpty(this.props.albums) || !_.isEmpty(this.props.tracks);
-    if(hasResult) {
-      React.findDOMNode(this.refs.$close).focus();
-    }
+    React.findDOMNode(this.refs.$close).focus();
   },
   handleKeyUp(event) {
     if(event.which === 27) {
