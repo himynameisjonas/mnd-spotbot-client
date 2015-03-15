@@ -1,3 +1,7 @@
+$fullscreen-font-size: 15px;
+$fullscreen-text-color: #fff;
+$fullscreen-text-contrast-color: $themeColor;
+
 .fullscreen {
   display: none;
 
@@ -5,7 +9,7 @@
     display: block;
     z-index: 108;
     position: absolute;
-    background: #fff;
+    background: $bgColor;
     top: 5px;
     left: 0;
     height: 100%;
@@ -28,14 +32,15 @@
     padding: 0;
 
     @media(min-width:768px){
-      width: 45px;
-      line-height: 45px;
-      font-size: 30px;
+      width: $fullscreen-font-size * 3;
+      line-height: $fullscreen-font-size * 3;
+      font-size: $fullscreen-font-size * 2;
     }
   }
 
   .cover {
-    -webkit-filter: blur(3px) grayscale(.6); filter: blur(3px) grayscale(.6);
+    -webkit-filter: blur(3px) grayscale(.6); 
+    filter: blur(3px) grayscale(.6);
     z-index: 109;
     top: -50%;
     left: -50%;
@@ -50,7 +55,7 @@
       left: 0;
       height: 100%;
       width: 100%;
-      background: rgba(0,0,0,.6);
+      background: rgba(#000, .6);
     }
   }
 
@@ -58,36 +63,28 @@
     width: auto;
     max-width: 100%;
 
-
     h3.media-heading {
-      font-size: 30px;
+      font-size: $fullscreen-font-size * 2;
       font-weight: 100;
-      color: #84bd00;
+      color: $fullscreen-text-contrast-color;
 
       .time {
-        color: #fff;
+        color: $fullscreen-text-color;
       }
 
       @media(min-width:768px){
-        font-size: 60px;
+        font-size: $fullscreen-font-size * 4;
 
         .time {
-          font-size: 30px;
+          font-size: $fullscreen-font-size * 2;
         }
       }
-    }
-    .playing-status {
-      display: none;
-    }
-
-    .media-left {
-      display: none;
     }
 
     .media-artist-album {
       text-transform: uppercase;
-      color: #fff;
-      font-size: 15px;
+      color: $fullscreen-text-color;
+      font-size: $fullscreen-font-size;
       font-weight: 200;
       letter-spacing: 2px;
     }
@@ -95,9 +92,10 @@
 }
 
 .fullscreen-inner {
-  margin: 15px;
+  margin: $fullscreen-font-size;
+  
   @media(min-width:768px){
-    margin: 120px;    
+    margin: $fullscreen-font-size * 8;    
     max-width: 80%;
   }
 }
