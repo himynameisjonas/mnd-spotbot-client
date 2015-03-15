@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 // Components
 import CurrentTrack from './current_track';
-import CurrentPlaylist from './current_playlist';
+import Playlist from './playlist';
 import Queue from './queue';
 import PlayerControls from './player_controls';
 import Search from './search';
@@ -45,12 +45,17 @@ var App = React.createClass({
       queue: {},
       playlistName: '',
       songStartedAt: Date.now(),
-      isPlaying: false
+      isPlaying: false,
+      isShuffle: false,
+      totalTracks: 0
     };
   },
 
-  onPlayerChange(status) {
-    this.setState({ isPlaying: status });
+  onPlayerChange(obj) {
+    this.setState({
+      isPlaying: obj.isPlaying,
+      isShuffle: obj.isShuffle
+    });
   },
 
   onQueueChange(tracks) {
@@ -68,7 +73,8 @@ var App = React.createClass({
     this.setState({
       tracks: obj.tracks,
       playlistName: obj.name,
-      searchResult: {} // Clear result instead via action
+      totalTracks: obj.totalTracks,
+      searchResult: {} // TODO: Clear result instead via action
     });
   },
 
@@ -80,35 +86,39 @@ var App = React.createClass({
   },
 
   componentDidMount() {
-    FirebaseRef.child('playlist/tracks').on('value', (trackUris) => {
-      PlaylistActions.setTracks(trackUris.val());
+    FirebaseRef.child('playlist/tracks').on('value', (snapshot) => {
+      PlaylistActions.setTracks(snapshot.val());
     });
-    FirebaseRef.child('playlist/name').on('value', (name) => {
-      PlaylistActions.setName(name.val());
+    FirebaseRef.child('playlist/name').on('value', (snapshot) => {
+      PlaylistActions.setName(snapshot.val());
     });
-    FirebaseRef.child('player/current_track').on('value', (track) => {
-      CurrentTrackActions.getTrack(track.val());
+    FirebaseRef.child('player/current_track').on('value', (snapshot) => {
+      CurrentTrackActions.getTrack(snapshot.val());
     });
-    FirebaseRef.child('queue').on('value', (trackUris) => {
-      QueueActions.setQueue(_.toArray(trackUris.val()));
+    FirebaseRef.child('queue').on('value', (snapshot) => {
+      QueueActions.setQueue(_.toArray(snapshot.val()));
     });
     FirebaseRef.child('player/playing').on('value', (snapshot) => {
       PlayerActions.setPlayingStatus(snapshot.val());
+    });
+    FirebaseRef.child('playlist/shuffle').on('value', (snapshot) => {
+      PlayerActions.setShuffleStatus(snapshot.val());
     });
   },
 
   render() {
     return (
       <div>
+        <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
         <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} isPlaying={this.state.isPlaying} />
-        <header id="banner">
+        <header id="banner" role="banner">
           <div className="container">
               <div className="row">
                 <div className="col-xs-12 col-sm-5">
-                  <CurrentTrack track={this.state.currentTrack} isPlaying={this.state.isPlaying} />
+                  <CurrentTrack track={this.state.currentTrack} />
                 </div>
                 <div className="col-xs-12 col-sm-3">
-                  <PlayerControls />
+                  <PlayerControls isPlaying={this.state.isPlaying} isShuffle={this.state.isShuffle} />
                 </div>
                 <div className="col-xs-12 col-sm-4">
                   <Search />
@@ -120,15 +130,10 @@ var App = React.createClass({
           <div className="container">
             <div className="row">
               <div className="col-xs-12">
-                <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-12">
                 <Queue tracks={this.state.queue} />
               </div>
               <div className="col-xs-12">
-                <CurrentPlaylist tracks={this.state.tracks} name={this.state.playlistName} />
+                <Playlist totalTracks={this.state.totalTracks} tracks={this.state.tracks} name={this.state.playlistName} currentTrack={this.state.currentTrack} />
               </div>
             </div>
           </div>

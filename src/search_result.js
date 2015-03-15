@@ -27,7 +27,7 @@ var Image = React.createClass({
 
 var Album = React.createClass({
   handleClick() {
-    PlaylistActions.setPlaylistUri(this.props.item.uri);
+    PlaylistActions.changePlaylistUri(this.props.item.uri);
     SearchActions.removeAlbum(this.props.item);
   },
   render() {
@@ -102,16 +102,28 @@ var TrackList = React.createClass({
 });
 
 var SearchResult = React.createClass({
+  getInitialState() {
+    //TODO: IMPLEMENT THIS INSTEAD OF CHECKING IN RENDER METHOD
+    return { hasResult: false }
+  },
+  // THIS WILL BE CHANGED TOO
+  componentDidUpdate(newProps) {
+    var hasResult = !_.isEmpty(this.props.albums) || !_.isEmpty(this.props.tracks);
+    if(hasResult) {
+      React.findDOMNode(this.refs.$close).focus();
+    }
+  },
   render() {
     var _albumList = 'No result',
-        _trackList = 'No result';
+        _trackList = 'No result',
+        hasResult = false;
+
     if(!_.isEmpty(this.props.albums)) {
       _albumList = <AlbumList albums={this.props.albums} />;
     }
     if(!_.isEmpty(this.props.tracks)) {
       _trackList = <TrackList tracks={this.props.tracks} />;
     }
-    var hasResult = false;
     if(!_.isEmpty(this.props.albums) || !_.isEmpty(this.props.tracks)) {
       hasResult = true;
     }
@@ -119,16 +131,19 @@ var SearchResult = React.createClass({
       display: ((hasResult) ? 'block' : 'none')
     };
     return (
-      <div className="container" style={style}>
-        <h2>Search result <Button bsStyle="link" onClick={SearchActions.clearSearch}>Clear</Button></h2>
-        <div className="row">
-          <div className="col-xs-6">
-            <h3>Tracks:</h3>
-            {_trackList}
-          </div>
-          <div className="col-xs-6">
-            <h3>Albums:</h3>
-            {_albumList}
+      <div className="search-result" style={style}>
+        <div className="container">
+          <h2>Search result</h2>
+          <Button ref="$close" className="close" bsStyle="link" onClick={SearchActions.clearSearch}>&times;</Button>
+          <div className="row">
+            <div className="col-xs-6">
+              <h3>Tracks:</h3>
+              {_trackList}
+            </div>
+            <div className="col-xs-6">
+              <h3>Albums:</h3>
+              {_albumList}
+            </div>
           </div>
         </div>
       </div>

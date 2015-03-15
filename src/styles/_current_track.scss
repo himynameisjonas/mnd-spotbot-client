@@ -1,0 +1,10 @@
+@import "vars";
+
+.current-track {
+  margin: 10px 0;
+  position: relative;
+
+  @media screen and (min-width: $screen-sm-min) {
+    margin: 0;
+  }
+}

@@ -1,0 +1,16 @@
+@import "vars";
+
+.player-controls {
+  margin: 10px 0;
+  text-align: center;
+
+  .shuffle-active {
+    border: solid $themeColor 1px;
+    background: rgba($themeColor, 0.2);
+  }
+
+  @media screen and (min-width: $screen-sm-min) {
+    margin: 0;
+    text-align: left;
+  }
+}

@@ -29,13 +29,15 @@ var Store = Reflux.createStore({
     var trackIds = trackUris.map(uri => {
       return utils.parseSpotifyId(uri);
     });
-    request.get('https://api.spotify.com/v1/tracks/').query({ ids: _.take(trackIds, 20).join(',')}).end((res) => {
+
+    request.get('https://api.spotify.com/v1/tracks/').query({ ids: _.take(trackIds, 50).join(',')}).end((res) => {
       this.obj.tracks = res.body.tracks;
+      this.obj.totalTracks = trackIds.length;
       this.trigger(this.obj);
     }.bind(this));
   },
 
-  onSetPlaylistUri(spotifyUri) {
+  onChangePlaylistUri(spotifyUri) {
     FirebaseRef.child('playlist/uri').set(spotifyUri);
   }
 

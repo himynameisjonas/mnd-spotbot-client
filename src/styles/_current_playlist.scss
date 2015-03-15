@@ -1,0 +1,49 @@
+@import "vars";
+
+.playlist {
+
+  img {
+    height: 35px;
+  }
+
+  &-current-track {
+    font-weight: bold;
+  }
+
+  th {
+    text-transform: uppercase;
+
+    &.no {
+      width: 20px;
+    }
+  }
+
+  .track-duration {
+    text-align: right;
+  }
+
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border-top: solid rgba($themeColor, .5) 1px;
+  }
+
+  .table>thead>tr>th {
+    border-bottom: solid rgba($themeColor, .5) 2px;
+  }
+
+
+
+  .table {
+    td {
+      vertical-align: middle !important;
+    }
+  }
+
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border-top: solid rgba($themeColor, .2) 1px;
+  }
+
+  .table>thead>tr>th {
+    border-bottom: solid rgba($themeColor, .2) 2px;
+  }
+
+}

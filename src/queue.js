@@ -17,12 +17,14 @@ var Queue = React.createClass({
   },
 
   render() {
-    var playList = <div>Queue is empty</div>;;
+    var playList = '';
+    var style = { display: 'none' };
     if(!_.isEmpty(this.props.tracks)) {
       playList = this.renderPlayList();
+      style.display = 'block';
     }
     return (
-      <div>
+      <div className="queue" style={style}>
         <h3>Queue</h3>
         {playList}
       </div>
