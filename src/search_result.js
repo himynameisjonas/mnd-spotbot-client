@@ -27,7 +27,7 @@ var Image = React.createClass({
 
 var Album = React.createClass({
   handleClick() {
-    PlaylistActions.setPlaylistUri(this.props.item.uri);
+    PlaylistActions.changePlaylistUri(this.props.item.uri);
     SearchActions.removeAlbum(this.props.item);
   },
   render() {

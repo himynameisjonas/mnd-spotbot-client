@@ -8,7 +8,7 @@ var AddPlaylist = React.createClass({
 
   handleSubmit(event) {
     event.preventDefault();
-    PlaylistActions.setPlaylistUri(this.state.query);
+    PlaylistActions.changePlaylistUri(this.state.query);
     this.setState({ query: '' });
   },
 
@@ -20,7 +20,7 @@ var AddPlaylist = React.createClass({
     return(
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <input value={this.state.query} onChange={this.handleChange} ref="$input" type="text" className="form-control" placeholder="Paste spotify uri" />
+          <input value={this.state.query} onChange={this.handleChange} ref="$input" type="text" className="form-control" placeholder="Paste spotify uri OR link" />
         </div>
       </form>
     );
