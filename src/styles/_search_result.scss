@@ -5,13 +5,24 @@
   top: 5%;
   background: rgba($bgColor, .9);
   z-index: 100;
-  border: solid rgba($textColor, .8) 1px;
+  border: solid rgba($themeColor, .8) 1px;
   right: 5%;
   left: 5%;
   bottom: 5%;
 
   .row {
-    height: 70vh;
+    height: 80vh;
     overflow: auto;
+  }
+
+  .close {
+    font-size: 40px;
+    font-weight: 200;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    text-shadow: none;
+    box-shadow: none;
+    color: rgba($themeColor, 1);
   }
 }

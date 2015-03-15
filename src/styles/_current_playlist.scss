@@ -2,52 +2,48 @@
 
 .playlist {
 
-  li {
-    min-height: 25px;
-  }
-
-  .playlist-name {
-    color: rgba($textColor, .5);
-    font-size: 14px;
-  }
-
-  .media-left {
-    img {
-      height: 35px;
-    }
+  img {
+    height: 35px;
   }
 
   &-current-track {
-    .media-heading {
-      font-weight: bold;
+    font-weight: bold;
+  }
+
+  th {
+    text-transform: uppercase;
+
+    &.no {
+      width: 20px;
     }
   }
 
-  .media-heading {
-    display: table;
-    border-bottom: dotted rgba($textColor, .2) 1px;
-
-    .track-name {
-      display: table-cell;
-      width: 80%;
-    }
-
-    .time {
-      display: table-cell;
-      width: 20%;
-      text-align: right;
-    }
+  .track-duration {
+    text-align: right;
   }
 
-  ul, ol {
-    color: $textColor;
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border-top: solid rgba($themeColor, .5) 1px;
   }
 
-  @media screen and (min-width: $screen-sm-min) {
-    ul, ol {
-      columns: 2;
-      -webkit-columns: 2;
-      -moz-columns: 2;
+  .table>thead>tr>th {
+    border-bottom: solid rgba($themeColor, .5) 2px;
+  }
+
+
+
+  .table {
+    td {
+      vertical-align: middle !important;
     }
   }
+
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border-top: solid rgba($themeColor, .2) 1px;
+  }
+
+  .table>thead>tr>th {
+    border-bottom: solid rgba($themeColor, .2) 2px;
+  }
+
 }

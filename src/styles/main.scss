@@ -8,42 +8,61 @@ body {
   background: #111 url(green.jpg) no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  color: rgba($textColor, 1);
+  color: rgba($themeColor, 1);
   font-family: "Courier New";
-}
 
-.body-wrapper {
-  background: rgba($bgColor, .8);
-  height: 100vh;
+  &:after {
+    background: rgba($bgColor, .8);
+    content: " ";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
 }
 
 .btn-default {
-  background-color: rgba($textColor, .1);
-  border-color: rgba($textColor, .5);
-  color: rgba($textColor, 1);
+  background-color: rgba($themeColor, .1);
+  border-color: rgba($themeColor, .5);
+  color: rgba($themeColor, 1);
 
   &:hover, &:focus {
-    background-color: rgba($textColor, .2);
-    border-color: rgba($textColor, 1);
-    color: $textColor;
+    background-color: rgba($themeColor, .2);
+    border-color: rgba($themeColor, 1);
+    color: $themeColor;
   }
 }
 
 textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus, .btn:focus {
-  border-color: rgba($textColor, 0.8);
-  box-shadow: 0 1px 1px rgba($textColor, 0.075) inset, 0 0 8px rgba($textColor, 0.6);
+  border-color: rgba($themeColor, 0.8);
+  box-shadow: 0 1px 1px rgba($themeColor, 0.075) inset, 0 0 8px rgba($themeColor, 0.6);
   outline: 0 none;
 }
 
+input::-webkit-input-placeholder {
+	color: rgba($themeColor, .5) !important;
+}
+input::-moz-placeholder {
+	color: rgba($themeColor, .5) !important;
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+	color: rgba($themeColor, .5) !important;
+}
+input:-ms-input-placeholder {
+	color: rgba($themeColor, .5) !important;
+}
+
 .form-control {
-  background-color: rgba($textColor, .1);
-  border: solid rgba($textColor, .5) 1px;
-  color: $textColor;;
+  background-color: rgba($themeColor, .1);
+  border: solid rgba($themeColor, .5) 1px;
+  color: $themeColor;;
 }
 
 header#banner {
-  border-bottom: solid rgba($textColor, .5) 1px;
-  background: rgba($bgColor, .5);
+  border-bottom: solid rgba($themeColor, .5) 1px;
+  background: rgba($bgColor, .3);
   padding: 20px 0;
 
   .track {
