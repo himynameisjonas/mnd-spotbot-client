@@ -4,8 +4,7 @@ html, body {
   height: 100%;
 }
 body {
-  //background: $bgColor url(green.jpg) no-repeat;
-  background: $bgColor;
+  background: $bgColor url(bg.jpg) no-repeat;
   background-size: cover;
   background-attachment: fixed;
   color: rgba($themeColor, 1);

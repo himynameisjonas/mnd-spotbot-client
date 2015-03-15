@@ -3,8 +3,10 @@ config/environment.js
 tmp/app.js
 tmp/main.css
 tmp/main.css.map
+tmp/bg.jpg
 
 public/app.js
 public/app.min.js
 public/main.css
 public/main.css.map
+public/bg.jpg
