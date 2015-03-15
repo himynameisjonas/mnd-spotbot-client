@@ -15,7 +15,7 @@ var Track = React.createClass({
     var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
       <tr className={isCurrentTrack} onClick={this.handleClick}>
-        <td>{this.props.index}.</td>
+        <td><span className="icon"><i className="fa fa-play"></i></span>{this.props.index}.</td>
         <td>{track.name}</td>
         <td className="hidden-xs">{track.artists[0].name}</td>
         <td className="hidden-xs">{track.album.name}</td>
@@ -34,7 +34,7 @@ var AlbumTrack = React.createClass({
     var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
       <tr className={isCurrentTrack} onClick={this.handleClick}>
-        <td>{this.props.index}.</td>
+        <td><span className="icon"><i className="fa fa-play"></i></span>{this.props.index}.</td>
         <td>{track.name}</td>
         <td className="track-duration">{utils.formatDuration(track.duration_ms)}</td>
       </tr>

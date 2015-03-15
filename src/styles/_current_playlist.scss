@@ -33,8 +33,30 @@
 
 
   .table {
+    .icon {
+      position: relative;
+    }
     td {
+      cursor: pointer;
       vertical-align: middle !important;
+
+      .fa-play {
+        color: rgba($themeColor, .5);
+        display: none;
+        font-size: 10px;
+        left: -25px;
+        position: absolute;
+        top: 3px;
+      }
+    }
+    tr:hover {
+      td {
+        background: rgba($themeColor, .1);
+
+        .fa-play {
+          display: inline;
+        }
+      }
     }
   }
 
