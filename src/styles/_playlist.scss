@@ -10,6 +10,11 @@
     font-weight: bold;
   }
 
+  .track-count {
+    font-size: 16px;
+    color: themeColor(.5);
+  }
+
   th {
     text-transform: uppercase;
 
@@ -23,11 +28,11 @@
   }
 
   .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    border-top: solid rgba($themeColor, .5) 1px;
+    border-top: solid themeColor(.5) 1px;
   }
 
   .table>thead>tr>th {
-    border-bottom: solid rgba($themeColor, .5) 2px;
+    border-bottom: solid themeColor(.5) 2px;
   }
 
 
@@ -41,7 +46,7 @@
       vertical-align: middle !important;
 
       .fa-play {
-        color: rgba($themeColor, .5);
+        color: themeColor(.5);
         display: none;
         font-size: 10px;
         left: -25px;
@@ -51,7 +56,7 @@
     }
     tr:hover, tr:focus {
       td {
-        background: rgba($themeColor, .1);
+        background: themeColor(.1);
 
         .fa-play {
           display: inline;
@@ -61,11 +66,11 @@
   }
 
   .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    border-top: solid rgba($themeColor, .2) 1px;
+    border-top: solid themeColor(.2) 1px;
   }
 
   .table>thead>tr>th {
-    border-bottom: solid rgba($themeColor, .2) 2px;
+    border-bottom: solid themeColor(.2) 2px;
   }
 
 }
