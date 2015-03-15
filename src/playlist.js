@@ -10,11 +10,16 @@ var Track = React.createClass({
   handleClick() {
     CurrentTrackActions.setTrack(this.props.metaData);
   },
+  handleKeyUp(event) {
+    if(event.which === 13) {
+      this.handleClick();
+    }
+  },
   render() {
     var track = this.props.metaData;
     var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
-      <tr className={isCurrentTrack} onClick={this.handleClick}>
+      <tr className={isCurrentTrack} onClick={this.handleClick} onKeyUp={this.handleKeyUp} tabIndex="0">
         <td><span className="icon"><i className="fa fa-play"></i></span>{this.props.index}.</td>
         <td>{track.name}</td>
         <td className="hidden-xs">{track.artists[0].name}</td>
@@ -29,11 +34,16 @@ var AlbumTrack = React.createClass({
   handleClick() {
     CurrentTrackActions.setTrack(this.props.metaData);
   },
+  handleKeyUp(event) {
+    if(event.which === 13) {
+      this.handleClick();
+    }
+  },
   render() {
     var track = this.props.metaData;
     var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
-      <tr className={isCurrentTrack} onClick={this.handleClick}>
+      <tr className={isCurrentTrack} onClick={this.handleClick} onKeyUp={this.handleKeyUp} tabIndex="0">
         <td><span className="icon"><i className="fa fa-play"></i></span>{this.props.index}.</td>
         <td>{track.name}</td>
         <td className="track-duration">{utils.formatDuration(track.duration_ms)}</td>

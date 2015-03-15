@@ -49,7 +49,7 @@
         top: 3px;
       }
     }
-    tr:hover {
+    tr:hover, tr:focus {
       td {
         background: rgba($themeColor, .1);
 
