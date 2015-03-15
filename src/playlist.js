@@ -69,7 +69,7 @@ var Playlist = React.createClass({
         _tracks.push(<Track isCurrentTrack={isCurrentTrack} index={index+1} key={index} metaData={track} />);
       }
     });
-    var hideColumn = { display: (this.state.isAlbum ? 'none' : 'block') };
+    var hideColumn = { display: (this.state.isAlbum ? 'none' : 'table-cell') };
 
     return (
       <table className="table">
