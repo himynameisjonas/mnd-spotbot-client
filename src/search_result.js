@@ -1,113 +1,14 @@
 import React from 'react';
-import Reflux from 'reflux';
 import _ from 'lodash';
-import utils from './utils';
 import PlaylistActions from './actions/playlist_actions';
 import SearchActions from './actions/search_actions';
 import QueueActions from './actions/queue_actions';
 import { Button } from 'react-bootstrap';
+import AlbumList from './search_result/album_list';
+import TrackList from './search_result/track_list';
 
-var Image = React.createClass({
-  handleKeyUp(event) {
-    if(event.which === 13) {
-      this.props.handleClick();
-    }
-  },
-  render() {
-    return (
-      <div className="media-left" onKeyUp={this.handleKeyUp} onClick={this.props.handleClick} tabIndex="0">
-        <img src={this.props.imageUrl} />
-        <div className="enqueue">
-          <i className="fa fa-plus"></i>
-        </div>
-      </div>
-    );
-  }
-});
-
-var Album = React.createClass({
-  handleClick() {
-    PlaylistActions.changePlaylistUri(this.props.item.uri);
-    SearchActions.removeAlbum(this.props.item);
-  },
-  render() {
-    var album = this.props.item;
-    var imageUrl = _.isUndefined(album.images[2]) ? album.images[1].url : album.images[2].url;
-    return (
-      <li>
-        <div className="media album">
-            <Image handleClick={this.handleClick} imageUrl={imageUrl} />
-            <div className="media-body">
-              <h3 className="media-heading">
-                {album.name} <span className="release-date">{album.release_date}</span>
-              </h3>
-              <h4>{album.artists[0].name}</h4>
-            </div>
-        </div>
-      </li>
-    );
-  }
-});
-
-var Track = React.createClass({
-  handleClick() {
-    QueueActions.enqueue(this.props.item.uri);
-    SearchActions.removeTrack(this.props.item);
-  },
-  render() {
-    var track = this.props.item;
-    return (
-      <li>
-        <div className="media album">
-            <Image handleClick={this.handleClick} imageUrl={track.album.images[2].url} />
-            <div className="media-body">
-              <h3 className="media-heading">
-                {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
-              </h3>
-              <h4>{track.artists[0].name}</h4>
-            </div>
-        </div>
-      </li>
-    );
-  }
-});
-
-var AlbumList = React.createClass({
-  render() {
-    var _albums = this.props.albums.map((item, index) => {
-      return <Album item={item} key={index} />;
-    });
-    return (
-      <div>
-        <ul className="list-unstyled">
-          {_albums}
-        </ul>
-      </div>
-    );
-  }
-});
-
-var TrackList = React.createClass({
-  render() {
-    var _tracks = this.props.tracks.map((item, index) => {
-      return <Track item={item} key={index} />;
-    });
-    return (
-      <div>
-        <ul className="list-unstyled">
-          {_tracks}
-        </ul>
-      </div>
-    );
-  }
-});
 
 var SearchResult = React.createClass({
-  getInitialState() {
-    //TODO: IMPLEMENT THIS INSTEAD OF CHECKING IN RENDER METHOD
-    return { hasResult: false }
-  },
-  // THIS WILL BE CHANGED TOO
   componentDidUpdate(newProps) {
     React.findDOMNode(this.refs.$close).focus();
   },
@@ -137,7 +38,7 @@ var SearchResult = React.createClass({
       <div className="search-result" style={style} onKeyUp={this.handleKeyUp}>
         <div className="container">
           <h2>Search result</h2>
-          <Button ref="$close" className="close" bsStyle="link" onClick={SearchActions.clearSearch}>&times;</Button>
+          <Button ref="$close" className="close" bsStyle="link" onClick={SearchActions.clearSearch} aria-label="Close">&times;</Button>
           <div className="row">
             <div className="col-xs-6">
               <h3>Tracks:</h3>
