@@ -41,6 +41,7 @@ var App = React.createClass({
     return {
       tracks: {},
       currentTrack: {},
+      displayFullscreen: true,
       searchResultAlbums: {},
       searchResultTracks: {},
       queue: {},
@@ -50,6 +51,10 @@ var App = React.createClass({
       isShuffle: false,
       totalTracks: 0
     };
+  },
+
+  moveMoveing() {
+    console.log("mouse moving");
   },
 
   onPlayerChange(obj) {
@@ -109,8 +114,8 @@ var App = React.createClass({
 
   render() {
     return (
-      <div>
-        <Fullscreen track={this.state.currentTrack} />
+      <div onMouseMove={this.moveMoveing}>
+        <Fullscreen track={this.state.currentTrack} displayFullscreen={this.state.displayFullscreen} isPlaying={this.state.isPlaying} />
         <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
         <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} isPlaying={this.state.isPlaying} />
         <header id="banner" role="banner">

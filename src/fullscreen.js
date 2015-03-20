@@ -5,13 +5,29 @@ import _ from 'lodash';
 
 var Fullscreen = React.createClass({
 
+  getInitialState() {
+    return { isVisible: false }
+  },
+
+  componentDidMount() {
+    console.log("componentDidMount");
+  },
+
+  toggle() {
+    this.setState({ isVisible: !this.state.isVisible });
+  },
+
   renderTrack() {
     var trackMeta = this.props.track;
+    var fullScreenClass = this.props.displayFullscreen ? "fullscreen open" : "fullscreen";
+
+    console.log(fullScreenClass);
+    console.log("displayFullscreen", this.props.displayFullscreen);
+
     return (
-      <div id="fullscreen" className="fullscreen open">
-        <img className="cover" src={trackMeta.album.images[2].url} />
+      <div id="fullscreen" onMouseMove={this.toggle} className={fullScreenClass}>
+        <img className="cover" src={trackMeta.album.images[0].url} />
         <div className="cover-fade">
-          <button className="fullscreen-close"><i className="fa fa-times-circle"></i></button>
           <div className="fullscreen-inner">
             <div className="current-track">
               <h3 className="media-heading">
