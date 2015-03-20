@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from './image';
 import utils from '../utils';
+import QueueActions from '../actions/queue_actions';
 
 var Track = React.createClass({
   handleClick() {
@@ -28,8 +29,8 @@ var Track = React.createClass({
 
 var TrackList = React.createClass({
   render() {
-    var _tracks = this.props.tracks.map((item, index) => {
-      return <Track item={item} key={index} />;
+    var _tracks = this.props.tracks.map(item => {
+      return <Track item={item} key={item.id} />;
     });
     return (
       <div>

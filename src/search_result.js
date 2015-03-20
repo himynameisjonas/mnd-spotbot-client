@@ -1,8 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import PlaylistActions from './actions/playlist_actions';
 import SearchActions from './actions/search_actions';
-import QueueActions from './actions/queue_actions';
 import { Button } from 'react-bootstrap';
 import AlbumList from './search_result/album_list';
 import TrackList from './search_result/track_list';

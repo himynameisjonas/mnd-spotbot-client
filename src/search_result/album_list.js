@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from './image';
+import PlaylistActions from '../actions/playlist_actions';
+import SearchActions from '../actions/search_actions';
 
 var Album = React.createClass({
   handleClick() {
@@ -26,8 +28,8 @@ var Album = React.createClass({
 
 var AlbumList = React.createClass({
   render() {
-    var _albums = this.props.albums.map((item, index) => {
-      return <Album item={item} key={index} />;
+    var _albums = this.props.albums.map(item => {
+      return <Album item={item} key={item.id} />;
     });
     return (
       <div>
