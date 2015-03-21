@@ -5,27 +5,37 @@ import _ from 'lodash';
 
 var Fullscreen = React.createClass({
 
+  timer: null,
   getInitialState() {
     return { isVisible: false }
   },
 
   componentDidMount() {
-    console.log("componentDidMount");
+    this.setTimer();
   },
 
-  toggle() {
-    this.setState({ isVisible: !this.state.isVisible });
+  setTimer() {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() =>
+      this.setState({ isVisible: true })
+    , 30000);
+  },
+
+  hide() {
+    this.setState({ isVisible: false });
+    this.setTimer();
+  },
+
+  componentWillReceiveProps(newProps) {
+    this.hide();
   },
 
   renderTrack() {
     var trackMeta = this.props.track;
-    var fullScreenClass = this.props.displayFullscreen ? "fullscreen open" : "fullscreen";
-
-    console.log(fullScreenClass);
-    console.log("displayFullscreen", this.props.displayFullscreen);
+    var fullScreenClass = (this.state.isVisible && this.props.displayFullscreen) ? "fullscreen open" : "fullscreen";
 
     return (
-      <div id="fullscreen" onMouseMove={this.toggle} className={fullScreenClass}>
+      <div id="fullscreen" className={fullScreenClass}>
         <img className="cover" src={trackMeta.album.images[0].url} />
         <div className="cover-fade">
           <div className="fullscreen-inner">
