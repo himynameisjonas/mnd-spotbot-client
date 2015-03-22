@@ -3,10 +3,11 @@ $fullscreen-text-color: #fff;
 $fullscreen-text-contrast-color: $themeColor;
 
 .fullscreen {
-  display: none;
+  opacity: 0;
 
   &.open {
-    display: block;
+    transition: opacity 2s ease-in;
+    opacity: 1;
     z-index: 108;
     position: absolute;
     background: $bgColor;
@@ -18,14 +19,14 @@ $fullscreen-text-contrast-color: $themeColor;
   }
 
   .cover {
-    -webkit-filter: blur(10px) grayscale(.6); 
+    -webkit-filter: blur(10px) grayscale(.6);
     filter: blur(3px) grayscale(.6);
     z-index: 109;
     top: -50%;
     left: -50%;
     position: absolute;
-    min-width: 200%;
-    min-height: 200%;
+    min-width: 100%;
+    min-height: 100%;
 
     &-fade {
       z-index: 110;
@@ -76,7 +77,7 @@ $fullscreen-text-contrast-color: $themeColor;
 
 .fullscreen-inner {
   margin: $fullscreen-font-size;
-  
+
   @media(min-width:768px){
     margin: $fullscreen-font-size * 8;
     max-width: 80%;
