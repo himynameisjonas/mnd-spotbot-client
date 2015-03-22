@@ -2,6 +2,7 @@ import React from 'react';
 import Image from './image';
 import utils from '../utils';
 import QueueActions from '../actions/queue_actions';
+import SearchActions from '../actions/search_actions';
 
 var Track = React.createClass({
   handleClick() {
