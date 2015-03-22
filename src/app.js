@@ -129,7 +129,7 @@ var App = React.createClass({
               </div>
           </div>
         </header>
-        <main>
+        <main role="main">
           <div className="container">
             <div className="row">
               <div className="col-xs-12">

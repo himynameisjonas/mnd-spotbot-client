@@ -8,7 +8,7 @@ import TrackList from './search_result/track_list';
 
 var SearchResult = React.createClass({
   componentDidUpdate(newProps) {
-    React.findDOMNode(this.refs.$close).focus();
+    React.findDOMNode(this.refs.$container).focus();
   },
   componentDidMount() {
     window.addEventListener('keyup', this.handleKeyUp);
@@ -36,10 +36,10 @@ var SearchResult = React.createClass({
       display: ((hasResult) ? 'block' : 'none')
     };
     return (
-      <div className="search-result" style={style}>
+      <div className="search-result" style={style} tabIndex="0" ref="$container">
         <div className="container">
           <h2>Search result</h2>
-          <Button ref="$close" className="close" bsStyle="link" onClick={SearchActions.clearSearch} aria-label="Close">&times;</Button>
+          <Button className="close" bsStyle="link" onClick={SearchActions.clearSearch} aria-label="Close">&times;</Button>
           <div className="row">
             <div className="col-xs-6">
               <h3>Tracks:</h3>
