@@ -2,6 +2,10 @@
 // Link in bootstrap vars and override
 @import "vars";
 
+html {
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
 html, body {
   height: 100%;
 }
