@@ -12,6 +12,8 @@ import Search from './search';
 import SearchResult from './search_result';
 import Duration from './duration.js';
 import Fullscreen from './fullscreen.js'
+import { TabbedArea } from 'react-bootstrap'
+import { TabPane } from 'react-bootstrap'
 
 // Stores
 import PlayerStore from './stores/player_store';
@@ -41,7 +43,7 @@ var App = React.createClass({
     return {
       tracks: {},
       currentTrack: {},
-      displayFullscreen: true,
+      displayFullscreen: false,
       searchResultAlbums: {},
       searchResultTracks: {},
       queue: {},
@@ -186,7 +188,14 @@ var App = React.createClass({
                 <Queue tracks={this.state.queue} />
               </div>
               <div className="col-xs-12">
-                <Playlist {...playlistProps} />
+                <TabbedArea defaultActiveKey={1}>
+                  <TabPane eventKey={1} tab="Playlist">
+                    <Playlist {...playlistProps} />
+                  </TabPane>
+                  <TabPane eventKey={2} tab="Queue">
+                    <Queue tracks={this.state.queue} />
+                  </TabPane>
+                </TabbedArea>
               </div>
             </div>
           </div>

@@ -28,6 +28,24 @@ body {
   }
 }
 
+main {
+  padding: 20px 0;
+}
+.nav-tabs>li>a {
+  color: themeColor(.5);
+  border: none !important;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  background-color: transparent;
+  color: themeColor(1);
+}
+.nav-tabs {
+  border-bottom: solid themeColor(.5) 1px;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+  background: transparent;
+}
+
 .btn-default {
   background-color: themeColor(.1);
   border-color: themeColor(.5);
@@ -40,7 +58,7 @@ body {
   }
 }
 
-textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus, .btn:focus, tr:focus, :focus {
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus, .btn:focus, tr:focus, :focus, .nav-tabs>li>a:focus {
   border-color: themeColor(.8);
   box-shadow: 0 1px 1px themeColor(.075) inset, 0 0 8px themeColor(.6);
   outline: 0 none;
