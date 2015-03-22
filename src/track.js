@@ -17,7 +17,7 @@ var Track = React.createClass({
             <h3 className="media-heading">
               {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
             </h3>
-            {track.artists[0].name} / {track.album.name}
+            <span className="media-artist-album">{track.artists[0].name} / {track.album.name}</span>
           </div>
       </div>
     );

@@ -11,6 +11,7 @@ import PlayerControls from './player_controls';
 import Search from './search';
 import SearchResult from './search_result';
 import Duration from './duration.js';
+import Fullscreen from './fullscreen.js'
 
 // Stores
 import PlayerStore from './stores/player_store';
@@ -40,6 +41,7 @@ var App = React.createClass({
     return {
       tracks: {},
       currentTrack: {},
+      displayFullscreen: true,
       searchResultAlbums: {},
       searchResultTracks: {},
       queue: {},
@@ -109,6 +111,7 @@ var App = React.createClass({
   render() {
     return (
       <div>
+        <Fullscreen isFullscreenVisible={this.state.isFullscreenVisible} track={this.state.currentTrack} displayFullscreen={this.state.displayFullscreen} isPlaying={this.state.isPlaying} />
         <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
         <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} isPlaying={this.state.isPlaying} />
         <header id="banner" role="banner">

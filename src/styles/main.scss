@@ -2,6 +2,10 @@
 // Link in bootstrap vars and override
 @import "vars";
 
+html {
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
 html, body {
   height: 100%;
 }
@@ -64,7 +68,7 @@ input:-ms-input-placeholder {
 header#banner {
   border-bottom: solid themeColor(.5) 1px;
   background: rgba($bgColor, .3);
-  padding: 20px 0;
+  padding: 25px 0 20px 0;
 
   .track {
     margin: 0;
@@ -85,6 +89,7 @@ li {
 @import "current_track";
 @import "duration";
 @import "playlist";
+@import "fullscreen";
 @import "player_controls";
 @import "queue";
 @import "search";

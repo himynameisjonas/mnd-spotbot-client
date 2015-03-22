@@ -1,5 +1,8 @@
 config/environment.js
 
+node_modules/*
+.sass-cache/*
+
 tmp/app.js
 tmp/main.css
 tmp/main.css.map
