@@ -10,6 +10,9 @@ var SearchResult = React.createClass({
   componentDidUpdate(newProps) {
     React.findDOMNode(this.refs.$close).focus();
   },
+  componentDidMount() {
+    window.addEventListener('keyup', this.handleKeyUp);
+  },
   handleKeyUp(event) {
     if(event.which === 27) {
       SearchActions.clearSearch();
@@ -33,7 +36,7 @@ var SearchResult = React.createClass({
       display: ((hasResult) ? 'block' : 'none')
     };
     return (
-      <div className="search-result" style={style} onKeyUp={this.handleKeyUp}>
+      <div className="search-result" style={style}>
         <div className="container">
           <h2>Search result</h2>
           <Button ref="$close" className="close" bsStyle="link" onClick={SearchActions.clearSearch} aria-label="Close">&times;</Button>
