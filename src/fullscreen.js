@@ -2,6 +2,8 @@ import React from 'react';
 import utils from './utils';
 import _ from 'lodash';
 
+React.initializeTouchEvents(true);
+
 var Fullscreen = React.createClass({
 
   timer: null,
@@ -13,6 +15,7 @@ var Fullscreen = React.createClass({
     this.setTimer();
     window.addEventListener('keyup', this.hide);
     window.addEventListener('mousemove', this.hide);
+    window.addEventListener('touchmove', this.hide);
   },
 
   setTimer() {
