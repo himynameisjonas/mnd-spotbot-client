@@ -5,7 +5,6 @@ $fullscreen-text-contrast-color: $themeColor;
 .fullscreen {
   opacity: 0;
 
-
   &.open {
     transition: opacity 2s ease-in;
     opacity: 1;
@@ -46,7 +45,7 @@ $fullscreen-text-contrast-color: $themeColor;
   }
 
   .current-track {
-    @media($screen-xs-min) {
+    @media screen and (min-width: $screen-sm-min) {
       position: absolute;
       bottom: $fullscreen-font-size * 8;
     }
@@ -62,7 +61,7 @@ $fullscreen-text-contrast-color: $themeColor;
         color: $fullscreen-text-color;
       }
 
-      @media($screen-xs-min) {
+      @media screen and (min-width: $screen-sm-min) {
         font-size: $fullscreen-font-size * 4;
 
         .time {
@@ -84,7 +83,7 @@ $fullscreen-text-contrast-color: $themeColor;
 .fullscreen-inner {
   margin: $fullscreen-font-size;
 
-  @media($screen-xs-min) {
+  @media screen and (min-width: $screen-sm-min) {
     margin: $fullscreen-font-size * 8;
     max-width: 80%;
   }
