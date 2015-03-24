@@ -61,6 +61,7 @@ class Queue extends React.Component {
     }
     return (
       <div className="queue playlist">
+        <h3>Queue</h3>
         {playList}
       </div>
     );
