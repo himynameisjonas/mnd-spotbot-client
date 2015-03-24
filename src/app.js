@@ -192,7 +192,7 @@ var App = React.createClass({
                   <TabPane eventKey={1} tab="Playlist">
                     <Playlist {...playlistProps} />
                   </TabPane>
-                  <TabPane eventKey={2} tab="Queue">
+                  <TabPane eventKey={2} tab={"Queue (" + this.state.queue.length + ")"}>
                     <Queue tracks={this.state.queue} />
                   </TabPane>
                 </TabbedArea>
