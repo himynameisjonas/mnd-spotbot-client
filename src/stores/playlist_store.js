@@ -22,10 +22,7 @@ var Store = Reflux.createStore({
   },
 
   onSetTracks(trackUris) {
-    // Tracks will be null the first time we set a new playlist
-    if(trackUris === null) {
-      return;
-    }
+
     var trackIds = trackUris.map(uri => {
       return utils.parseSpotifyId(uri);
     });

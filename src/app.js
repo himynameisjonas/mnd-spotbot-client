@@ -89,22 +89,40 @@ var App = React.createClass({
 
   componentDidMount() {
     FirebaseRef.child('playlist/tracks').on('value', (snapshot) => {
-      PlaylistActions.setTracks(snapshot.val());
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        PlaylistActions.setTracks(val);
+      }
     });
     FirebaseRef.child('playlist/name').on('value', (snapshot) => {
-      PlaylistActions.setName(snapshot.val());
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        PlaylistActions.setName(val);
+      }
     });
     FirebaseRef.child('player/current_track').on('value', (snapshot) => {
-      CurrentTrackActions.getTrack(snapshot.val());
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        CurrentTrackActions.getTrack(val);
+      }
     });
     FirebaseRef.child('queue').on('value', (snapshot) => {
-      QueueActions.setQueue(_.toArray(snapshot.val()));
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        QueueActions.setQueue(_.toArray(val));
+      }
     });
     FirebaseRef.child('player/playing').on('value', (snapshot) => {
-      PlayerActions.setPlayingStatus(snapshot.val());
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        PlayerActions.setPlayingStatus(val);
+      }
     });
     FirebaseRef.child('playlist/shuffle').on('value', (snapshot) => {
-      PlayerActions.setShuffleStatus(snapshot.val());
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        PlayerActions.setShuffleStatus(val);
+      }
     });
   },
 
