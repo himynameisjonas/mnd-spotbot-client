@@ -2,7 +2,11 @@ import React from 'react';
 import Track from './track';
 import _ from 'lodash';
 
-var CurrentTrack = React.createClass({
+class CurrentTrack extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     var metaData = '';
     if(!_.isEmpty(this.props.track)) {
@@ -14,6 +18,6 @@ var CurrentTrack = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default CurrentTrack;

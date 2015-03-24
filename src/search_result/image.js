@@ -1,11 +1,13 @@
 import React from 'react';
 
-var Image = React.createClass({
+class Image extends React.Component {
+
   handleKeyUp(event) {
     if(event.which === 13) {
       this.props.handleClick();
     }
-  },
+  }
+
   renderImage() {
     var imageUrl = '';
     var urls = this.props.images;
@@ -29,7 +31,8 @@ var Image = React.createClass({
         </div>
       </span>
     );
-  },
+  }
+
   render() {
     var imageUrls = this.props.images;
     var image = '';
@@ -37,11 +40,11 @@ var Image = React.createClass({
       image = this.renderImage();
     }
     return (
-      <div className="media-left" onKeyUp={this.handleKeyUp} onClick={this.props.handleClick} tabIndex="0">
+      <div className="media-left" onKeyUp={this.handleKeyUp.bind(this)} onClick={this.props.handleClick} tabIndex="0">
         {image}
       </div>
     );
   }
-});
+};
 
 export default Image;

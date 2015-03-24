@@ -4,33 +4,37 @@ import _ from 'lodash';
 
 React.initializeTouchEvents(true);
 
-var Fullscreen = React.createClass({
+class Fullscreen extends React.Component {
 
-  timer: null,
-  getInitialState() {
-    return { isVisible: false }
-  },
+  constructor(props) {
+    super(props);
+    this.state = {
+      isVisible: false
+    };
+    this.timer = null;
+  }
 
   componentDidMount() {
+    window.addEventListener('keyup', this.hide.bind(this));
+    window.addEventListener('mousemove', this.hide.bind(this));
+    window.addEventListener('touchmove', this.hide.bind(this));
+    window.addEventListener('click', this.hide.bind(this));
     this.setTimer();
-    window.addEventListener('keyup', this.hide);
-    window.addEventListener('mousemove', this.hide);
-    window.addEventListener('touchmove', this.hide);
-  },
+  }
 
   setTimer() {
     clearTimeout(this.timer);
     this.timer = setTimeout(() =>
       this.setState({ isVisible: true })
     , 15000);
-  },
+  }
 
   hide() {
     if(this.state.isVisible) {
       this.setState({ isVisible: false });
       this.setTimer();
     }
-  },
+  }
 
   renderTrack() {
     var trackMeta = this.props.track;
@@ -51,7 +55,7 @@ var Fullscreen = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
   render() {
     var track = '';
@@ -65,6 +69,6 @@ var Fullscreen = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default Fullscreen;

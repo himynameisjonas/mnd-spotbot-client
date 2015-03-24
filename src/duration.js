@@ -1,24 +1,27 @@
 import React from 'react';
 
-var Duration = React.createClass({
-  getInitialState() {
-    return { elapsed: 0 }
-  },
+class Duration extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      elapsed: 0
+    };
+  }
 
   tick() {
     this.setState({ elapsed: (Date.now() - this.props.startedAt) });
-  },
+  }
 
   componentDidMount() {
-    this.timer = setInterval(this.tick, 100);
-  },
+    this.timer = setInterval(this.tick.bind(this), 1000);
+  }
 
   componentWillUnmount() {
     clearInterval(this.timer);
-  },
+  }
 
   render() {
-    // Calculate width outside render and update state instead
     var width = (this.state.elapsed / this.props.trackDuration) * 100;
     var style = {
       width: width.toFixed(5) + '%'
@@ -30,6 +33,6 @@ var Duration = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default Duration;

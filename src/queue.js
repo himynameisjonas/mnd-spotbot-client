@@ -2,7 +2,7 @@ import React from 'react';
 import Track from './track';
 import _ from 'lodash';
 
-var Queue = React.createClass({
+class Queue extends React.Component {
 
   renderPlayList() {
     var _tracks = [];
@@ -14,7 +14,7 @@ var Queue = React.createClass({
       {_tracks}
       </ul>
     );
-  },
+  }
 
   render() {
     var playList = '';
@@ -30,6 +30,6 @@ var Queue = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default Queue;

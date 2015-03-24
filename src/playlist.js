@@ -6,20 +6,22 @@ import PlayerActions from './actions/player_actions';
 import CurrentTrackActions from './actions/current_track_actions';
 import AddPlaylist from './current_playlist/add_playlist';
 
-var Track = React.createClass({
+class Track extends React.Component {
   handleClick() {
     CurrentTrackActions.setTrack(this.props.metaData);
-  },
+  }
+
   handleKeyUp(event) {
     if(event.which === 13) {
       this.handleClick();
     }
-  },
+  }
+
   render() {
     var track = this.props.metaData;
     var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
-      <tr className={isCurrentTrack} onClick={this.handleClick} onKeyUp={this.handleKeyUp} tabIndex="0">
+      <tr className={isCurrentTrack} onClick={this.handleClick.bind(this)} onKeyUp={this.handleKeyUp.bind(this)} tabIndex="0">
         <td><span className="icon"><i className="fa fa-play"></i></span>{this.props.index}.</td>
         <td>{track.name}</td>
         <td className="hidden-xs">{track.artists[0].name}</td>
@@ -28,37 +30,41 @@ var Track = React.createClass({
       </tr>
     );
   }
-});
+};
 
-var AlbumTrack = React.createClass({
+class AlbumTrack extends React.Component {
+
   handleClick() {
     CurrentTrackActions.setTrack(this.props.metaData);
-  },
+  }
+
   handleKeyUp(event) {
     if(event.which === 13) {
       this.handleClick();
     }
-  },
+  }
+
   render() {
     var track = this.props.metaData;
     var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
-      <tr className={isCurrentTrack} onClick={this.handleClick} onKeyUp={this.handleKeyUp} tabIndex="0">
+      <tr className={isCurrentTrack} onClick={this.handleClick.bind(this)} onKeyUp={this.handleKeyUp.bind(this)} tabIndex="0">
         <td><span className="icon"><i className="fa fa-play"></i></span>{this.props.index}.</td>
         <td>{track.name}</td>
         <td className="track-duration">{utils.formatDuration(track.duration_ms)}</td>
       </tr>
     );
   }
-});
+};
 
-var Playlist = React.createClass({
+class Playlist extends React.Component {
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       isAlbum: false
-    }
-  },
+    };
+  }
 
   componentWillReceiveProps(newProps) {
     var albums = newProps.tracks.map(track => {
@@ -66,7 +72,7 @@ var Playlist = React.createClass({
     });
     var isAlbum = _.uniq(albums).length === 1;
     this.setState({ isAlbum: isAlbum });
-  },
+  }
 
   renderPlayList() {
     var _tracks = [];
@@ -97,29 +103,13 @@ var Playlist = React.createClass({
         </tbody>
       </table>
     );
-  },
-
-  // TODO: Only get cover first time playlist is set
-  renderCovers() {
-    var albumCover = [];
-    if(this.state.isAlbum) {
-      albumCover.push(<img src={this.props.tracks[0].album.images[2].url} />);
-    }
-    else {
-      var tracks = _.sample(this.props.tracks, 4);
-      tracks.map((track) => {
-        albumCover.push(<img src={track.album.images[2].url} />);
-      });
-    }
-    return albumCover;
-  },
+  }
 
   render() {
     var playList = '';
     var covers = '';
     if(!_.isEmpty(this.props.tracks)) {
       playList = this.renderPlayList();
-      //covers = this.renderCovers();
     }
 
     return (
@@ -130,6 +120,6 @@ var Playlist = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default Playlist;

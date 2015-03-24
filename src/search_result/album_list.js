@@ -3,17 +3,23 @@ import Image from './image';
 import PlaylistActions from '../actions/playlist_actions';
 import SearchActions from '../actions/search_actions';
 
-var Album = React.createClass({
+class Album extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   handleClick() {
     PlaylistActions.changePlaylistUri(this.props.item.uri);
     SearchActions.removeAlbum(this.props.item);
-  },
+  }
+
   render() {
     var album = this.props.item;
     return (
       <li>
         <div className="media album">
-            <Image handleClick={this.handleClick} images={album.images} />
+            <Image handleClick={this.handleClick.bind(this)} images={album.images} />
             <div className="media-body">
               <h3 className="media-heading">
                 {album.name} <span className="release-date">{album.release_date}</span>
@@ -24,9 +30,9 @@ var Album = React.createClass({
       </li>
     );
   }
-});
+};
 
-var AlbumList = React.createClass({
+class AlbumList extends React.Component {
   render() {
     var _albums = this.props.albums.map(item => {
       return <Album item={item} key={item.id} />;
@@ -39,6 +45,6 @@ var AlbumList = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default AlbumList;

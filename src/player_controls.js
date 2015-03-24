@@ -2,7 +2,12 @@ import React from 'react';
 import PlayerActions from './actions/player_actions';
 import { Button } from 'react-bootstrap';
 
-var PlayerControls = React.createClass({
+class PlayerControls extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     var playButton = '';
     var shuffleActive = '';
@@ -25,6 +30,6 @@ var PlayerControls = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default PlayerControls;

@@ -6,18 +6,22 @@ import AlbumList from './search_result/album_list';
 import TrackList from './search_result/track_list';
 
 
-var SearchResult = React.createClass({
+class SearchResult extends React.Component {
+
   componentDidUpdate(newProps) {
     React.findDOMNode(this.refs.$container).focus();
-  },
+  }
+
   componentDidMount() {
     window.addEventListener('keyup', this.handleKeyUp);
-  },
+  }
+
   handleKeyUp(event) {
     if(event.which === 27) {
       SearchActions.clearSearch();
     }
-  },
+  }
+
   render() {
     var _albumList = 'No result',
         _trackList = 'No result',
@@ -54,6 +58,6 @@ var SearchResult = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default SearchResult;

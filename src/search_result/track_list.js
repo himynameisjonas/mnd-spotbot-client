@@ -4,17 +4,19 @@ import utils from '../utils';
 import QueueActions from '../actions/queue_actions';
 import SearchActions from '../actions/search_actions';
 
-var Track = React.createClass({
+class Track extends React.Component {
+
   handleClick() {
     QueueActions.enqueue(this.props.item.uri);
     SearchActions.removeTrack(this.props.item);
-  },
+  }
+
   render() {
     var track = this.props.item;
     return (
       <li>
         <div className="media album">
-            <Image handleClick={this.handleClick} images={track.album.images} />
+            <Image handleClick={this.handleClick.bind(this)} images={track.album.images} />
             <div className="media-body">
               <h3 className="media-heading">
                 {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
@@ -25,10 +27,10 @@ var Track = React.createClass({
       </li>
     );
   }
-});
+};
 
 
-var TrackList = React.createClass({
+class TrackList extends React.Component {
   render() {
     var _tracks = this.props.tracks.map(item => {
       return <Track item={item} key={item.id} />;
@@ -41,6 +43,6 @@ var TrackList = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default TrackList;

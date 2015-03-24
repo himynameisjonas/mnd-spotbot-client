@@ -2,15 +2,17 @@ import React from 'react';
 import utils from './utils';
 import CurrentTrackActions from './actions/current_track_actions';
 
-var Track = React.createClass({
+class Track extends React.Component {
+
   handleClick() {
     CurrentTrackActions.setTrack(this.props.metaData);
-  },
+  }
+
   render() {
     var track = this.props.metaData;
     return (
       <div className="media track">
-          <div className="media-left" onClick={this.handleClick}>
+          <div className="media-left" onClick={this.handleClick.bind(this)}>
             <img src={track.album.images[2].url} />
           </div>
           <div className="media-body">
@@ -22,6 +24,6 @@ var Track = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default Track;
