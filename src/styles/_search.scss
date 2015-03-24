@@ -1,12 +1,8 @@
-@import "vars";
-
 .search {
   margin: 10px 0;
 
   .form-control-feedback {
     color: themeColor(.5);
-    right: 5px !important;
-    top: 10px !important;
   }
 
   @media screen and (min-width: $screen-sm-min) {

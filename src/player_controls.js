@@ -9,8 +9,8 @@ class PlayerControls extends React.Component {
   }
 
   render() {
-    var playButton = '';
-    var shuffleActive = '';
+    let playButton = '';
+    let shuffleActive = '';
     if(this.props.isPlaying) {
       playButton = <Button bsStyle="default" onClick={PlayerActions.togglePlay} aria-label="Pause"><i className="fa fa-pause"></i></Button>
     }

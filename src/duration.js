@@ -22,8 +22,8 @@ class Duration extends React.Component {
   }
 
   render() {
-    var width = (this.state.elapsed / this.props.trackDuration) * 100;
-    var style = {
+    let width = (this.state.elapsed / this.props.trackDuration) * 100;
+    let style = {
       width: width.toFixed(5) + '%'
     };
     return (

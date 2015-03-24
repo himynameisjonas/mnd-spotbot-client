@@ -18,8 +18,8 @@ class Track extends React.Component {
   }
 
   render() {
-    var track = this.props.metaData;
-    var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
+    let track = this.props.metaData;
+    let isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
       <tr className={isCurrentTrack} onClick={this.handleClick.bind(this)} onKeyUp={this.handleKeyUp.bind(this)} tabIndex="0">
         <td><span className="icon"><i className="fa fa-play"></i></span>{this.props.index}.</td>
@@ -45,8 +45,8 @@ class AlbumTrack extends React.Component {
   }
 
   render() {
-    var track = this.props.metaData;
-    var isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
+    let track = this.props.metaData;
+    let isCurrentTrack = (this.props.isCurrentTrack) ? 'playlist-current-track' : '';
     return (
       <tr className={isCurrentTrack} onClick={this.handleClick.bind(this)} onKeyUp={this.handleKeyUp.bind(this)} tabIndex="0">
         <td><span className="icon"><i className="fa fa-play"></i></span>{this.props.index}.</td>
@@ -67,17 +67,17 @@ class Playlist extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    var albums = newProps.tracks.map(track => {
+    let albums = newProps.tracks.map(track => {
       return track.album.uri;
     });
-    var isAlbum = _.uniq(albums).length === 1;
+    let isAlbum = _.uniq(albums).length === 1;
     this.setState({ isAlbum: isAlbum });
   }
 
   renderPlayList() {
-    var _tracks = [];
+    let _tracks = [];
     this.props.tracks.map((track, index) => {
-      var isCurrentTrack = this.props.currentTrack.id === track.id;
+      let isCurrentTrack = this.props.currentTrack.id === track.id;
       if(this.state.isAlbum) {
         _tracks.push(<AlbumTrack isCurrentTrack={isCurrentTrack} index={index+1} key={index} metaData={track} />);
       }
@@ -85,7 +85,7 @@ class Playlist extends React.Component {
         _tracks.push(<Track isCurrentTrack={isCurrentTrack} index={index+1} key={index} metaData={track} />);
       }
     });
-    var hideColumn = { display: (this.state.isAlbum ? 'none' : 'table-cell') };
+    let hideColumn = { display: (this.state.isAlbum ? 'none' : 'table-cell') };
 
     return (
       <table className="table">
@@ -106,8 +106,8 @@ class Playlist extends React.Component {
   }
 
   render() {
-    var playList = '';
-    var covers = '';
+    let playList = '';
+    let covers = '';
     if(!_.isEmpty(this.props.tracks)) {
       playList = this.renderPlayList();
     }

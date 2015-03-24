@@ -37,8 +37,8 @@ class Fullscreen extends React.Component {
   }
 
   renderTrack() {
-    var trackMeta = this.props.track;
-    var fullScreenClass = (this.state.isVisible && this.props.displayFullscreen) ? "fullscreen open" : "fullscreen";
+    let trackMeta = this.props.track;
+    let fullScreenClass = (this.state.isVisible && this.props.displayFullscreen) ? "fullscreen open" : "fullscreen";
 
     return (
       <div id="fullscreen" className={fullScreenClass} onClick={this.hide}>
@@ -58,7 +58,7 @@ class Fullscreen extends React.Component {
   }
 
   render() {
-    var track = '';
+    let track = '';
     if(!_.isEmpty(this.props.track)) {
       track = this.renderTrack();
     }

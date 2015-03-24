@@ -126,12 +126,44 @@ var App = React.createClass({
     });
   },
 
+
   render() {
+
+    let searchResultProps = {
+      albums: this.state.searchResultAlbums,
+      tracks: this.state.searchResultTracks
+    };
+
+    let fullscreenProps = {
+      isFullscreenVisible: this.state.isFullscreenVisible,
+      track: this.state.currentTrack,
+      displayFullscreen: this.state.displayFullscreen,
+      isPlaying: this.state.isPlaying
+    };
+
+    let durationProps = {
+      startedAt: this.state.startedAt,
+      trackDuration: this.state.currentTrack.duration_ms,
+      isPlaying: this.state.isPlaying
+    };
+
+    let playerControlsProps = {
+      isPlaying: this.state.isPlaying,
+      isShuffle: this.state.isShuffle
+    };
+
+    let playlistProps = {
+      totalTracks: this.state.totalTracks,
+      tracks: this.state.tracks,
+      name: this.state.playlistName,
+      currentTrack: this.state.currentTrack
+    };
+
     return (
       <div>
-        <Fullscreen isFullscreenVisible={this.state.isFullscreenVisible} track={this.state.currentTrack} displayFullscreen={this.state.displayFullscreen} isPlaying={this.state.isPlaying} />
-        <SearchResult albums={this.state.searchResultAlbums} tracks={this.state.searchResultTracks} />
-        <Duration startedAt={this.state.songStartedAt} trackDuration={this.state.currentTrack.duration_ms} isPlaying={this.state.isPlaying} />
+        <Fullscreen {...fullscreenProps}  />
+        <SearchResult {...searchResultProps} />
+        <Duration {...durationProps} />
         <header id="banner" role="banner">
           <div className="container">
               <div className="row">
@@ -139,7 +171,7 @@ var App = React.createClass({
                   <CurrentTrack track={this.state.currentTrack} />
                 </div>
                 <div className="col-xs-12 col-sm-3">
-                  <PlayerControls isPlaying={this.state.isPlaying} isShuffle={this.state.isShuffle} />
+                  <PlayerControls {...playerControlsProps} />
                 </div>
                 <div className="col-xs-12 col-sm-4">
                   <Search />
@@ -154,7 +186,7 @@ var App = React.createClass({
                 <Queue tracks={this.state.queue} />
               </div>
               <div className="col-xs-12">
-                <Playlist totalTracks={this.state.totalTracks} tracks={this.state.tracks} name={this.state.playlistName} currentTrack={this.state.currentTrack} />
+                <Playlist {...playlistProps} />
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ class CurrentTrack extends React.Component {
   }
 
   render() {
-    var metaData = '';
+    let metaData = '';
     if(!_.isEmpty(this.props.track)) {
       metaData = <Track metaData={this.props.track} />;
     }
