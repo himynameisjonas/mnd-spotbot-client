@@ -142,7 +142,7 @@ var App = React.createClass({
     };
 
     let durationProps = {
-      startedAt: this.state.startedAt,
+      startedAt: this.state.songStartedAt,
       trackDuration: this.state.currentTrack.duration_ms,
       isPlaying: this.state.isPlaying
     };
