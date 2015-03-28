@@ -79,10 +79,10 @@ class Playlist extends React.Component {
     this.props.tracks.map((track, index) => {
       let isCurrentTrack = this.props.currentTrack.id === track.id;
       if(this.state.isAlbum) {
-        _tracks.push(<AlbumTrack isCurrentTrack={isCurrentTrack} index={index+1} key={index} metaData={track} />);
+        _tracks.push(<AlbumTrack isCurrentTrack={isCurrentTrack} index={index+1} key={track.id} metaData={track} />);
       }
       else {
-        _tracks.push(<Track isCurrentTrack={isCurrentTrack} index={index+1} key={index} metaData={track} />);
+        _tracks.push(<Track isCurrentTrack={isCurrentTrack} index={index+1} key={track.id} metaData={track} />);
       }
     });
     let hideColumn = { display: (this.state.isAlbum ? 'none' : 'table-cell') };

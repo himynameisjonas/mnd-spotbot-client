@@ -12,6 +12,8 @@ import Search from './search';
 import SearchResult from './search_result';
 import Duration from './duration.js';
 import Fullscreen from './fullscreen.js'
+import { TabbedArea } from 'react-bootstrap'
+import { TabPane } from 'react-bootstrap'
 
 // Stores
 import PlayerStore from './stores/player_store';
@@ -107,10 +109,8 @@ var App = React.createClass({
       }
     });
     FirebaseRef.child('queue').on('value', (snapshot) => {
-      let val = snapshot.val();
-      if(!_.isNull(val)) {
-        QueueActions.setQueue(_.toArray(val));
-      }
+      let val = _.toArray(snapshot.val());
+      QueueActions.setQueue(val);
     });
     FirebaseRef.child('player/playing').on('value', (snapshot) => {
       let val = snapshot.val();
@@ -159,6 +159,8 @@ var App = React.createClass({
       currentTrack: this.state.currentTrack
     };
 
+    let queueLength = _.isEmpty(this.state.queue) ? 0 : this.state.queue.length;
+
     return (
       <div>
         <Fullscreen {...fullscreenProps}  />
@@ -183,10 +185,14 @@ var App = React.createClass({
           <div className="container">
             <div className="row">
               <div className="col-xs-12">
-                <Queue tracks={this.state.queue} />
-              </div>
-              <div className="col-xs-12">
-                <Playlist {...playlistProps} />
+                <TabbedArea defaultActiveKey={1}>
+                  <TabPane eventKey={1} tab="Playlist">
+                    <Playlist {...playlistProps} />
+                  </TabPane>
+                  <TabPane eventKey={2} tab={"Queue (" + queueLength + ")"}>
+                    <Queue tracks={this.state.queue} />
+                  </TabPane>
+                </TabbedArea>
               </div>
             </div>
           </div>
