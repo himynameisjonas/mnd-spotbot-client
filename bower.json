@@ -1,0 +1,21 @@
+{
+  "name": "mnd-spotbot-client",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mynewsdesk/mnd-spotbot-client",
+  "authors": [
+    "Emil Löfquist <emil.lofquist@mynewsdesk.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap-sass": "~3.3.4"
+  }
+}

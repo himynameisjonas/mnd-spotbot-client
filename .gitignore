@@ -1,6 +1,7 @@
 config/environment.js
 
 node_modules/*
+bower_components/*
 .sass-cache/*
 
 tmp/app.js

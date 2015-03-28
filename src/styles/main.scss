@@ -1,6 +1,5 @@
-// TODO: Install bootstrap via bower
-// Link in bootstrap vars and override
-@import "vars";
+@import "bootstrap_overrides";
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
 html {
   -webkit-font-smoothing: subpixel-antialiased;
@@ -9,15 +8,16 @@ html {
 html, body {
   height: 100%;
 }
+
 body {
-  background: $bgColor url(bg.jpg) no-repeat;
+  background: $body-bg url(bg.jpg) no-repeat;
   background-size: cover;
   background-attachment: fixed;
   color: themeColor(1);
   font-family: "Courier New";
 
   &:after {
-    background: rgba($bgColor, .8);
+    background: rgba($body-bg, .8);
     content: " ";
     position: fixed;
     top: 0;
@@ -67,7 +67,7 @@ input:-ms-input-placeholder {
 
 header#banner {
   border-bottom: solid themeColor(.5) 1px;
-  background: rgba($bgColor, .3);
+  background: rgba($body-bg, .3);
   padding: 25px 0 20px 0;
 
   .track {
