@@ -10,11 +10,8 @@ html, body {
 }
 
 body {
-  background: $body-bg url(bg.jpg) no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+  background-color: $body-bg;
   color: themeColor(1);
-  font-family: "Courier New";
 
   &:after {
     background: rgba($body-bg, .8);
@@ -35,13 +32,11 @@ main {
   color: themeColor(.5);
   border: none !important;
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-  background-color: transparent;
-  color: themeColor(1);
-}
+
 .nav-tabs {
   border-bottom: solid themeColor(.5) 1px;
 }
+
 .nav>li>a:focus, .nav>li>a:hover {
   background: transparent;
 }
@@ -58,29 +53,10 @@ main {
   }
 }
 
-textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus, .btn:focus, tr:focus, :focus, .nav-tabs>li>a:focus {
+.btn:focus, tr:focus, :focus, .nav-tabs>li>a:focus {
   border-color: themeColor(.8);
   box-shadow: 0 1px 1px themeColor(.075) inset, 0 0 8px themeColor(.6);
   outline: 0 none;
-}
-
-input::-webkit-input-placeholder {
-	color: themeColor(.5) !important;
-}
-input::-moz-placeholder {
-	color: themeColor(.5) !important;
-}
-input:-moz-placeholder {   /* Older versions of Firefox */
-	color: themeColor(.5) !important;
-}
-input:-ms-input-placeholder {
-	color: themeColor(.5) !important;
-}
-
-.form-control {
-  background-color: themeColor(.1);
-  border: solid themeColor(.5) 1px;
-  color: $themeColor;;
 }
 
 header#banner {
