@@ -1,4 +1,5 @@
 import React from 'react';
+import { ProgressBar } from 'react-bootstrap';
 
 class Duration extends React.Component {
 
@@ -22,15 +23,9 @@ class Duration extends React.Component {
   }
 
   render() {
-    let width = (this.state.elapsed / this.props.trackDuration) * 100;
-    let style = {
-      width: width.toFixed(5) + '%'
-    };
+    let percent = (this.state.elapsed / this.props.trackDuration) * 100;
     return (
-      <div className="duration">
-        <div style={style} className="elapsed">
-        </div>
-      </div>
+      <ProgressBar now={percent} label="%(percent)s%" srOnly />
     );
   }
 };
