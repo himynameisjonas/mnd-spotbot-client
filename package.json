@@ -39,8 +39,5 @@
     "react-bootstrap": "^0.17.0",
     "reflux": "^0.2.5",
     "superagent": "^0.21.0"
-  },
-  "dependencies": {
-    "express": "^4.12.2"
   }
 }
