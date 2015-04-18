@@ -28,9 +28,7 @@ import PlaylistActions from './actions/playlist_actions';
 import CurrentTrackActions from './actions/current_track_actions';
 import QueueActions from './actions/queue_actions';
 
-
-
-var App = React.createClass({
+const App = React.createClass({
   mixins: [
     Reflux.listenTo(PlayerStore, 'onPlayerChange'),
     Reflux.listenTo(PlaylistStore, 'onTracksChange'),
