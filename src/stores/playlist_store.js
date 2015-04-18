@@ -27,7 +27,7 @@ var Store = Reflux.createStore({
       return utils.parseSpotifyId(uri);
     });
 
-    request.get('https://api.spotify.com/v1/tracks/').query({ ids: _.take(trackIds, 50).join(',')}).end((res) => {
+    request.get('https://api.spotify.com/v1/tracks/').query({ ids: _.take(trackIds, 50).join(',')}).end((err, res) => {
       this.obj.tracks = res.body.tracks;
       this.obj.totalTracks = trackIds.length;
       this.trigger(this.obj);

@@ -22,7 +22,7 @@ var Store = Reflux.createStore({
   onGetTrack(track) {
     this.obj.startedAt = track.started_at;
     var trackId = utils.parseSpotifyId(track.uri);
-    request.get('https://api.spotify.com/v1/tracks/' + trackId, function(res) {
+    request.get('https://api.spotify.com/v1/tracks/' + trackId, function(err, res) {
       this.obj.currentTrack = res.body;
       this.trigger(this.obj);
     }.bind(this));

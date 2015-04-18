@@ -34,14 +34,14 @@ var Store = Reflux.createStore({
     this.obj.albums = [];
     this.obj.tracks = [];
     // Search tracks
-    request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'track', market: 'se' }).end((res) => {
+    request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'track', market: 'se' }).end((err, res) => {
       this.obj.tracks = res.body.tracks.items;
-      request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'album', market: 'se' }).end((res) => {
+      request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'album', market: 'se' }).end((err, res) => {
         var ids = _.pluck(res.body.albums.items, 'id');
 
         // Get more album meta-data
         if(ids.length) {
-          request.get('https://api.spotify.com/v1/albums').query({ ids: ids }).end((res) => {
+          request.get('https://api.spotify.com/v1/albums').query({ ids: ids }).end((err, res) => {
             this.obj.albums = res.body.albums;
             this.trigger(this.obj);
           }.bind(this));
