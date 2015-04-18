@@ -124,6 +124,11 @@ var App = React.createClass({
         PlayerActions.setShuffleStatus(val);
       }
     });
+    FirebaseRef.child('push').on('child_changed', (snapshot) => {
+      if(snapshot.key() === 'refresh') {
+        window.location.reload();
+      }
+    });
   },
 
 
