@@ -22,16 +22,34 @@ $fullscreen-text-contrast-color: $themeColor;
     }
   }
 
+  figure {
+    margin: 20px 0;
+    text-align: center;;
+
+    img {
+      width: 100px;
+    }
+
+    @media screen and (min-width: $screen-sm-min) {
+      float: left;
+      margin: 0 20px 0;
+
+      img {
+        width: 150px;
+      }
+    }
+  }
+
   .cover {
     display: none;
-    -webkit-filter: blur(10px) grayscale(.6);
     filter: blur(3px) grayscale(.6);
-    z-index: 109;
-    top: -50%;
     left: -50%;
-    position: absolute;
     min-width: 200%;
     min-height: 200%;
+    position: absolute;
+    top: -50%;
+    z-index: 109;
+    -webkit-filter: blur(10px) grayscale(.6);
 
     &-fade {
       z-index: 110;
@@ -45,12 +63,14 @@ $fullscreen-text-contrast-color: $themeColor;
   }
 
   .current-track {
+    max-width: 100%;
+    width: auto;
+
     @media screen and (min-width: $screen-sm-min) {
       position: absolute;
       bottom: $fullscreen-font-size * 8;
     }
-    width: auto;
-    max-width: 100%;
+
 
     h3.media-heading {
       font-size: $fullscreen-font-size * 2;
@@ -88,5 +108,3 @@ $fullscreen-text-contrast-color: $themeColor;
     max-width: 80%;
   }
 }
-
-

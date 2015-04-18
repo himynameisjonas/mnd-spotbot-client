@@ -9,7 +9,7 @@ class Fullscreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVisible: false
+      isVisible: true
     };
     this.timer = null;
   }
@@ -46,10 +46,13 @@ class Fullscreen extends React.Component {
         <div className="cover-fade">
           <div className="fullscreen-inner">
             <div className="current-track">
+              <figure>
+                <img src={trackMeta.album.images[1].url} />
+              </figure>
               <h3 className="media-heading">
                 {trackMeta.name} <span className="time">{utils.formatDuration(trackMeta.duration_ms)}</span>
+                <span className="media-artist-album">{trackMeta.artists[0].name} / {trackMeta.album.name}</span>
               </h3>
-              <span className="media-artist-album">{trackMeta.artists[0].name} / {trackMeta.album.name}</span>
             </div>
           </div>
         </div>
