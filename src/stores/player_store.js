@@ -40,7 +40,25 @@ var Store = Reflux.createStore({
   onSetShuffleStatus(isShuffle) {
     this.obj.isShuffle = isShuffle;
     this.trigger(this.obj);
-  }
+  },
+
+  onVolumeDown() {
+    FirebaseRef.child('volume').once("value", function(snapshot){
+      var current_vol = snapshot.val()
+      current_vol = current_vol - 5
+      if (current_vol < 0) { current_vol = 0}
+      FirebaseRef.child('volume').set(current_vol)
+    })
+  },
+
+  onVolumeUp() {
+    FirebaseRef.child('volume').once("value", function(snapshot){
+      var current_vol = snapshot.val()
+      current_vol = current_vol + 5
+      if (current_vol > 100) { current_vol = 100}
+      FirebaseRef.child('volume').set(current_vol)
+    })
+  },
 });
 
 export default Store;
