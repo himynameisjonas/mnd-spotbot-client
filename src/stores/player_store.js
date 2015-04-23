@@ -53,11 +53,11 @@ var Store = Reflux.createStore({
   },
 
   onVolumeDown() {
-    this.changeVolumeBy(-5)
+    this.changeVolumeBy(-2)
   },
 
   onVolumeUp() {
-    this.changeVolumeBy(+5)
+    this.changeVolumeBy(+2)
   },
 });
 
