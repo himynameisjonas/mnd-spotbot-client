@@ -12,6 +12,16 @@ var Store = Reflux.createStore({
     };
   },
 
+  changeVolumeBy(amount) {
+    FirebaseRef.child('volume').once("value", function(snapshot){
+      var current_vol = snapshot.val()
+      current_vol = current_vol + amount
+      if (current_vol < 0) { current_vol = 0}
+      if (current_vol > 100) { current_vol = 100}
+      FirebaseRef.child('volume').set(current_vol)
+    })
+  },
+
   onShuffle() {
     FirebaseRef.child('playlist/shuffle').set(!this.obj.isShuffle);
   },
@@ -43,21 +53,11 @@ var Store = Reflux.createStore({
   },
 
   onVolumeDown() {
-    FirebaseRef.child('volume').once("value", function(snapshot){
-      var current_vol = snapshot.val()
-      current_vol = current_vol - 5
-      if (current_vol < 0) { current_vol = 0}
-      FirebaseRef.child('volume').set(current_vol)
-    })
+    this.changeVolumeBy(-5)
   },
 
   onVolumeUp() {
-    FirebaseRef.child('volume').once("value", function(snapshot){
-      var current_vol = snapshot.val()
-      current_vol = current_vol + 5
-      if (current_vol > 100) { current_vol = 100}
-      FirebaseRef.child('volume').set(current_vol)
-    })
+    this.changeVolumeBy(+5)
   },
 });
 
