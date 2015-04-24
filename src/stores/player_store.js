@@ -8,7 +8,8 @@ var Store = Reflux.createStore({
   init() {
     this.obj = {
       isPlaying: false,
-      isShuffle: false
+      isShuffle: false,
+      volume: 0
     };
   },
 
@@ -52,13 +53,23 @@ var Store = Reflux.createStore({
     this.trigger(this.obj);
   },
 
+  setVolume(volume) {
+    if(volume < 0) { volume = 0; }
+    if(volume > 100) { volume = 100; }
+    FirebaseRef.child('volume').set(volume);
+    this.obj.volume = volume;
+  },
+
   onVolumeDown() {
-    this.changeVolumeBy(-2)
+    let volume = this.obj.volume - 2;
+    this.setVolume(volume);
   },
 
   onVolumeUp() {
-    this.changeVolumeBy(+2)
-  },
+    let volume = this.obj.volume + 2;
+    this.setVolume(volume);
+  }
+
 });
 
 export default Store;

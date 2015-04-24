@@ -127,6 +127,9 @@ const App = React.createClass({
         window.location.reload();
       }
     });
+    FirebaseRef.child('volume').on("value", (snapshot) => {
+      PlayerActions.setVolume(snapshot.val());
+    })
   },
 
 
