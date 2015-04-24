@@ -10,10 +10,6 @@
     height: 35px;
   }
 
-  &-current-track {
-    font-weight: bold;
-  }
-
   .track-count {
     font-size: 16px;
     color: themeColor(.5);
@@ -58,7 +54,7 @@
         top: 3px;
       }
     }
-    tr:hover, tr:focus {
+    tr.playlist-current-track, tr:hover, tr:focus {
       td {
         background: themeColor(.1);
 

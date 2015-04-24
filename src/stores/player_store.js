@@ -58,16 +58,7 @@ var Store = Reflux.createStore({
     if(volume > 100) { volume = 100; }
     FirebaseRef.child('volume').set(volume);
     this.obj.volume = volume;
-  },
-
-  onVolumeDown() {
-    let volume = this.obj.volume - 2;
-    this.setVolume(volume);
-  },
-
-  onVolumeUp() {
-    let volume = this.obj.volume + 2;
-    this.setVolume(volume);
+    this.trigger(this.obj);
   }
 
 });

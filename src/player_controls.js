@@ -20,14 +20,13 @@ class PlayerControls extends React.Component {
     if(this.props.isShuffle) {
       shuffleActive = 'shuffle-active';
     }
+
     return (
       <div className="player-controls">
         <div className="btn-group" role="group" aria-label="Player controls">
           {playButton}
           <Button bsStyle="default" onClick={PlayerActions.next} aria-label="Next track"><i className="fa fa-forward"></i></Button>
           <Button bsStyle="default" className={shuffleActive} onClick={PlayerActions.shuffle} aria-label="Shuffle playlist"><i className="fa fa-random"></i></Button>
-          <Button bsStyle="default" onClick={PlayerActions.volumeDown} aria-label="Volume Down"><i className="fa fa-volume-down"></i></Button>
-          <Button bsStyle="default" onClick={PlayerActions.volumeUp} aria-label="Volume Up"><i className="fa fa-volume-up"></i></Button>
         </div>
       </div>
     );

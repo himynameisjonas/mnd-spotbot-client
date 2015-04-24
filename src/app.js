@@ -11,9 +11,10 @@ import PlayerControls from './player_controls';
 import Search from './search';
 import SearchResult from './search_result';
 import Duration from './duration.js';
-import Fullscreen from './fullscreen.js'
-import { TabbedArea } from 'react-bootstrap'
-import { TabPane } from 'react-bootstrap'
+import Fullscreen from './fullscreen.js';
+import VolumeControl from './volume_control';
+import { TabbedArea } from 'react-bootstrap';
+import { TabPane } from 'react-bootstrap';
 
 // Stores
 import PlayerStore from './stores/player_store';
@@ -49,14 +50,16 @@ const App = React.createClass({
       songStartedAt: Date.now(),
       isPlaying: false,
       isShuffle: false,
-      totalTracks: 0
+      totalTracks: 0,
+      volume: 0
     };
   },
 
   onPlayerChange(obj) {
     this.setState({
       isPlaying: obj.isPlaying,
-      isShuffle: obj.isShuffle
+      isShuffle: obj.isShuffle,
+      volume: obj.volume
     });
   },
 
@@ -175,11 +178,14 @@ const App = React.createClass({
         <header id="banner" role="banner">
           <div className="container">
               <div className="row">
-                <div className="col-xs-12 col-sm-5">
+                <div className="col-xs-12 col-sm-4">
                   <CurrentTrack track={this.state.currentTrack} />
                 </div>
-                <div className="col-xs-12 col-sm-3">
+                <div className="col-xs-12 col-sm-2">
                   <PlayerControls {...playerControlsProps} />
+                </div>
+                <div className="col-xs-12 col-sm-2">
+                  <VolumeControl volume={this.state.volume} />
                 </div>
                 <div className="col-xs-12 col-sm-4">
                   <Search />
