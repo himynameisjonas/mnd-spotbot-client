@@ -8,12 +8,8 @@ import TrackList from './search_result/track_list';
 
 class SearchResult extends React.Component {
 
-  componentDidUpdate(newProps) {
-    React.findDOMNode(this.refs.$container).focus();
-  }
-
   componentDidMount() {
-    window.addEventListener('keyup', this.handleKeyUp);
+    window.addEventListener('keyup', this.handleKeyUp.bind(this));
   }
 
   handleKeyUp(event) {
@@ -25,7 +21,7 @@ class SearchResult extends React.Component {
   render() {
     var _albumList = 'No result',
         _trackList = 'No result',
-        hasResult = false;
+        hasQuery = false;
 
     if(!_.isEmpty(this.props.albums)) {
       _albumList = <AlbumList albums={this.props.albums} />;
@@ -33,24 +29,24 @@ class SearchResult extends React.Component {
     if(!_.isEmpty(this.props.tracks)) {
       _trackList = <TrackList tracks={this.props.tracks} />;
     }
-    if(!_.isEmpty(this.props.albums) || !_.isEmpty(this.props.tracks)) {
-      hasResult = true;
+    if(!_.isEmpty(this.props.query)) {
+      hasQuery = true;
     }
     var style = {
-      display: ((hasResult) ? 'block' : 'none')
+      display: ((hasQuery) ? 'block' : 'none')
     };
     return (
-      <div className="search-result" style={style} tabIndex="0" ref="$container">
+      <div className="search-result" style={style}>
         <div className="container">
-          <h2>Search result</h2>
+          <h3>Search result</h3>
           <Button className="close" bsStyle="link" onClick={SearchActions.clearSearch} aria-label="Close">&times;</Button>
           <div className="row">
             <div className="col-xs-6">
-              <h3>Tracks:</h3>
+              <h4>Tracks:</h4>
               {_trackList}
             </div>
             <div className="col-xs-6">
-              <h3>Albums:</h3>
+              <h4>Albums:</h4>
               {_albumList}
             </div>
           </div>

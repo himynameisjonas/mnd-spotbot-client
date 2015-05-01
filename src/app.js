@@ -42,7 +42,7 @@ const App = React.createClass({
     return {
       tracks: {},
       currentTrack: {},
-      displayFullscreen: true,
+      displayFullscreen: false,
       searchResultAlbums: {},
       searchResultTracks: {},
       queue: {},
@@ -52,6 +52,7 @@ const App = React.createClass({
       isShuffle: false,
       totalTracks: 0,
       volume: null
+      query: ''
     };
   },
 
@@ -86,7 +87,8 @@ const App = React.createClass({
   onSearchChange(obj) {
     this.setState({
       searchResultAlbums: obj.albums,
-      searchResultTracks: obj.tracks
+      searchResultTracks: obj.tracks,
+      query: obj.query
     });
   },
 
@@ -140,7 +142,8 @@ const App = React.createClass({
 
     let searchResultProps = {
       albums: this.state.searchResultAlbums,
-      tracks: this.state.searchResultTracks
+      tracks: this.state.searchResultTracks,
+      query: this.state.query
     };
 
     let fullscreenProps = {
@@ -173,7 +176,6 @@ const App = React.createClass({
     return (
       <div>
         <Fullscreen {...fullscreenProps}  />
-        <SearchResult {...searchResultProps} />
         <Duration {...durationProps} />
         <header id="banner" role="banner">
           <div className="container">
@@ -195,6 +197,11 @@ const App = React.createClass({
         </header>
         <main role="main">
           <div className="container">
+          <div className="row">
+            <div className="col-xs-12">
+              <SearchResult {...searchResultProps} />
+            </div>
+          </div>
             <div className="row">
               <div className="col-xs-12">
                 <TabbedArea defaultActiveKey={1}>

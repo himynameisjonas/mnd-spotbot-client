@@ -9,7 +9,8 @@ var Store = Reflux.createStore({
   init() {
     this.obj = {
       albums: [],
-      tracks: []
+      tracks: [],
+      query: ''
     };
   },
 
@@ -26,13 +27,23 @@ var Store = Reflux.createStore({
   clearSearch() {
     this.obj.albums = [];
     this.obj.tracks = [];
+    this.obj.query = '';
     this.trigger(this.obj);
   },
 
   onSearch(query) {
 
+    if(this.obj.query === query) {
+      return;
+    }
+    if(_.isEmpty(query)) {
+      return this.clearSearch();
+    }
+
+    this.obj.query = query;
     this.obj.albums = [];
     this.obj.tracks = [];
+
     // Search tracks
     request.get('https://api.spotify.com/v1/search').query({ q: query, limit: 20, type: 'track', market: 'se' }).end((err, res) => {
       this.obj.tracks = res.body.tracks.items;
