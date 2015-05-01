@@ -1,11 +1,62 @@
 .volume-control {
+
   text-align: center;
-  padding-top: 7px;
+  padding-top: 9px;
 
   input {
     margin: 0 5px;
-    position: relative;
-    top: -1px;
-    width: 80%;
+    width: 90%;
+
+    @media screen and (min-width: $screen-sm-min) {
+      width: 80%;
+    }
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    background: none;
+    display: inline-block;
+  }
+
+  input[type=range]:focus {
+    outline: none;
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+    cursor: pointer;
+    background: themeColor(.2);
+    border-radius: 0px;
+    border: none;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    border: 1px solid themeColor(.5);
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: themeColor(1);
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: themeColor(.2);
+  }
+
+  input[type=range]::-moz-range-track {
+    height: 5px;
+    cursor: pointer;
+    background: themeColor(.2);
+    border-radius: 0px;
+    border: none;
+  }
+
+  input[type=range]::-moz-range-thumb {
+    border: 1px solid themeColor(.5);
+    background: themeColor(1);
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    cursor: pointer;
   }
 }
