@@ -30,10 +30,8 @@ class Fullscreen extends React.Component {
   }
 
   hide() {
-    if(this.state.isVisible) {
-      this.setState({ isVisible: false });
-      this.setTimer();
-    }
+    this.setState({ isVisible: false });
+    this.setTimer();
   }
 
   renderTrack() {
