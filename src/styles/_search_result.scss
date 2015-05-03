@@ -14,4 +14,13 @@
     box-shadow: none;
     color: themeColor(1);
   }
+
+  .album-tracks {
+    margin-bottom: $grid-gutter-width/2;
+
+    li {
+      margin-bottom: 5px;
+    }
+
+  }
 }

@@ -14,21 +14,25 @@ var Store = Reflux.createStore({
     };
   },
 
+  getData() {
+    return this.obj;
+  },
+
   removeAlbum(album) {
     _.remove(this.obj.albums, album);
-    this.trigger(this.obj);
+    this.trigger();
   },
 
   removeTrack(track) {
     _.remove(this.obj.tracks, track);
-    this.trigger(this.obj);
+    this.trigger();
   },
 
   clearSearch() {
     this.obj.albums = [];
     this.obj.tracks = [];
     this.obj.query = '';
-    this.trigger(this.obj);
+    this.trigger();
   },
 
   onSearch(query) {
@@ -54,11 +58,11 @@ var Store = Reflux.createStore({
         if(ids.length) {
           request.get('https://api.spotify.com/v1/albums').query({ ids: ids }).end((err, res) => {
             this.obj.albums = res.body.albums;
-            this.trigger(this.obj);
+            this.trigger();
           }.bind(this));
         }
         else {
-          this.trigger(this.obj);
+          this.trigger();
         }
       });
     }.bind(this));

@@ -42,7 +42,7 @@ const App = React.createClass({
     return {
       tracks: {},
       currentTrack: {},
-      displayFullscreen: false,
+      displayFullscreen: true,
       searchResultAlbums: {},
       searchResultTracks: {},
       queue: {},
@@ -84,11 +84,12 @@ const App = React.createClass({
     });
   },
 
-  onSearchChange(obj) {
+  onSearchChange() {
+    let data = SearchStore.getData();
     this.setState({
-      searchResultAlbums: obj.albums,
-      searchResultTracks: obj.tracks,
-      query: obj.query
+      searchResultAlbums: data.albums,
+      searchResultTracks: data.tracks,
+      query: data.query
     });
   },
 
