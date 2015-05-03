@@ -191,7 +191,7 @@ const App = React.createClass({
                   <VolumeControl volume={this.state.volume} />
                 </div>
                 <div className="col-xs-12 col-sm-4">
-                  <Search />
+                  <Search query={this.state.query} />
                 </div>
               </div>
           </div>

@@ -24,6 +24,10 @@ class Search extends React.Component {
     this.setState({ query: event.target.value });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ query: nextProps.query });
+  }
+
   render() {
     return (
       <form className="search" onSubmit={this.handleSubmit.bind(this)}>
