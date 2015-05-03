@@ -3,12 +3,21 @@ import Image from './image';
 import utils from '../utils';
 import QueueActions from '../actions/queue_actions';
 import SearchActions from '../actions/search_actions';
+import { Button } from 'react-bootstrap';
 
 class Track extends React.Component {
 
   handleClick() {
     QueueActions.enqueue(this.props.item.uri);
     SearchActions.removeTrack(this.props.item);
+  }
+
+  searchArtist() {
+    SearchActions.search(this.props.item.artists[0].name);
+  }
+
+  searchAlbum() {
+    SearchActions.search(this.props.item.album.name);
   }
 
   render() {
@@ -21,7 +30,11 @@ class Track extends React.Component {
               <h3 className="media-heading">
                 {track.name} <span className="time">{utils.formatDuration(track.duration_ms)}</span>
               </h3>
-              <h4>{track.artists[0].name}</h4>
+              <h4>
+                <Button onClick={this.searchAlbum.bind(this)} bsStyle="link" bsSize="xsmall">{track.album.name}</Button>
+                /
+                <Button onClick={this.searchArtist.bind(this)} bsStyle="link" bsSize="xsmall">{track.artists[0].name}</Button>
+              </h4>
             </div>
         </div>
       </li>

@@ -52,6 +52,10 @@ class Album extends React.Component {
     this.setState({ showTracks: !this.state.showTracks });
   }
 
+  searchArtist() {
+    SearchActions.search(this.props.item.artists[0].name);
+  }
+
   render() {
     let album = this.props.item;
     let tracks = this.props.item.tracks.items.map((track) => {
@@ -72,7 +76,7 @@ class Album extends React.Component {
                 </Button>
               </h3>
               <h4>
-                {album.artists[0].name}
+                <Button onClick={this.searchArtist.bind(this)} bsStyle="link" bsSize="xsmall">{album.artists[0].name}</Button>
               </h4>
             </div>
         </div>
