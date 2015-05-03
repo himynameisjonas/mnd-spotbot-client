@@ -65,7 +65,7 @@ class Album extends React.Component {
     let chevronClass = (this.state.showTracks) ? 'fa fa-chevron-up' : 'fa fa-chevron-down';
 
     return (
-      <li>
+      <li className="list-group-item">
         <div className="media album">
             <Image handleClick={this.handleClick.bind(this)} images={album.images} />
             <div className="media-body">
@@ -95,7 +95,7 @@ class AlbumList extends React.Component {
     });
     return (
       <div>
-        <ul className="list-unstyled">
+        <ul className="list-group">
           {_albums}
         </ul>
       </div>

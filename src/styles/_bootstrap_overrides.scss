@@ -677,9 +677,9 @@ $progress-bar-bg:             $themeColor;
 //##
 
 //** Background color on `.list-group-item`
-// $list-group-bg:                 #fff
+$list-group-bg: none;
 //** `.list-group-item` border color
-// $list-group-border:             #ddd
+$list-group-border: themeColor(.2);
 //** List group border radius
 // $list-group-border-radius:      $border-radius-base
 

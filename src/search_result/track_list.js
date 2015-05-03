@@ -23,7 +23,7 @@ class Track extends React.Component {
   render() {
     var track = this.props.item;
     return (
-      <li>
+      <li className="list-group-item">
         <div className="media album">
             <Image handleClick={this.handleClick.bind(this)} images={track.album.images} />
             <div className="media-body">
@@ -50,7 +50,7 @@ class TrackList extends React.Component {
     });
     return (
       <div>
-        <ul className="list-unstyled">
+        <ul className="list-group">
           {_tracks}
         </ul>
       </div>
