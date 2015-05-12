@@ -1,6 +1,7 @@
 import Reflux from 'reflux';
 import Actions from '../actions/player_actions';
 import FirebaseRef from 'firebaseRef';
+import _ from 'lodash';
 
 var Store = Reflux.createStore({
   listenables: Actions,
@@ -44,6 +45,10 @@ var Store = Reflux.createStore({
   },
 
   setVolume(volume) {
+    volume = Number(volume);
+    if(!_.isFinite(volume)) {
+      return "Volume must be a number value between 0-100";
+    }
     if(volume < 0) { volume = 0; }
     if(volume > 100) { volume = 100; }
     FirebaseRef.child('volume').set(volume);
