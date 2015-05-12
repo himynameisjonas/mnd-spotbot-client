@@ -1,7 +1,9 @@
 .search-result {
 
-  img {
-    height: 35px;
+  .tracks {
+    img {
+      height: 35px;
+    }
   }
 
   .close {
@@ -22,5 +24,27 @@
       margin-bottom: 5px;
     }
 
+  }
+
+  .albums {
+    background-color: themeColor(.5);
+    height: 150px;
+    overflow: scroll;
+    position: relative;
+    max-width: 100%;
+
+    ul {
+      position: absolute;
+      height: 150px;
+      margin: 0;
+    }
+
+    li {
+      float: left;
+
+      img {
+        height: 150px;
+      }
+    }
   }
 }

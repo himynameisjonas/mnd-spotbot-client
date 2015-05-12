@@ -4,7 +4,7 @@ import SearchActions from './actions/search_actions';
 import { Button } from 'react-bootstrap';
 import AlbumList from './search_result/album_list';
 import TrackList from './search_result/track_list';
-
+import Albums from './search_result/albums';
 
 class SearchResult extends React.Component {
 
@@ -43,7 +43,9 @@ class SearchResult extends React.Component {
           <div className="row">
             <div className="col-xs-6">
               <h4>Tracks:</h4>
-              {_trackList}
+              <div className="tracks">
+                {_trackList}
+              </div>
             </div>
             <div className="col-xs-6">
               <h4>Albums:</h4>

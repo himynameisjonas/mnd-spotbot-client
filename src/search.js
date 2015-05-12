@@ -12,7 +12,7 @@ class Search extends React.Component {
 
     this.bounceSearch = _.debounce((e) => {
       SearchActions.search(this.state.query);
-    }, 400);
+    }, 200);
   }
 
   handleSubmit(event) {
@@ -25,7 +25,7 @@ class Search extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ query: nextProps.query });
+    //this.setState({ query: nextProps.query });
   }
 
   render() {

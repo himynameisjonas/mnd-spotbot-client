@@ -197,12 +197,8 @@ const App = React.createClass({
           </div>
         </header>
         <main role="main">
+          <SearchResult {...searchResultProps} />
           <div className="container">
-          <div className="row">
-            <div className="col-xs-12">
-              <SearchResult {...searchResultProps} />
-            </div>
-          </div>
             <div className="row">
               <div className="col-xs-12">
                 <TabbedArea defaultActiveKey={1}>
