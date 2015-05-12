@@ -10,7 +10,7 @@ var Store = Reflux.createStore({
     this.obj = {
       isPlaying: false,
       isShuffle: false,
-      volume: 0
+      volume: null
     };
   },
 
