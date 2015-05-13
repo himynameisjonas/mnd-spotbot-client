@@ -1,50 +1,44 @@
 import React from 'react';
 import PlayerActions from './actions/player_actions';
+import _ from 'lodash';
 
 class VolumeControl extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      volume: 0,
-      updating: false
-    };
-    this.timeout = null;
-  }
 
-  handleVolumeInput(e) {
-    let value = e.currentTarget.value;
-    this.setState({ volume: value, updating: true });
-    if(this.state.updating) { return; }
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      PlayerActions.setVolume(this.state.volume);
-      this.setState({ updating: false });
-    }, 1000);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ volume: nextProps.volume });
+    this.setVolume = _.debounce(() => {
+      let vol = React.findDOMNode(this.refs.inputRange).value;
+      PlayerActions.setVolume(vol);
+    }, 200);
   }
 
   render() {
 
+    if(this.props.volume === null) { return false; }
+
     let volumeProps = {
+      onClick: this.setVolume.bind(this),
+      onChange: this.setVolume.bind(this),
       defaultValue: this.props.volume,
-      onClick: this.handleVolumeInput.bind(this),
-      value: this.state.volume,
-      onInput: this.handleVolumeInput.bind(this),
-      step: 2
+      ref: 'inputRange',
+      type: 'range',
+      step: 2,
+      min: 0,
+      max: 100
     };
 
     return (
       <div className="volume-control">
         <i className="fa fa-volume-down"></i>
-        <input type="range" min="0" max="100" {...volumeProps} />
+        <input {...volumeProps} />
         <i className="fa fa-volume-up"></i>
       </div>
     );
   }
 };
+
+VolumeControl.propTypes = { volume: React.PropTypes.number };
+VolumeControl.defaultProps = { volume: null };
 
 export default VolumeControl;
