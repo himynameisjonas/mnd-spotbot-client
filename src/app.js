@@ -51,7 +51,7 @@ const App = React.createClass({
       isPlaying: false,
       isShuffle: false,
       totalTracks: 0,
-      volume: 0
+      volume: null
     };
   },
 

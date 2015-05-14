@@ -21,12 +21,17 @@ class PlayerControls extends React.Component {
       shuffleActive = 'shuffle-active';
     }
 
+
     return (
       <div className="player-controls">
         <div className="btn-group" role="group" aria-label="Player controls">
           {playButton}
-          <Button bsStyle="default" onClick={PlayerActions.next} aria-label="Next track"><i className="fa fa-forward"></i></Button>
-          <Button bsStyle="default" className={shuffleActive} onClick={PlayerActions.shuffle} aria-label="Shuffle playlist"><i className="fa fa-random"></i></Button>
+          <Button bsStyle="default" onClick={PlayerActions.next} aria-label="Next track">
+            <i className="fa fa-forward"></i>
+          </Button>
+          <Button bsStyle="default" className={shuffleActive} onClick={PlayerActions.shuffle} aria-label="Shuffle playlist">
+            <i className="fa fa-random"></i>
+          </Button>
         </div>
       </div>
     );

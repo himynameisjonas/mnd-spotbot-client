@@ -7,9 +7,9 @@ class VolumeControl extends React.Component {
   constructor(props) {
     super(props);
 
-    this.setVolume = _.debounce(() => {
+    this.changeVolume = _.debounce(() => {
       let vol = React.findDOMNode(this.refs.inputRange).value;
-      PlayerActions.setVolume(vol);
+      PlayerActions.changeVolume(vol);
     }, 200);
   }
 
@@ -18,8 +18,8 @@ class VolumeControl extends React.Component {
     if(this.props.volume === null) { return false; }
 
     let volumeProps = {
-      onClick: this.setVolume.bind(this),
-      onChange: this.setVolume.bind(this),
+      onClick: this.changeVolume.bind(this),
+      onChange: this.changeVolume.bind(this),
       defaultValue: this.props.volume,
       ref: 'inputRange',
       type: 'range',
