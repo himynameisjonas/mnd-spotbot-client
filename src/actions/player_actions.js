@@ -8,6 +8,7 @@ var Actions = Reflux.createActions([
   'setPlayingStatus',
   'setShuffleStatus',
   'togglePlay',
+  'changeVolume',
   'setVolume'
 ]);
 

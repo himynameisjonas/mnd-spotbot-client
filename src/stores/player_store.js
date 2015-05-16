@@ -44,14 +44,19 @@ var Store = Reflux.createStore({
     this.trigger(this.obj);
   },
 
+  onChangeVolume(volume) {
+    volume = _.parseInt(volume);
+    console.log(volume);
+    FirebaseRef.child('volume').set(volume);
+  },
+
   setVolume(volume) {
-    volume = Number(volume);
+    volume = _.parseInt(volume);
     if(!_.isFinite(volume)) {
       return "Volume must be a number value between 0-100";
     }
     if(volume < 0) { volume = 0; }
     if(volume > 100) { volume = 100; }
-    FirebaseRef.child('volume').set(volume);
     this.obj.volume = volume;
     this.trigger(this.obj);
   }
