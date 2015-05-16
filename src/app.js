@@ -16,6 +16,8 @@ import VolumeControl from './volume_control';
 import { TabbedArea } from 'react-bootstrap';
 import { TabPane } from 'react-bootstrap';
 
+import SearchResultContainer from './search_result_container';
+
 // Stores
 import PlayerStore from './stores/player_store';
 import PlaylistStore from './stores/playlist_store';
@@ -42,8 +44,8 @@ const App = React.createClass({
     return {
       tracks: {},
       currentTrack: {},
-      displayFullscreen: true,
-      searchResultAlbums: {},
+      displayFullscreen: false,
+      searchResultAlbums: [],
       searchResultTracks: {},
       queue: {},
       playlistName: '',
@@ -79,8 +81,8 @@ const App = React.createClass({
     this.setState({
       tracks: obj.tracks,
       playlistName: obj.name,
-      totalTracks: obj.totalTracks,
-      searchResult: {} // TODO: Clear result instead via action
+      totalTracks: obj.totalTracks//,
+      //searchResult: {} // TODO: Clear result instead via action
     });
   },
 
@@ -96,6 +98,7 @@ const App = React.createClass({
   componentDidMount() {
     FirebaseRef.child('playlist/tracks').on('value', (snapshot) => {
       let val = snapshot.val();
+      console.log("is set tracks the way to go??");
       if(!_.isNull(val)) {
         PlaylistActions.setTracks(val);
       }
@@ -135,7 +138,7 @@ const App = React.createClass({
     });
     FirebaseRef.child('volume').on("value", (snapshot) => {
       PlayerActions.setVolume(snapshot.val());
-    })
+    });
   },
 
 
@@ -197,7 +200,7 @@ const App = React.createClass({
           </div>
         </header>
         <main role="main">
-          <SearchResult {...searchResultProps} />
+          <SearchResultContainer {...searchResultProps} />
           <div className="container">
             <div className="row">
               <div className="col-xs-12">

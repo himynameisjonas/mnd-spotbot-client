@@ -1,0 +1,69 @@
+.search-result-container {
+
+  .albums {
+    min-height: 150px;
+    overflow: scroll;
+    width: 100%;
+    position: relative;
+
+    ul {
+      position: absolute;
+      height: 150px;
+      margin: 0;
+
+      li {
+        float: left;
+        position: relative;
+
+        &:hover, &:focus {
+          .album-info {
+            background: rgba(0,0,0,.8);
+          }
+        }
+      }
+    }
+
+    .album-info {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      .details {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 4px 8px;
+
+        button {
+          padding: 0;
+        }
+
+        .album-name {
+        }
+        .artist-name {
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    img {
+      height: 150px;
+      width: 150px;
+    }
+  }
+
+  .album-details {
+    background: #222;
+
+    ol {
+      -moz-column-count: 2;
+      -moz-column-gap: 20px;
+      -webkit-column-count: 2;
+      -webkit-column-gap: 20px;
+      column-count: 2;
+      column-gap: 20px;
+    }
+  }
+}

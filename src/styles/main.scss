@@ -26,7 +26,7 @@ body {
 }
 
 main {
-  padding: 20px 0;
+  //padding: 20px 0;
 }
 
 .nav-tabs > li >a {
@@ -88,3 +88,5 @@ header#banner {
 @import "search_result";
 @import "track";
 @import "volume_control";
+
+@import "search_result_container";

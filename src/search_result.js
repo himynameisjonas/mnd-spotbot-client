@@ -19,6 +19,7 @@ class SearchResult extends React.Component {
   }
 
   render() {
+
     var _albumList = 'No result',
         _trackList = 'No result',
         hasQuery = false;
@@ -35,6 +36,7 @@ class SearchResult extends React.Component {
     var style = {
       display: ((hasQuery) ? 'block' : 'none')
     };
+
     return (
       <div className="search-result" style={style}>
         <div className="container">
