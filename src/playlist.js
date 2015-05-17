@@ -106,17 +106,15 @@ class Playlist extends React.Component {
   }
 
   render() {
+    if(_.isEmpty(this.props.tracks)) { return false; }
     let playList = '';
     let covers = '';
-    if(!_.isEmpty(this.props.tracks)) {
-      playList = this.renderPlayList();
-    }
 
     return (
       <div className="playlist">
         <h3>{this.props.name} <span className="track-count">({this.props.totalTracks} songs)</span></h3>
         <AddPlaylist />
-        {playList}
+        {this.renderPlayList()}
       </div>
     );
   }

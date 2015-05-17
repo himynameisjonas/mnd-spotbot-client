@@ -2,6 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import { Button } from 'react-bootstrap';
 import SearchActions from '../../actions/search_actions';
+import PlaylistActions from '../../actions/playlist_actions';
+import PlayerActions from '../../actions/player_actions';
 
 class Album extends React.Component {
 
@@ -11,6 +13,11 @@ class Album extends React.Component {
 
   handleSearchArtist() {
     SearchActions.search(this.props.album.artists[0].name);
+  }
+
+  handlePlayAlbum() {
+    PlaylistActions.changePlaylistUri(this.props.album.uri);
+    PlayerActions.next();
   }
 
   render() {
@@ -24,6 +31,11 @@ class Album extends React.Component {
       <li tabIndex="0">
         <img src={image} />
         <div className="album-info">
+          <div className="play-album">
+            <Button bsStyle="link" onClick={this.handlePlayAlbum.bind(this)}>
+              <i className="fa fa-play-circle-o"></i>
+            </Button>
+          </div>
           <div className="details">
             <Button bsStyle="link" onClick={this.handleShowTracks.bind(this)}>
               {name}

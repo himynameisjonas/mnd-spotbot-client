@@ -19,18 +19,45 @@
           .album-info {
             background: rgba(0,0,0,.8);
           }
+
+          .play-album, .details {
+            display: block;
+          }
         }
       }
     }
 
     .album-info {
-      position: absolute;
-      top: 0;
-      right: 0;
       bottom: 0;
       left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      .play-album {
+        display: none;
+        left: 45px;
+        position: absolute;
+        top: 40px;
+
+        button {
+          color: #fff;
+          font-size: 40px;
+
+          i {
+            opacity: .5;
+          }
+
+          &:hover {
+            i {
+              opacity: .8;
+            }
+          }
+        }
+      }
 
       .details {
+        display: none;
         position: absolute;
         bottom: 0;
         width: 100%;
@@ -40,8 +67,6 @@
           padding: 0;
         }
 
-        .album-name {
-        }
         .artist-name {
           text-transform: uppercase;
         }
@@ -56,14 +81,11 @@
 
   .album-details {
     background: #222;
+    box-shadow: 0 3px 3px #000 inset;
 
-    ol {
-      -moz-column-count: 2;
-      -moz-column-gap: 20px;
-      -webkit-column-count: 2;
-      -webkit-column-gap: 20px;
-      column-count: 2;
-      column-gap: 20px;
+    button {
+      padding: 0;
+      margin-right: 5px;
     }
   }
 }
