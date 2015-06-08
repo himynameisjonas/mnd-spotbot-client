@@ -14,6 +14,7 @@ FIREBASE_URL=https://{project_name}.firebaseio.com
 ## Install dependencies
 ```
 npm install
+bower install
 ```
 
 ## Grunt tasks
